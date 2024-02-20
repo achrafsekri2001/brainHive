@@ -1,7 +1,9 @@
 package edu.esprit.entities;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Post {
     private int id;
@@ -13,7 +15,7 @@ public class Post {
     private int numberOfComments;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private Set<FichierPost> fichiers;
+    private Set<FichierPost> fichiers = new HashSet<>();
     public Post(){
 
     }

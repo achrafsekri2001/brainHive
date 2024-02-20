@@ -22,24 +22,11 @@ public class PostService implements IService<Post> {
             pst.setString(3, post.getMatiere());
             pst.setInt(4, post.getGroupId());
             pst.setInt(5, post.getUserId());
-            pst.setInt(6, post.getNumberOfComments());
-            pst.setTimestamp(7, post.getCreatedAt());
-            pst.setTimestamp(8, post.getUpdatedAt());
+            pst.setInt(6, 0);
+            pst.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
+            pst.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
             pst.executeUpdate();
             System.out.println("Post added !");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    void ajouterFichier(FichierPost fichierPost) {
-        String req = "INSERT INTO fichierPost(postId,fileLink) VALUES (?,?)";
-        try {
-            PreparedStatement pst = cnx.prepareStatement(req);
-            pst.setInt(1, fichierPost.getId());
-            pst.setString(2, fichierPost.getFileLink());
-            pst.executeUpdate();
-            System.out.println("Fichier added !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -84,22 +71,13 @@ public class PostService implements IService<Post> {
     @Override
     public Set<Post> getAll() {
         Set<Post> posts = new HashSet<>();
-
         String req = "Select * from post";
         try {
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
 
             while(rs.next()){
-                Set comments = new HashSet<>();
                 Post post = new Post();
-                String req2 = "Select * from commentaire where postId="+rs.getInt(1);
-                Statement st2 = cnx.createStatement();
-                ResultSet rs2 = st2.executeQuery(req2);
-                while(rs2.next()){
-                    comments.add(rs2.getString(3));
-                }
-//                posts.setComments(comments);
                 post.setId(rs.getInt(1));
                 post.setTitle(rs.getString(2));
                 post.setDescription(rs.getString(3));
@@ -121,7 +99,8 @@ public class PostService implements IService<Post> {
     @Override
     public Post getOneByID(int id) {
         Post post = new Post();
-        String req = "Select * from post where id="+id;
+        // get post and comments associated with it
+        String req = "Select post.*, count(comment.id) as numberOfComments from post left join comment on post.id = comment.postId where post.id = " + id;
         try {
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
