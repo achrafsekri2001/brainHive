@@ -1,18 +1,16 @@
 package edu.esprit.tests;
 
-import atlantafx.base.theme.PrimerDark;
-import atlantafx.base.theme.PrimerLight;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class MainFX extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
-        Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
+//        Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
+//        Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/acceuil.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);

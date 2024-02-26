@@ -13,13 +13,14 @@ public class Post {
     private int groupId;
     private int userId;
     private int numberOfComments;
+    public Set<Commentaire> commentaires = new HashSet<>();
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private Set<FichierPost> fichiers = new HashSet<>();
-    public Post(){
+    private Set<Object> fichiers = new HashSet<>();
+
+    public Post() {
 
     }
-
 
     public Post(String title, String description, String matiere, int groupId, int userId, int numberOfComments, Timestamp createdAt, Timestamp updatedAt) {
         this.title = title;
@@ -44,6 +45,14 @@ public class Post {
         this.updatedAt = updatedAt;
     }
 
+
+    public Set<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(Set<Commentaire> commentaires) {
+        this.commentaires = commentaires;
+    }
 
     public int getId() {
         return id;
@@ -117,11 +126,11 @@ public class Post {
         this.updatedAt = updatedAt;
     }
 
-    public Set<FichierPost> getFichiers() {
+    public Set<Object> getFichiers() {
         return fichiers;
     }
 
-    public void setFichiers(Set<FichierPost> fichiers) {
+    public void setFichiers(Set<Object> fichiers) {
         this.fichiers = fichiers;
     }
 

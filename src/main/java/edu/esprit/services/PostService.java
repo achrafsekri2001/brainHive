@@ -1,6 +1,5 @@
 package edu.esprit.services;
 
-import edu.esprit.entities.FichierPost;
 import edu.esprit.entities.Post;
 import edu.esprit.utils.DataSource;
 
@@ -14,7 +13,7 @@ public class PostService implements IService<Post> {
 
     @Override
     public void ajouter(Post post) {
-       String req = "INSERT INTO post (title, description, matiere, groupId, userId, numberOfComments, createdAt, updatedAt) VALUES (?,?,?,?,?,?,?,?)";
+        String req = "INSERT INTO post (title, description, matiere, groupId, userId, numberOfComments, createdAt, updatedAt) VALUES (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setString(1, post.getTitle());
@@ -76,7 +75,7 @@ public class PostService implements IService<Post> {
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
 
-            while(rs.next()){
+            while (rs.next()) {
                 Post post = new Post();
                 post.setId(rs.getInt(1));
                 post.setTitle(rs.getString(2));
@@ -104,7 +103,7 @@ public class PostService implements IService<Post> {
         try {
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
-            while(rs.next()){
+            while (rs.next()) {
                 post.setId(rs.getInt(1));
                 post.setTitle(rs.getString(2));
                 post.setDescription(rs.getString(3));

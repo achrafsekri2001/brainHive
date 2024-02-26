@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.Avatar?>
+<?import com.gluonhq.charm.glisten.control.Chip?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0"
+            prefWidth="1050.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AcceuilController">
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: d2d2d2;"
+              AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Pane prefHeight="126.0" prefWidth="256.0" style="-fx-background-color: d2d2d2;">
+                    <children>
+                        <ImageView fitHeight="29.0" fitWidth="126.0" layoutX="80.0" layoutY="32.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@../../../../assets/logo.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </Pane>
+                <VBox prefHeight="484.0" prefWidth="256.0" style="-fx-background-color: d2d2d2;">
+                    <children>
+                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="262.0"
+                                style="-fx-background-color: FF8D29;" text="Accueil">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0"
+                                prefWidth="262.0" style="-fx-background-color: FF8D29;" text="Populaire">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                            <VBox.margin>
+                                <Insets top="10.0"/>
+                            </VBox.margin>
+                        </Button>
+                        <Button layoutX="10.0" layoutY="51.0" mnemonicParsing="false" prefHeight="30.0"
+                                prefWidth="262.0" style="-fx-background-color: FF8D29;" text="Sauvegardée">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                            <VBox.margin>
+                                <Insets top="10.0"/>
+                            </VBox.margin>
+                        </Button>
+                        <ListView fx:id="subjectsList" prefHeight="294.0" prefWidth="256.0"
+                                  style="-fx-background-color: d2d2d2;">
+                            <VBox.margin>
+                                <Insets top="40.0"/>
+                            </VBox.margin>
+                        </ListView>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="40.0"/>
+                    </VBox.margin>
+                </VBox>
+            </children>
+        </VBox>
+        <AnchorPane layoutX="258.4" layoutY="42.0" prefHeight="576.0" prefWidth="792.0"
+                    style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="258.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <SplitPane dividerPositions="0.15006963788300834" layoutX="-1.0" orientation="VERTICAL"
+                           prefHeight="576.0" prefWidth="792.0">
+                    <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                            <children>
+                                <Pane prefHeight="91.0" prefWidth="790.0" style="-fx-background-color: FFFFFF;">
+                                    <children>
+                                        <TextField id="seachBar" layoutX="14.0" layoutY="30.0" prefHeight="25.0"
+                                                   prefWidth="356.0" promptText="Recherche"
+                                                   style="-fx-border-color: black;"/>
+                                        <Button layoutX="639.0" layoutY="28.0" mnemonicParsing="false"
+                                                style="-fx-background-color: transparent;" textFill="TRANSPARENT">
+                                            <graphic>
+                                                <ImageView id="AddPubIcon" fitHeight="20.0" fitWidth="20.0"
+                                                           pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../../../../assets/plusRounded.png"/>
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Button layoutX="586.0" layoutY="28.0" mnemonicParsing="false"
+                                                style="-fx-background-color: transparent;">
+                                            <graphic>
+                                                <ImageView id="notificationIcon" fitHeight="20.0" fitWidth="20.0"
+                                                           pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../../../../assets/carbon_notification.png"/>
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Avatar layoutX="717.0" layoutY="27.0">
+                                            <image>
+                                                <Image url="@../../../../../../../../Downloads/IMG_5881.jpeg"/>
+                                            </image>
+                                            <opaqueInsets>
+                                                <Insets/>
+                                            </opaqueInsets>
+                                        </Avatar>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                    </padding>
+                                </Pane>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                            <children>
+                                <ScrollPane layoutY="2.0" prefHeight="485.0" prefWidth="790.0">
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="80.0"/>
+                                    </padding>
+                                    <content>
+                                        <VBox prefHeight="386.0" prefWidth="750.0">
+                                            <children>
+                                                <Pane prefHeight="334.0" prefWidth="750.0"
+                                                      style="-fx-background-color: EBEBEB;">
+                                                    <children>
+                                                        <Avatar layoutX="27.0" layoutY="43.0">
+                                                            <image>
+                                                                <Image url="@../../../../../../../../Downloads/IMG_5881.jpeg"/>
+                                                            </image>
+                                                        </Avatar>
+                                                        <Chip id="subjectChip" layoutX="82.0"
+                                                              layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity"
+                                                              prefHeight="14.0"
+                                                              style="-fx-background-radius: 100; -fx-background-color: #FFFFF;"
+                                                              styleClass="subjectChip"
+                                                              stylesheets="@../styles/Accueil.css" text="Anglais"/>
+                                                        <Text layoutX="83.0" layoutY="66.0" strokeType="OUTSIDE"
+                                                              strokeWidth="0.0"
+                                                              text="J'ai confrontée un probleme dans cet exercice">
+                                                            <font>
+                                                                <Font name="System Bold" size="16.0"/>
+                                                            </font>
+                                                        </Text>
+                                                        <Text layoutX="83.0" layoutY="91.0" strokeType="OUTSIDE"
+                                                              strokeWidth="0.0"
+                                                              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit cursus justo sit amet dapibus. Donec ex massa ...."
+                                                              wrappingWidth="356.0">
+                                                            <font>
+                                                                <Font size="11.0"/>
+                                                            </font>
+                                                        </Text>
+                                                        <ImageView fitHeight="150.0" fitWidth="287.0" layoutX="83.0"
+                                                                   layoutY="131.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@../../../../../../../../Downloads/1_eGdNATA_BGQcA1xUvc9Irg.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                        <Button id="commentsButton" fx:id=""
+                                                                layoutX="81.0" layoutY="295.0" mnemonicParsing="false"
+                                                                style="-fx-background-color: transparent;" text="128">
+                                                            <graphic>
+                                                                <ImageView fitHeight="10.0" fitWidth="10.0"
+                                                                           pickOnBounds="true" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../../../../assets/comments.png"/>
+                                                                    </image>
+                                                                </ImageView>
+                                                            </graphic>
+                                                            <font>
+                                                                <Font size="11.0"/>
+                                                            </font>
+                                                        </Button>
+                                                        <Button layoutX="682.0" layoutY="26.0" mnemonicParsing="false"
+                                                                style="-fx-background-color: transparent;">
+                                                            <graphic>
+                                                                <ImageView fitHeight="16.0" fitWidth="16.0"
+                                                                           pickOnBounds="true" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../../../../assets/save.png"/>
+                                                                    </image>
+                                                                </ImageView>
+                                                            </graphic>
+                                                        </Button>
+                                                    </children>
+                                                </Pane>
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </ScrollPane>
+                                <Label text="Accueil">
+                                    <font>
+                                        <Font name="Arial" size="28.0"/>
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" top="20.0"/>
+                                    </padding>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </items>
+                </SplitPane>
+            </children>
+        </AnchorPane>
+    </children>
+    <effect>
+        <DropShadow color="#1b1eeb"/>
+    </effect>
+</AnchorPane>
