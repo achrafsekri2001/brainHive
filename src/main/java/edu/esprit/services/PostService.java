@@ -13,7 +13,7 @@ public class PostService implements IService<Post> {
 
     @Override
     public void ajouter(Post post) {
-        String req = "INSERT INTO post (title, description, matiere, groupId, userId, numberOfComments, createdAt, updatedAt) VALUES (?,?,?,?,?,?,?,?)";
+        String req = "INSERT INTO post (title, description, matiere, groupeId, userId, nbrOfComments, createdAt, updatedAt) VALUES (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setString(1, post.getTitle());
@@ -33,7 +33,7 @@ public class PostService implements IService<Post> {
 
     @Override
     public void modifier(Post post) {
-        String req = "UPDATE post SET title=?, description=?, matiere=?, groupId=?, userId=?, numberOfComments=?, createdAt=?, updatedAt=? WHERE id=?";
+        String req = "UPDATE post SET title=?, description=?, matiere=?, groupeId=?, userId=?, nbrOfComments=?, createdAt=?, updatedAt=? WHERE id=?";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setString(1, post.getTitle());
@@ -51,6 +51,57 @@ public class PostService implements IService<Post> {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public void incrementComments(int id) {
+        String req = "UPDATE post SET nbrOfComments=nbrOfComments+1 WHERE id=?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, id);
+            pst.executeUpdate();
+            System.out.println("Post updated !");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void decrementComments(int id) {
+        String req = "UPDATE post SET nbrOfComments=nbrOfComments-1 WHERE id=?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, id);
+            pst.executeUpdate();
+            System.out.println("Post updated !");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void ajouterFichier(Post post, String fichier) {
+        String req = "INSERT INTO fichierPost (postId, fileLink) VALUES (?,?)";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, post.getId());
+            pst.setString(2, fichier);
+            pst.executeUpdate();
+            System.out.println("FichierPost added !");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void supprimerFichier(int id) {
+        String req = "DELETE FROM fichierPost WHERE id=?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, id);
+            pst.executeUpdate();
+            System.out.println("FichierPost deleted !");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
@@ -72,48 +123,58 @@ public class PostService implements IService<Post> {
         Set<Post> posts = new HashSet<>();
         String req = "Select * from post";
         try {
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-
-            while (rs.next()) {
+            Statement pst = cnx.createStatement();
+            pst.executeQuery(req);
+            while (pst.getResultSet().next()) {
                 Post post = new Post();
-                post.setId(rs.getInt(1));
-                post.setTitle(rs.getString(2));
-                post.setDescription(rs.getString(3));
-                post.setMatiere(rs.getString(4));
-                post.setGroupId(rs.getInt(5));
-                post.setUserId(rs.getInt(6));
-                post.setNumberOfComments(rs.getInt(7));
-                post.setCreatedAt(rs.getTimestamp(8));
-                post.setUpdatedAt(rs.getTimestamp(9));
+                post.setId(pst.getResultSet().getInt("id"));
+                post.setTitle(pst.getResultSet().getString("title"));
+                post.setDescription(pst.getResultSet().getString("description"));
+                post.setMatiere(pst.getResultSet().getString("matiere"));
+                post.setGroupId(pst.getResultSet().getInt("groupeId"));
+                post.setUserId(pst.getResultSet().getInt("userId"));
+                post.setNumberOfComments(pst.getResultSet().getInt("nbrOfComments"));
+                post.setCreatedAt(pst.getResultSet().getTimestamp("createdAt"));
+                post.setUpdatedAt(pst.getResultSet().getTimestamp("updatedAt"));
                 posts.add(post);
             }
+            System.out.println("Posts selected !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
         return posts;
     }
 
     @Override
     public Post getOneByID(int id) {
+//        private int id;
+//        private String title;
+//        private String description;
+//        private String matiere;
+//        private int groupId;
+//        private int userId;
+//        private int numberOfComments;
+//        public Set<Commentaire> commentaires = new HashSet<>();
+//        private Timestamp createdAt;
+//        private Timestamp updatedAt;
+//        private Set<Object> fichiers = new HashSet<>();
+
+        String req = "SELECT * FROM post WHERE id=?";
         Post post = new Post();
-        // get post and comments associated with it
-        String req = "Select post.*, count(comment.id) as numberOfComments from post left join comment on post.id = comment.postId where post.id = " + id;
         try {
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                post.setId(rs.getInt(1));
-                post.setTitle(rs.getString(2));
-                post.setDescription(rs.getString(3));
-                post.setMatiere(rs.getString(4));
-                post.setGroupId(rs.getInt(5));
-                post.setUserId(rs.getInt(6));
-                post.setNumberOfComments(rs.getInt(7));
-                post.setCreatedAt(rs.getTimestamp(8));
-                post.setUpdatedAt(rs.getTimestamp(9));
-            }
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, id);
+            pst.executeQuery();
+            post.setId(pst.getResultSet().getInt("id"));
+            post.setTitle(pst.getResultSet().getString("title"));
+            post.setDescription(pst.getResultSet().getString("description"));
+            post.setMatiere(pst.getResultSet().getString("matiere"));
+            post.setGroupId(pst.getResultSet().getInt("groupeId"));
+            post.setUserId(pst.getResultSet().getInt("userId"));
+            post.setNumberOfComments(pst.getResultSet().getInt("nbrOfComments"));
+            post.setCreatedAt(pst.getResultSet().getTimestamp("createdAt"));
+            post.setUpdatedAt(pst.getResultSet().getTimestamp("updatedAt"));
+            System.out.println("Post selected !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -45,6 +45,9 @@ public class Commentaire {
         this.updatedAt = updatedAt;
     }
 
+    public Commentaire() {
+    }
+
     public int getId() {
         return id;
     }
