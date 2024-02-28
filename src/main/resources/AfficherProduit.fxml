@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="670.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherProduit">
+   <VBox prefHeight="670.0" prefWidth="930.0">
+      <children>
+         <HBox alignment="CENTER" prefHeight="64.0" prefWidth="798.0" style="-fx-background-color: FFCD38;">
+            <children>
+               <ImageView fitHeight="112.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../../../../../Downloads/429636892_968504204789314_101429248215607992_n.png" />
+                  </image>
+               </ImageView>
+               <TextField prefHeight="26.0" prefWidth="359.0" promptText="rechercher" />
+               <Pane prefHeight="200.0" prefWidth="200.0" />
+               <HBox alignment="CENTER" prefHeight="50.0" prefWidth="329.0">
+                  <children>
+                     <Label prefHeight="18.0" prefWidth="110.0" text="Rima Guedria">
+                        <font>
+                           <Font name="Roboto" size="14.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+            </children>
+         </HBox>
+         <HBox prefHeight="610.0" prefWidth="930.0">
+            <children>
+               <VBox prefHeight="534.0" prefWidth="147.0" style="-fx-background-color: FFCD38;">
+                  <children>
+                     <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Acceuil" textAlignment="CENTER">
+                        <font>
+                           <Font name="Roboto Bold" size="14.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
+                        </VBox.margin>
+                     </Button>
+                     <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Favoris">
+                        <font>
+                           <Font name="Roboto Bold" size="14.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets bottom="20.0" left="15.0" right="15.0" top="15.0" />
+                        </VBox.margin>
+                     </Button>
+                     <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Messages">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets bottom="20.0" left="15.0" right="15.0" top="15.0" />
+                        </VBox.margin>
+                     </Button>
+                     <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Parascolaires">
+                        <VBox.margin>
+                           <Insets bottom="20.0" left="15.0" right="15.0" top="15.0" />
+                        </VBox.margin>
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </Button>
+                  </children>
+               </VBox>
+               <ScrollPane fx:id="scroll" prefHeight="609.0" prefWidth="788.0">
+                  <content>
+                     <GridPane fx:id="produitGrid">
+                        <rowConstraints>
+                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                     </GridPane>
+                  </content>
+               </ScrollPane>
+            </children>
+         </HBox>
+      </children>
+   </VBox>
+</AnchorPane>
