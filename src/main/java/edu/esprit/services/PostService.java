@@ -13,17 +13,16 @@ public class PostService implements IService<Post> {
 
     @Override
     public void ajouter(Post post) {
-        String req = "INSERT INTO post (title, description, matiere, groupeId, userId, nbrOfComments, createdAt, updatedAt) VALUES (?,?,?,?,?,?,?,?)";
+        String req = "INSERT INTO post (title, description, matiere, userId, nbrOfComments, createdAt, updatedAt) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setString(1, post.getTitle());
             pst.setString(2, post.getDescription());
             pst.setString(3, post.getMatiere());
-            pst.setInt(4, post.getGroupId());
-            pst.setInt(5, post.getUserId());
-            pst.setInt(6, 0);
+            pst.setInt(4, post.getUserId());
+            pst.setInt(5, post.getNumberOfComments());
+            pst.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
             pst.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
-            pst.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
             pst.executeUpdate();
             System.out.println("Post added !");
         } catch (SQLException e) {

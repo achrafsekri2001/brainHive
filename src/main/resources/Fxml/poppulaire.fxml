@@ -2,7 +2,6 @@
 
 <?import com.gluonhq.charm.glisten.control.AutoCompleteTextField?>
 <?import com.gluonhq.charm.glisten.control.Avatar?>
-<?import com.gluonhq.charm.glisten.control.Chip?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
@@ -18,9 +17,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1050.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AcceuilController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1050.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.PoppulaireController">
     <effect>
         <DropShadow color="#1b1eeb" />
     </effect>
@@ -141,62 +139,10 @@
                 </Pane>
             </left>
             <center>
-                <ScrollPane prefHeight="442.0" prefWidth="818.0" BorderPane.alignment="CENTER">
+                <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <content>
-                        <VBox prefHeight="463.0" prefWidth="846.0">
-                            <children>
-                                <Pane prefHeight="330.0" prefWidth="600.0" style="-fx-background-color: EBEBEB;">
-                                    <children>
-                                        <Avatar layoutX="27.0" layoutY="43.0">
-                                            <image>
-                                                <Image url="@../../../../../../../../Downloads/IMG_5881.jpeg" />
-                                            </image>
-                                        </Avatar>
-                                        <Chip id="subjectChip" layoutX="82.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="14.0" style="-fx-background-radius: 100; -fx-background-color: #FFFFF;" styleClass="subjectChip" stylesheets="@../styles/Accueil.css" text="Anglais" />
-                                        <Text layoutX="83.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="J'ai confrontée un probleme dans cet exercice">
-                                            <font>
-                                                <Font name="System Bold" size="16.0" />
-                                            </font>
-                                        </Text>
-                                        <Text layoutX="83.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit cursus justo sit amet dapibus. Donec ex massa ...." wrappingWidth="356.0">
-                                            <font>
-                                                <Font size="11.0" />
-                                            </font>
-                                        </Text>
-                                        <ImageView fitHeight="150.0" fitWidth="287.0" layoutX="83.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../../../../../../Downloads/1_eGdNATA_BGQcA1xUvc9Irg.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Button id="commentsButton" fx:id="" layoutX="81.0" layoutY="295.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="128">
-                                            <graphic>
-                                                <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../../../../assets/comments.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </graphic>
-                                            <font>
-                                                <Font size="11.0" />
-                                            </font>
-                                        </Button>
-                                        <Button layoutX="682.0" layoutY="26.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
-                                            <graphic>
-                                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../../../../assets/save.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </graphic>
-                                        </Button>
-                                    </children>
-                                </Pane>
-                            </children>
-                        </VBox>
+                        <Label text="Populaire" />
                     </content>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
                 </ScrollPane>
             </center>
         </BorderPane>

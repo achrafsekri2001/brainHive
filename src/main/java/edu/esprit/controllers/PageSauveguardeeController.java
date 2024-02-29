@@ -12,7 +12,7 @@ import javafx.scene.control.ListView;
 import java.io.IOException;
 import java.util.List;
 
-public class AcceuilController {
+public class PageSauveguardeeController {
     @FXML
     private ListView<String> matiereList;
 

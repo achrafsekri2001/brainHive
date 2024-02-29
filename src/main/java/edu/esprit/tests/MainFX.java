@@ -11,7 +11,7 @@ public class MainFX extends Application {
     public void start(Stage stage) throws Exception {
 //        Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
 //        Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/acceuil.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/pageAcceuil.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);

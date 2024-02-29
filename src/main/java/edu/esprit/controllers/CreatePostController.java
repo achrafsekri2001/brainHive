@@ -1,18 +1,20 @@
 package edu.esprit.controllers;
 
+import edu.esprit.entities.Post;
+import edu.esprit.services.PostService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.util.List;
 
-public class AcceuilController {
+public class CreatePostController {
+
+    private final PostService postService = new PostService();
+
     @FXML
     private ListView<String> matiereList;
 
@@ -36,13 +38,28 @@ public class AcceuilController {
     private Hyperlink navigateReclamation = new Hyperlink();
 
     @FXML
-    private Button addPostButton = new Button();
+    private TextArea descriptionInput = new TextArea();
+
+    @FXML
+    private TextField titleInput = new TextField();
+
+    @FXML
+    private ChoiceBox matiere = new ChoiceBox();
+
+    @FXML
+    private Button submitButton = new Button();
 
     @FXML
     public void initialize() {
 
         List<String> listeMatiere = List.of("Mathématiques", "Physique", "Informatique", "Anglais", "Français", "Histoire", "Géographie", "Philosophie", "SVT", "EPS", "Arts plastiques", "Musique", "Technologie", "Sciences de l'ingénieur", "Langues vivantes", "Latin", "Arabe");
         matiereList.getItems().addAll(listeMatiere);
+
+        // clone listMatiere and add a select option
+        List<String> listeMatiereCree = new java.util.ArrayList<>(List.copyOf(listeMatiere));
+        listeMatiereCree.add(0, "Sélectionner une matière");
+        matiere.getItems().addAll(listeMatiereCree);
+        matiere.getSelectionModel().selectFirst();
 
         // when a subject is selected, navigate to a page called "subjects"
         matiereList.setOnMouseClicked(event -> {
@@ -55,7 +72,33 @@ public class AcceuilController {
         navigateMessagerie.setOnAction(this::Navigate);
         navigateParascolaire.setOnAction(this::Navigate);
         navigateReclamation.setOnAction(this::Navigate);
-        addPostButton.setOnAction(this::Navigate);
+
+        // submit button
+        submitButton.setOnAction(event -> {
+            // selected subject should not have the "Sélectionner une matière" value
+            if (matiere.getSelectionModel().getSelectedIndex() == 0) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Matière non sélectionnée");
+                alert.setContentText("Veuillez sélectionner une matière.");
+                alert.showAndWait();
+            } else {
+                // create a post
+                Post post = new Post();
+                post.setTitle(titleInput.getText());
+                post.setDescription(descriptionInput.getText());
+                post.setMatiere(matiere.getSelectionModel().getSelectedItem().toString());
+                post.setUserId(1);
+                postService.ajouter(post);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information");
+                alert.setHeaderText("Post créé");
+                alert.setContentText("Votre post a été créé avec succès.");
+                alert.showAndWait();
+
+
+            }
+        });
 
     }
 
@@ -66,7 +109,7 @@ public class AcceuilController {
             navigateTo("/Fxml/pageAcceuil.fxml");
         }
         if (event.getSource() == navigatePopulaire) {
-            navigateTo("/Fxml/poppulaire.fxml");
+            navigateTo("/Fxml/test.fxml");
         }
         if (event.getSource() == navigateSauveguardee) {
             navigateTo("/Fxml/pageSauveguardee.fxml");
@@ -79,9 +122,6 @@ public class AcceuilController {
         }
         if (event.getSource() == navigateReclamation) {
             navigateTo("/Fxml/pageReclamation.fxml");
-        }
-        if (event.getSource() == addPostButton) {
-            navigateTo("/Fxml/createPost.fxml");
         }
 
     }
@@ -99,4 +139,5 @@ public class AcceuilController {
             alert.showAndWait();
         }
     }
+
 }
