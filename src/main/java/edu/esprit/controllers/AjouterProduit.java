@@ -4,7 +4,9 @@ import edu.esprit.entities.Produit;
 import edu.esprit.services.ServiceProduit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -69,7 +71,7 @@ public class AjouterProduit implements Initializable {
 
 
                     // Récupérer le parascolaire nouvellement ajouté depuis la base de données
-                    Produit nouveauParascolaire = sp.getOneByID(produit.getId_produit()); // Ici, supposez que vous avez une méthode dans votre service produit pour récupérer un parascolaire par son ID
+                    //Produit nouveauParascolaire = sp.getOneByID(produit.getId_produit()); // Ici, supposez que vous avez une méthode dans votre service produit pour récupérer un parascolaire par son ID
 
                     // Mettre à jour la liste d'affichage dans la page d'affichage avec le nouveau parascolaire
                    // AfficherProduit.getInstance().ajouterParascolaire(nouveauParascolaire);
@@ -92,16 +94,46 @@ public class AjouterProduit implements Initializable {
             }
     }
 
-        private boolean isValidInput() {
-            return titreTF.getText() != null && !titreTF.getText().isEmpty() &&
-                    descriptionTF.getText() != null && !descriptionTF.getText().isEmpty() &&
-                    matierepara.getValue() != null;
+    private boolean isValidInput() {
+        // Vérifier si le champ titre est vide ou trop long (plus de 50 caractères)
+        if (titreTF.getText() == null || titreTF.getText().isEmpty() || titreTF.getText().length() > 30) {
+            return false;
         }
 
+        // Vérifier si le champ description est vide
+        if (descriptionTF.getText() == null || descriptionTF.getText().isEmpty()) {
+            return false;
+
+        }
+
+        // Vérifier si une matière est sélectionnée
+        if (matierepara.getValue() == null || matierepara.getValue().isEmpty()) {
+            return false;
+        }
+
+        // Vérifier si une image est sélectionnée
+        if (selectedFile == null) {
+            return false;
+        }
+
+        return true;
+    }
 
 
+    private void navigateTo(String fxmlFilePath) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlFilePath));
+            titreTF.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Navigation Error");
+            alert.setContentText("An error occurred while navigating to the next page.");
+            alert.showAndWait();
+        }}
     @FXML
     void navigatetoAcceuilAction(ActionEvent event) {
-
+        navigateTo("/AfficherProduitAdmin.fxml");
     }
 }

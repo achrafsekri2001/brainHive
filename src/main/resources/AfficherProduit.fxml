@@ -8,17 +8,15 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="670.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherProduit">
    <VBox prefHeight="670.0" prefWidth="930.0">
       <children>
-         <HBox alignment="CENTER" prefHeight="64.0" prefWidth="798.0" style="-fx-background-color: FFCD38;">
+         <HBox alignment="CENTER" prefHeight="58.0" prefWidth="930.0" style="-fx-background-color: FFCD38;">
             <children>
                <ImageView fitHeight="112.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -76,15 +74,15 @@
                      </Button>
                   </children>
                </VBox>
-               <ScrollPane fx:id="scroll" prefHeight="609.0" prefWidth="788.0">
-                  <content>
-                     <GridPane fx:id="produitGrid">
-                        <rowConstraints>
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        </rowConstraints>
-                     </GridPane>
-                  </content>
-               </ScrollPane>
+               <AnchorPane fx:id="container" prefHeight="200.0" prefWidth="200.0">
+                  <children>
+                     <ScrollPane fx:id="scroll" prefHeight="609.0" prefWidth="788.0">
+                        <content>
+                           <VBox fx:id="vcontainer" prefHeight="224.0" prefWidth="770.0" spacing="10" />
+                        </content>
+                     </ScrollPane>
+                  </children>
+               </AnchorPane>
             </children>
          </HBox>
       </children>

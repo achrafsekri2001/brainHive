@@ -2,20 +2,47 @@ package edu.esprit.entities;
 
 import java.util.Objects;
 
-public class CommentaireProduit {
+public class AvisProduit {
     private int id_commentaire;
     private int user_id;
     private String contenu;
     private int id_produit;
+    private String user_name;
+    private String user_img;
 
-    public CommentaireProduit(int id_commentaire, int user_id, String contenu, int id_produit) {
+
+
+    public AvisProduit(int id_commentaire, int user_id, String contenu, int id_produit, String user_name, String user_img) {
         this.id_commentaire = id_commentaire;
         this.user_id = user_id;
         this.contenu = contenu;
         this.id_produit = id_produit;
+        this.user_name = user_name;
+        this.user_img = user_img;
     }
 
-    public CommentaireProduit() {
+    public AvisProduit(int user_id, String contenu, int id_produit, String user_name, String user_img) {
+        this.user_id = user_id;
+        this.contenu = contenu;
+        this.id_produit = id_produit;
+        this.user_name = user_name;
+        this.user_img = user_img;
+    }
+
+    public AvisProduit(String contenu, int id_produit, String user_name, String user_img) {
+        this.contenu = contenu;
+        this.id_produit = id_produit;
+        this.user_name = user_name;
+        this.user_img = user_img;
+    }
+    public AvisProduit(String contenu, String user_name, String user_img) {
+        this.contenu = contenu;
+        this.user_name = user_name;
+        this.user_img = user_img;
+    }
+
+    public AvisProduit() {
+
     }
 
     public int getId_commentaire() {
@@ -52,18 +79,34 @@ public class CommentaireProduit {
 
     @Override
     public String toString() {
-        return "CommentaireProduit{" +
+        return "AvisProduit{" +
                 " user_id=" + user_id +
                 ", contenu='" + contenu + '\'' +
                 ", id_produit=" + id_produit +
                 '}';
     }
 
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getUser_img() {
+        return user_img;
+    }
+
+    public void setUser_img(String user_img) {
+        this.user_img = user_img;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CommentaireProduit that = (CommentaireProduit) o;
+        AvisProduit that = (AvisProduit) o;
         return id_commentaire == that.id_commentaire;
     }
 

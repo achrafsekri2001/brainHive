@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierProduit">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="701.0" prefWidth="210.0" style="-fx-background-color: FFCD38;">
+         <children>
+            <ImageView fitHeight="51.0" fitWidth="200.0" layoutY="14.0">
+               <image>
+                  <Image url="@../../../../../../Downloads/429636892_968504204789314_101429248215607992_n.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="24.0" layoutY="105.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="161.0" style="-fx-background-color: white;" text="Acceuil" textAlignment="CENTER">
+               <font>
+                  <Font name="Roboto Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="24.0" layoutY="187.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="161.0" style="-fx-background-color: white;" text="       les parascolaires">
+               <font>
+                  <Font name="Roboto Bold" size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="24.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Downloads/346a1f4363e1b59f6860fdce6abc1082.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="34.0" fitWidth="30.0" layoutX="32.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Downloads/téléchargement.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label layoutX="393.0" layoutY="24.0" prefHeight="70.0" prefWidth="330.0" text="Modifier le parascolaire" textFill="#ffcd38">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="321.0" layoutY="189.0" prefHeight="38.0" prefWidth="70.0" text="Titre">
+         <font>
+            <Font name="Roboto Bold" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="321.0" layoutY="263.0" text="Description">
+         <font>
+            <Font name="Roboto Bold" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="322.0" layoutY="434.0" prefHeight="34.0" prefWidth="96.0" text="Image">
+         <font>
+            <Font name="Roboto Bold" size="23.0" />
+         </font>
+      </Label>
+      <Button layoutX="273.0" layoutY="574.0" mnemonicParsing="false" onAction="#modifierParascolaireAction" prefHeight="38.0" prefWidth="267.0" style="-fx-background-color: FFCD38;" text="Mettre à jour le parascolaire" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="327.0">
+         <font>
+            <Font name="Roboto Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="634.0" layoutY="574.0" mnemonicParsing="false" onAction="#navigatetoAffichageAction" prefHeight="38.0" prefWidth="144.0" style="-fx-background-color: FFCD38;" text="Annuler">
+         <font>
+            <Font name="Roboto Bold" size="18.0" />
+         </font>
+      </Button>
+      <TextField fx:id="titreTF" layoutX="486.0" layoutY="195.0" prefHeight="26.0" prefWidth="220.0" promptText="Saisir le titre de parascolaire" />
+      <TextField fx:id="descriptionTF" layoutX="486.0" layoutY="244.0" prefHeight="98.0" prefWidth="220.0" promptText="Décrire le parascolaire" />
+      <Button layoutX="723.0" layoutY="451.0" mnemonicParsing="false" onAction="#uploadimgAction" text="Télécharger votre image">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="img" fitHeight="150.0" fitWidth="152.0" layoutX="520.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="322.0" layoutY="354.0" prefHeight="34.0" prefWidth="116.0" text="Matiére">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="matierepara" layoutX="486.0" layoutY="359.0" prefHeight="26.0" prefWidth="220.0" />
+   </children>
+</AnchorPane>

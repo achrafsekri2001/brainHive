@@ -8,13 +8,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.NoteEtAvis">
    <children>
@@ -36,7 +33,7 @@
             <Pane prefHeight="60.0" prefWidth="230.0" />
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="175.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="110.0" text="Rima Guedria">
+                  <Label fx:id="usercompte" prefHeight="18.0" prefWidth="110.0" text="Rima Guedria">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
@@ -57,7 +54,7 @@
             </Button>
             <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Favoris">
                <font>
-                  <Font name="Roboto Bold" size="14.0" />
+                  <Font name="SansSerif Bold" size="14.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="20.0" left="15.0" right="15.0" top="15.0" />
@@ -65,7 +62,7 @@
             </Button>
             <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Messages">
                <font>
-                  <Font size="14.0" />
+                  <Font name="SansSerif Bold" size="14.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="20.0" left="15.0" right="15.0" top="15.0" />
@@ -76,7 +73,7 @@
                   <Insets bottom="20.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
                <font>
-                  <Font size="14.0" />
+                  <Font name="SansSerif Bold" size="14.0" />
                </font>
             </Button>
          </children>
@@ -87,7 +84,7 @@
                <children>
                   <VBox prefHeight="578.0" prefWidth="270.0">
                      <children>
-                        <ImageView fitHeight="411.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imgpara" fitHeight="411.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../Downloads/012-6.jpg" />
                            </image>
@@ -99,7 +96,7 @@
                   </VBox>
                   <VBox prefHeight="620.0" prefWidth="549.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="545.0" text="Note et avis" textFill="#f20404">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="545.0" text="        Note et avis" textFill="#f20404">
                            <font>
                               <Font name="System Italic" size="24.0" />
                            </font>
@@ -111,32 +108,45 @@
                                     <Font name="System Italic" size="18.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets top="40.0" />
+                                    <Insets bottom="20.0" top="40.0" />
                                  </HBox.margin>
                               </Label>
                            </children>
                         </HBox>
                         <HBox prefHeight="154.0" prefWidth="540.0">
                            <children>
-                              <Label />
-                              <TextField alignment="TOP_LEFT" prefHeight="108.0" prefWidth="415.0" promptText="Décriver votre avis (facultatif) ">
+                              <VBox prefHeight="154.0" prefWidth="464.0">
+                                 <children>
+                                    <Label prefHeight="27.0" prefWidth="239.0" text="         Donner votre avis :">
+                                       <font>
+                                          <Font name="System Italic" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="avisTF" alignment="TOP_LEFT" prefHeight="108.0" prefWidth="415.0" promptText="Décriver votre avis (facultatif) ">
+                                       <VBox.margin>
+                                          <Insets left="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                              <Button mnemonicParsing="false" onAction="#ajouteravisAction" text="ajouter">
                                  <HBox.margin>
-                                    <Insets left="30.0" top="30.0" />
+                                    <Insets left="10.0" top="40.0" />
                                  </HBox.margin>
-                              </TextField>
+                              </Button>
                            </children>
                         </HBox>
                         <VBox prefHeight="300.0" prefWidth="540.0">
                            <children>
-                              <ScrollPane prefHeight="308.0" prefWidth="540.0">
-                                 <content>
-                                    <GridPane prefHeight="0.0" prefWidth="0.0">
-                                      <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                    </GridPane>
-                                 </content>
-                              </ScrollPane>
+                              <AnchorPane fx:id="conatinerAvis" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ScrollPane prefHeight="308.0" prefWidth="540.0">
+                                       <content>
+                                          <VBox fx:id="vcontainer" prefHeight="93.0" prefWidth="543.0" />
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </VBox>
                      </children>

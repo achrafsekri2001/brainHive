@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.Avatar?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AvisItem"/>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AvisItem">
+   <children>
+      <VBox layoutX="-1.0" layoutY="-3.0" prefHeight="120.0" prefWidth="543.0" style="-fx-background-color: FFF6CC;">
+         <children>
+            <HBox prefHeight="45.0" prefWidth="543.0">
+               <children>
+                  <Avatar fx:id="userimg">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" top="10.0" />
+                     </HBox.margin>
+                  </Avatar>
+                  <Label fx:id="username" prefHeight="42.0" prefWidth="198.0" text="Label" />
+               </children></HBox>
+            <Label fx:id="contenuavis" prefHeight="64.0" prefWidth="477.0" text="Label">
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

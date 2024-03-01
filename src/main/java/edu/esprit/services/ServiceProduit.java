@@ -4,6 +4,7 @@ import edu.esprit.entities.Produit;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -61,7 +62,7 @@ public class ServiceProduit implements IService<Produit>{
     }
 
     public List<Produit> getAll() {
-        Set<Produit> produits = new HashSet<>();
+        List<Produit> produits = new ArrayList<>();
 
         String req = "SELECT * FROM produit";
         try {
@@ -84,12 +85,12 @@ public class ServiceProduit implements IService<Produit>{
         return (List<Produit>) produits;
     }
 
-    public Produit getOneByID(int id) {
+    public Produit getOneByID(int id_produit) {
         Produit p = null;
         try {
             String req = "SELECT * FROM produit WHERE id_produit=?";
             PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setInt(1, id);
+            ps.setInt(1, id_produit);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String nom = rs.getString("nom");
@@ -97,7 +98,7 @@ public class ServiceProduit implements IService<Produit>{
                 String description = rs.getString("description");
                 String matiere = rs.getString("matiere");
                 int note = rs.getInt("note");
-                p = new Produit(id, nom, image, description, matiere, note);
+                p = new Produit(id_produit, nom, image, description, matiere, note);
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération du produit : " + e.getMessage());
@@ -124,4 +125,7 @@ public class ServiceProduit implements IService<Produit>{
         }
         return moyenne;
     }
+
+
+
 }
