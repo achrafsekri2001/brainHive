@@ -38,10 +38,11 @@ public class ServiceUser  implements IService<User> {
 
 
 
-    @Override
-    public void modifier(User t) {
 
-            String req = "UPDATE `user` SET `email`=?, `nom`=?, `prenom`=?, `password`=?, `roles`=? WHERE `id`=?";
+
+         /*
+           @Override
+    public void modifier(User t) {String req = "UPDATE `user` SET `email`=?, `nom`=?, `prenom`=?, `password`=?, `roles`=? WHERE `id`=?";
             try {
                 PreparedStatement ps = cnx.prepareStatement(req);
                 ps.setString(1, t.getEmail());
@@ -54,8 +55,71 @@ public class ServiceUser  implements IService<User> {
                 System.out.println("Utilisateur modifié !");
             } catch (SQLException e) {
                 System.out.println("Erreur lors de la modification de l'utilisateur : " + e.getMessage());
+            }*/
+    @Override
+        public void modifier(User t) throws SQLException {
+
+            String req = "UPDATE `user` SET `email`=?, `nom`=?, `prenom`=?, `password`=?, `roles`=? WHERE `id`=?";
+            PreparedStatement ps;
+            try {
+                ps = cnx.prepareStatement(req);
+
+                // Set parameters for the prepared statement
+                ps.setString(1, t.getEmail());
+                ps.setString(2, t.getNom());
+                ps.setString(3, t.getPrenom());
+                ps.setString(4, t.getPassword());
+                ps.setInt(5, t.getRoles());
+                ps.setInt(6, t.getId());
+
+                // Execute the update query
+                int rowsUpdated = ps.executeUpdate();
+
+                if (rowsUpdated > 0) {
+                    // Successful modification
+                    System.out.println("Utilisateur modifié : " + t.getNom());
+                } else {
+                    // No rows were updated, indicating a potential error
+                    System.out.println("Aucune modification effectuée.");
+                }
+
+            } catch (SQLException e) {
+                System.out.println("Erreur lors de la modification de l'utilisateur : " + e.getMessage());
+                throw e; // Re-throw the exception to propagate it up the call stack
             }
         }
+
+
+    public void modifierAdmin(User userToUpdate) throws SQLException {
+        String req = "UPDATE `user` SET `nom`=?, `prenom`=?, `email`=?, `password`=? WHERE `id`=?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+
+        try {
+            // Set parameters for the prepared statement
+            ps.setString(1, userToUpdate.getNom());
+            ps.setString(2, userToUpdate.getPrenom());
+            ps.setString(3, userToUpdate.getEmail());
+            ps.setString(4, userToUpdate.getPassword());
+            ps.setInt(5, userToUpdate.getId());
+
+            // Execute the update query
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                // Successful modification
+                System.out.println("Utilisateur modifié : " + userToUpdate.getNom());
+            } else {
+                // No rows were updated, indicating a potential error
+                System.out.println("Aucune modification effectuée.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la modification de l'utilisateur : " + e.getMessage());
+            throw e; // Re-throw the exception to propagate it up the call stack
+        }
+    }
+
+
 
 
 
@@ -175,7 +239,46 @@ public class ServiceUser  implements IService<User> {
         }
 
 
+
+
+
+
+    public void save_modification(User u) throws SQLException {
+
+        String req = "UPDATE `user` SET `email`=?, `nom`=?, `prenom`=?, `password`=? WHERE `id`=? AND `roles`=0";
+        PreparedStatement ps;
+
+        try {
+            ps = cnx.prepareStatement(req);
+
+            // Set parameters for the prepared statement
+            ps.setString(1, u.getEmail());
+            ps.setString(2, u.getNom());
+            ps.setString(3, u.getPrenom());
+            ps.setString(4, u.getPassword());
+            ps.setInt(5, u.getId());
+
+            // Execute the update query
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                // Successful modification
+                System.out.println("Utilisateur modifié : " + u.getNom());
+            } else {
+                // No rows were updated, indicating a potential error
+                System.out.println("Aucune modification effectuée. Veuillez vérifier que l'utilisateur a le rôle 0 (Admin).");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la modification de l'utilisateur : " + e.getMessage());
+            throw e; // Re-throw the exception to propagate it up the call stack
+        }
     }
+
+
+
+
+}
 
 
 

@@ -181,9 +181,10 @@ try{
         return;}
 
             // Validate role
-            if (role != 0 && role != 1 && role != 2) {
+            if ( role != 1 && role != 2) {
                 throw new IllegalArgumentException("Veuillez saisir un rôle valide ( 1 pour étudiant, 2 pour enseignant).");
             }
+
 
             // Create User object
             User u = new User();
@@ -198,11 +199,10 @@ try{
 
             // Display success message with role specified
             String roleMessage = "";
-            if (role == 0) {
-                roleMessage = "Admin";
-            } else if (role == 1) {
+
+             if (role == 1) {
                 roleMessage = "Etudiant";
-            } else {
+            } else if(role==2 ){
                 roleMessage = "Enseignant";
             }
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -29,6 +29,13 @@ public class User {
         this.roles = roles;
     }
 
+    public User(String email, String nom, String prenom, String password) {
+        this.email = email;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.password = password;
+    }
+
     public  int getId() {
         return id;
     }

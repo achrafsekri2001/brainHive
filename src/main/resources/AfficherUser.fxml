@@ -8,20 +8,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherUser">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="648.0" style="-fx-background-color: silver;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherUser">
     <children>
         <ListView fx:id="listView" layoutX="14.0" layoutY="5.0" prefHeight="226.0" prefWidth="447.0" />
         <VBox layoutX="463.0" layoutY="95.0" prefHeight="56.0" prefWidth="151.0" spacing="10.0">
             <children>
-                <Button fx:id="clear" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clear" prefHeight="41.0" prefWidth="150.0" text="Clear ">
+                <Button fx:id="clear" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clear" prefHeight="41.0" prefWidth="150.0" style="-fx-background-color: #743cd6;" text="Clear ">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Button>
             </children>
         </VBox>
-      <Button layoutX="468.0" layoutY="167.0" mnemonicParsing="false" onAction="#modifier" prefHeight="40.0" prefWidth="149.0" text="modifier" />
-          <Button alignment="CENTER" contentDisplay="CENTER" layoutX="466.0" layoutY="7.0" mnemonicParsing="false" onAction="#afficheruserbtn" prefHeight="56.0" prefWidth="151.0" text="afficheruser">
+      <Button layoutX="468.0" layoutY="167.0" mnemonicParsing="false" onAction="#modifier" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: #743cd6;" text="modifier" />
+          <Button alignment="CENTER" contentDisplay="CENTER" layoutX="466.0" layoutY="7.0" mnemonicParsing="false" onAction="#afficheruserbtn" prefHeight="56.0" prefWidth="151.0" style="-fx-background-color: #743cd6;" text="afficheruser">
               <font>
                   <Font size="15.0" />
               </font>
@@ -34,7 +34,7 @@
       <TextField fx:id="nouveau_prenom" layoutX="198.0" layoutY="286.0" />
       <TextField fx:id="nouveauemail" layoutX="198.0" layoutY="329.0" />
       <TextField fx:id="nouveaupswd" layoutX="198.0" layoutY="368.0" />
-      <Button fx:id="save" layoutX="483.0" layoutY="312.0" mnemonicParsing="false" onAction="#save" prefHeight="56.0" prefWidth="75.0" text="save" />
-      <Button fx:id="retour" layoutX="582.0" layoutY="416.0" mnemonicParsing="false" onAction="#retour_page" text="retour" />
+      <Button fx:id="save" layoutX="483.0" layoutY="312.0" mnemonicParsing="false" onAction="#save" prefHeight="56.0" prefWidth="75.0" style="-fx-background-color: #743cd6;" text="save" />
+      <Button fx:id="retour" layoutX="582.0" layoutY="416.0" mnemonicParsing="false" onAction="#retour_page" style="-fx-background-color: #743cd6;" text="retour" />
     </children>
 </AnchorPane>
