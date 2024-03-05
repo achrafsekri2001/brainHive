@@ -7,6 +7,8 @@ import edu.esprit.services.ServiceAvis;
 
 import edu.esprit.services.ServiceProduit;
 import edu.esprit.services.UserCRUD;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import org.controlsfx.control.Rating;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,48 +29,42 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class NoteEtAvis implements Initializable {
+    @FXML
+    private Rating rating;
 
     @FXML
     private TextField avisTF;
 
     @FXML
-    private AnchorPane containerAvis;
+    private AnchorPane conatinerAvis;
 
     @FXML
     private ImageView imgpara;
 
     @FXML
-    private Label usercompte;
+    private Label note;
 
     @FXML
     private VBox vcontainer;
 
-    Utilisateur user = new Utilisateur(1,"rima","sdfghj");
+
+   /* Utilisateur user = new Utilisateur(1,"rima","sdfghj");
     private final UserCRUD su=new UserCRUD();
     private final ServiceAvis sa = new ServiceAvis();
     private final int id_Produit;
     private final ServiceProduit serviceProduit = new ServiceProduit();
     public NoteEtAvis(int id_Produit) {
         this.id_Produit = id_Produit;
-    }
-    public void initialize(URL location, ResourceBundle resources) {
-       /* try {
-            Produit produitAEvaluer = serviceProduit.getOneById(id_Produit);
+    }*/
 
-            List<AvisProduit> avis = sa.getAll();
-            for (AvisProduit avisProduit : avis) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AvisItem.fxml"));
-                try {
-                    vcontainer.getChildren().add(loader.load());
-                    AvisItem controller = loader.getController();
-                    controller.setAvisData(avisProduit, containerAvis);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    public void initialize(URL location, ResourceBundle resources) {
+       /* rating.ratingProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                // Mettre à jour la valeur de la note dans la Label
+                note.setText(t1.toString());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+        });*/
     }
 
     @FXML
@@ -75,10 +72,8 @@ public class NoteEtAvis implements Initializable {
         if (isValidInput()) {
             AvisProduit avis = new AvisProduit();
             avis.setContenu(avisTF.getText());
-            avis.setUser_id(user.getId()); // Définissez l'utilisateur actuel comme le "user" de la réclamation
-            avis.setUser_img(user.getImgUser()); // Définissez l'ID de l'utilisateur actuel comme l'ID de l'utilisateur de la réclamation
-            avis.setUser_name(user.getUserName());
-            sa.ajouter(avis);
+            //avis.setUser_id(user.getId()); // Définissez l'utilisateur actuel comme le "user" de la réclamation
+          //  sa.ajouter(avis);
 
 
             // Récupérer le parascolaire nouvellement ajouté depuis la base de données

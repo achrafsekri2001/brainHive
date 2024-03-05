@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -22,7 +23,7 @@ import java.util.Optional;
 
 public class ItemAdmin {
     @FXML
-    private Label parascolaireDescription;
+    private Label parascolaireMatiere;
 
     @FXML
     private ImageView parascolaireImage;
@@ -34,9 +35,9 @@ public class ItemAdmin {
     private Label parascolaireNote;
     ServiceProduit sp = new ServiceProduit();
     private Produit produit;
-    private AnchorPane container;
+    private GridPane container;
     private int produitId;
-    public void setDataAdmin(Produit produit, AnchorPane container) {
+    public void setDataAdmin(Produit produit, GridPane container) {
         this.produit = produit;
         this.container = container;
 
@@ -44,20 +45,15 @@ public class ItemAdmin {
         this.produitId = produit.getId_produit();
 
         parascolaireNom.setText(produit.getNom());
-        parascolaireDescription.setText(produit.getDescription());
+        parascolaireMatiere.setText(produit.getMatiere());
         parascolaireNote.setText(String.valueOf(produit.getNote())); // Supposant que la note est un double
         // Charger l'image depuis le chemin du fichier
         parascolaireImage.setImage(new Image(new File(produit.getImage()).toURI().toString()));
-    }
-    private void refreshData() {
-        if (parentController != null) {
-            parentController.refreshData();
-        }
 
     }
 
     @FXML
-    void ModifierAction(ActionEvent event) {
+    void modifierAction(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierProduit.fxml"));
         Parent root;
         try {
@@ -78,7 +74,7 @@ public class ItemAdmin {
         this.parentController = parentController;
     }
     @FXML
-    void SupprimerAction(ActionEvent event) {
+    void supprimerAction(ActionEvent event) {
         // Afficher une boîte de dialogue de confirmation pour confirmer la suppression
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
@@ -96,4 +92,6 @@ public class ItemAdmin {
             }
         }
     }
+
+
 }

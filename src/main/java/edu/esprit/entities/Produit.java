@@ -1,5 +1,7 @@
 package edu.esprit.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -103,4 +105,5 @@ public class Produit {
     public int hashCode() {
         return Objects.hash(id_produit);
     }
+
 }

@@ -5,35 +5,27 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.NoteEtAvis">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.NoteEtAvis">
    <children>
-      <HBox layoutX="-6.0" prefHeight="60.0" prefWidth="966.0" style="-fx-background-color: FFCD38;">
+      <HBox layoutX="-6.0" prefHeight="87.0" prefWidth="966.0" style="-fx-background-color: FFCD38;">
          <children>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="494.0">
+            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="494.0">
                <children>
-                  <ImageView fitHeight="119.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true">
-                     <HBox.margin>
-                        <Insets right="90.0" />
-                     </HBox.margin>
-                     <image>
-                        <Image url="@../../../../../../Downloads/429636892_968504204789314_101429248215607992_n.png" />
-                     </image>
-                  </ImageView>
                   <TextField prefHeight="38.0" prefWidth="200.0" promptText="rechercher" />
                </children>
             </HBox>
             <Pane prefHeight="60.0" prefWidth="230.0" />
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="175.0">
                <children>
-                  <Label fx:id="usercompte" prefHeight="18.0" prefWidth="110.0" text="Rima Guedria">
+                  <Label prefHeight="18.0" prefWidth="110.0" text="Rima Guedria">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
@@ -42,7 +34,7 @@
             </HBox>
          </children>
       </HBox>
-      <VBox layoutY="58.0" prefHeight="593.0" prefWidth="142.0" style="-fx-background-color: FFCD38;">
+      <VBox layoutY="58.0" prefHeight="619.0" prefWidth="142.0" style="-fx-background-color: FFCD38;">
          <children>
             <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Acceuil" textAlignment="CENTER">
                <font>
@@ -78,42 +70,41 @@
             </Button>
          </children>
       </VBox>
-      <VBox layoutX="142.0" layoutY="59.0" prefHeight="594.0" prefWidth="816.0">
+      <VBox layoutX="142.0" layoutY="59.0" prefHeight="610.0" prefWidth="816.0">
          <children>
-            <HBox prefHeight="614.0" prefWidth="816.0">
+            <HBox prefHeight="606.0" prefWidth="816.0">
                <children>
                   <VBox prefHeight="578.0" prefWidth="270.0">
                      <children>
                         <ImageView fx:id="imgpara" fitHeight="411.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../Downloads/012-6.jpg" />
-                           </image>
                            <VBox.margin>
                               <Insets left="20.0" right="10.0" top="60.0" />
                            </VBox.margin>
                         </ImageView>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="620.0" prefWidth="549.0">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="545.0" text="        Note et avis" textFill="#f20404">
-                           <font>
-                              <Font name="System Italic" size="24.0" />
-                           </font>
-                        </Label>
-                        <HBox prefHeight="76.0" prefWidth="540.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="60.0" prefWidth="242.0" text="         Noter ce parascolaire :">
+                              <Label prefHeight="58.0" prefWidth="111.0" text="           Note :" textFill="#31b783">
                                  <font>
-                                    <Font name="System Italic" size="18.0" />
+                                    <Font name="System Bold Italic" size="18.0" />
                                  </font>
-                                 <HBox.margin>
-                                    <Insets bottom="20.0" top="40.0" />
-                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="note" prefHeight="57.0" prefWidth="110.0">
+                                 <font>
+                                    <Font name="System Italic" size="16.0" />
+                                 </font>
                               </Label>
                            </children>
                         </HBox>
-                        <HBox prefHeight="154.0" prefWidth="540.0">
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="615.0" prefWidth="540.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="108.0" prefWidth="540.0" text="      Note et avis" textFill="#31b783">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="148.0" prefWidth="540.0">
                            <children>
                               <VBox prefHeight="154.0" prefWidth="464.0">
                                  <children>
@@ -127,28 +118,34 @@
                                           <Insets left="10.0" />
                                        </VBox.margin>
                                     </TextField>
+                                    <HBox prefHeight="40.0" prefWidth="464.0">
+                                       <children>
+                                          <Label prefHeight="43.0" prefWidth="226.0" text="         Noter ce parascolaire :">
+                                             <font>
+                                                <Font name="System Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Rating fx:id="rating" />
+                                       </children>
+                                    </HBox>
                                  </children>
                               </VBox>
-                              <Button mnemonicParsing="false" onAction="#ajouteravisAction" text="ajouter">
+                              <Button mnemonicParsing="false" onAction="#ajouteravisAction" text="Ajouter">
                                  <HBox.margin>
                                     <Insets left="10.0" top="40.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
                         </HBox>
-                        <VBox prefHeight="300.0" prefWidth="540.0">
+                        <AnchorPane fx:id="conatinerAvis" prefHeight="278.0" prefWidth="540.0">
                            <children>
-                              <AnchorPane fx:id="conatinerAvis" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ScrollPane prefHeight="308.0" prefWidth="540.0">
-                                       <content>
-                                          <VBox fx:id="vcontainer" prefHeight="93.0" prefWidth="543.0" />
-                                       </content>
-                                    </ScrollPane>
-                                 </children>
-                              </AnchorPane>
+                              <ScrollPane layoutY="-1.0" prefHeight="404.0" prefWidth="540.0">
+                                 <content>
+                                    <VBox fx:id="vcontainer" prefHeight="93.0" prefWidth="543.0" />
+                                 </content>
+                              </ScrollPane>
                            </children>
-                        </VBox>
+                        </AnchorPane>
                      </children>
                   </VBox>
                </children>

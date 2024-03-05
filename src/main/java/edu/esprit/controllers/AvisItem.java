@@ -29,7 +29,7 @@ public class AvisItem {
         this.containerAvis= containerAvis;
 
         contenuavis.setText(avisProduit.getContenu());
-        username.setText(avisProduit.getUser_name());
-        userimg.setImage(new Image(new File(avisProduit.getUser_img()).toURI().toString()));
+        //username.setText(avisProduit.getUser_name());
+       // userimg.setImage(new Image(new File(avisProduit.getUser_img()).toURI().toString()));
     }
 }

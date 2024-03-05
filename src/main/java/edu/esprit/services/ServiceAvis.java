@@ -16,14 +16,14 @@ public class ServiceAvis {
     Connection cnx = DataSource.getInstance().getCnx();
 
     public void ajouter(AvisProduit avis) throws SQLException {
-        String req = "INSERT INTO avis (id_produit, contenu, user_id, user_name, user_img) VALUES (?, ?, ?, ?, ?)";
+        String req = "INSERT INTO avisproduit (id_produit, contenu, user_id, note) VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, avis.getId_produit());
             ps.setString(2, avis.getContenu());
             ps.setInt(3, avis.getUser_id());
-            ps.setString(4, avis.getUser_name());
-            ps.setString(5, avis.getUser_img());
+            ps.setInt(4, avis.getNote());
+
             ps.executeUpdate();
             System.out.println("Avis ajouté avec succès !");
 
@@ -70,13 +70,13 @@ public class ServiceAvis {
                 Statement st = cnx.createStatement();
                 ResultSet rs = st.executeQuery(req);
                 while (rs.next()) {
-                    int id_commentaire = rs.getInt("id_commentaire");
+                    int id_commentaire = rs.getInt("id");
                     int user_id = rs.getInt("user_id");
                     String contenu = rs.getString("contenu");
                     int id_produit = rs.getInt("id_produit");
-                    String user_name = rs.getString("user_name");
-                    String user_img = rs.getString("user_img");
-                    AvisProduit avis = new AvisProduit(id_commentaire, user_id, contenu, id_produit, user_name, user_img);
+                    int note = rs.getInt("note");
+
+                    AvisProduit avis = new AvisProduit(id_commentaire, user_id, contenu, id_produit, note);
                     avisList.add(avis);
                 }
             } catch (SQLException e) {
@@ -93,13 +93,13 @@ public class ServiceAvis {
                 ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    int id_commentaire = rs.getInt("id_commentaire");
+                    int id_commentaire = rs.getInt("id");
                     int user_id = rs.getInt("user_id");
                     String contenu = rs.getString("contenu");
                     int id_produit = rs.getInt("id_produit");
-                    String user_name = rs.getString("user_name");
-                    String user_img = rs.getString("user_img");
-                    avis = new AvisProduit(id_commentaire, user_id, contenu, id_produit, user_name, user_img);
+                    int note = rs.getInt("note");
+
+                    avis = new AvisProduit(id_commentaire, user_id, contenu, id_produit, note);
                 }
             } catch (SQLException e) {
                 System.out.println("Erreur lors de la récupération de l'avis : " + e.getMessage());

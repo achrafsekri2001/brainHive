@@ -7,38 +7,37 @@ public class AvisProduit {
     private int user_id;
     private String contenu;
     private int id_produit;
-    private String user_name;
-    private String user_img;
+    private int note;
 
 
 
-    public AvisProduit(int id_commentaire, int user_id, String contenu, int id_produit, String user_name, String user_img) {
+
+    public AvisProduit(int id_commentaire, int user_id, String contenu, int id_produit, int note) {
         this.id_commentaire = id_commentaire;
         this.user_id = user_id;
         this.contenu = contenu;
         this.id_produit = id_produit;
-        this.user_name = user_name;
-        this.user_img = user_img;
+        this.note = note;
+
     }
 
-    public AvisProduit(int user_id, String contenu, int id_produit, String user_name, String user_img) {
+    public AvisProduit(int user_id, String contenu, int id_produit, int note) {
         this.user_id = user_id;
         this.contenu = contenu;
         this.id_produit = id_produit;
-        this.user_name = user_name;
-        this.user_img = user_img;
+        this.note = note;
+
     }
 
-    public AvisProduit(String contenu, int id_produit, String user_name, String user_img) {
+    public AvisProduit(String contenu, int id_produit, int note) {
         this.contenu = contenu;
         this.id_produit = id_produit;
-        this.user_name = user_name;
-        this.user_img = user_img;
+        this.note = note;
+
     }
-    public AvisProduit(String contenu, String user_name, String user_img) {
+    public AvisProduit(String contenu) {
         this.contenu = contenu;
-        this.user_name = user_name;
-        this.user_img = user_img;
+
     }
 
     public AvisProduit() {
@@ -77,6 +76,14 @@ public class AvisProduit {
         this.id_produit = id_produit;
     }
 
+    public int getNote() {
+        return note;
+    }
+
+    public void setNote(int note) {
+        this.note = note;
+    }
+
     @Override
     public String toString() {
         return "AvisProduit{" +
@@ -86,21 +93,6 @@ public class AvisProduit {
                 '}';
     }
 
-    public String getUser_name() {
-        return user_name;
-    }
-
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
-    }
-
-    public String getUser_img() {
-        return user_img;
-    }
-
-    public void setUser_img(String user_img) {
-        this.user_img = user_img;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -75,7 +75,7 @@ public class ServiceProduit implements IService<Produit>{
                 String description = rs.getString("description");
                 String matiere = rs.getString("matiere");
                 int note = rs.getInt("note");
-                Produit p = new Produit(id, nom, image, description, matiere, note);
+                Produit p = new Produit(id, image, nom, description, matiere, note);
                 produits.add(p);
             }
         } catch (SQLException e) {
@@ -126,6 +126,59 @@ public class ServiceProduit implements IService<Produit>{
         return moyenne;
     }
 
+    public List<String> getMatiereList() {
+        // Initialise une liste pour stocker les matières disponibles
+        List<String> matieres = new ArrayList<>();
+
+        try {
+            // Remplacer cette partie avec votre propre logique pour récupérer les matières depuis la source de données
+            // Par exemple, si vous stockez les matières dans une base de données, vous devrez exécuter une requête pour les récupérer
+            // Ici, nous simulons des données de test
+            matieres.add("Arabe");
+            matieres.add("Anglais");
+            matieres.add("Allemand");
+            matieres.add("Economie");
+            matieres.add("Espagnole");
+            matieres.add("Français");
+            matieres.add("Gestion");
+            matieres.add("Histoire et géographie");
+            matieres.add("Informatique");
+            matieres.add("Italien");
+            matieres.add("Mathématique");
+            matieres.add("Philosophie");
+            matieres.add("Physique et chimie");
+            matieres.add("Sciences de la vie et de la terre");
+            matieres.add("Technique");
+
+        } catch (Exception e) {
+            // Gérer les éventuelles exceptions, telles que les erreurs de connexion à la base de données
+            e.printStackTrace();
+        }
+
+        // Retourne la liste des matières disponibles
+        return matieres;
+    }
+    public List<Produit> getProduitsByMatiere(String matiere) {
+        List<Produit> produitsParMatiere = new ArrayList<>();
+        String req = "SELECT * FROM produit WHERE matiere=?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, matiere);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int id = rs.getInt("id_produit");
+                String nom = rs.getString("nom");
+                String image = rs.getString("image");
+                String description = rs.getString("description");
+                int note = rs.getInt("note");
+                Produit p = new Produit(id, image, nom, description, matiere, note);
+                produitsParMatiere.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des produits par matière : " + e.getMessage());
+        }
+        return produitsParMatiere;
+    }
 
 
 }

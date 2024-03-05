@@ -1,7 +1,6 @@
 /*package edu.esprit.controllers;
 
-import edu.esprit.entities.Reclamation;
-import edu.esprit.services.ServiceReclamation;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
 
 public class ReclamationItemComponentController {
 

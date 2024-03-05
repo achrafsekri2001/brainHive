@@ -2,14 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -18,11 +19,6 @@
       <children>
          <HBox alignment="CENTER" prefHeight="58.0" prefWidth="930.0" style="-fx-background-color: FFCD38;">
             <children>
-               <ImageView fitHeight="112.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../../../../../Downloads/429636892_968504204789314_101429248215607992_n.png" />
-                  </image>
-               </ImageView>
                <TextField prefHeight="26.0" prefWidth="359.0" promptText="rechercher" />
                <Pane prefHeight="200.0" prefWidth="200.0" />
                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="329.0">
@@ -74,15 +70,31 @@
                      </Button>
                   </children>
                </VBox>
-               <AnchorPane fx:id="container" prefHeight="200.0" prefWidth="200.0">
+               <VBox prefHeight="610.0" prefWidth="783.0">
                   <children>
-                     <ScrollPane fx:id="scroll" prefHeight="609.0" prefWidth="788.0">
-                        <content>
-                           <VBox fx:id="vcontainer" prefHeight="224.0" prefWidth="770.0" spacing="10" />
-                        </content>
-                     </ScrollPane>
+                     <ComboBox fx:id="matiereBox" prefWidth="150.0">
+                        <VBox.margin>
+                           <Insets bottom="10.0" left="300.0" top="10.0" />
+                        </VBox.margin>
+                     </ComboBox>
+                     <AnchorPane prefHeight="610.0" prefWidth="783.0">
+                        <children>
+                           <ScrollPane prefHeight="565.0" prefWidth="783.0">
+                              <content>
+                                 <GridPane fx:id="container" prefHeight="296.0" prefWidth="200.0">
+                                    <rowConstraints>
+                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <opaqueInsets>
+                                       <Insets />
+                                    </opaqueInsets>
+                                 </GridPane>
+                              </content>
+                           </ScrollPane>
+                        </children>
+                     </AnchorPane>
                   </children>
-               </AnchorPane>
+               </VBox>
             </children>
          </HBox>
       </children>
