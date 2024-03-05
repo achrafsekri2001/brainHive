@@ -55,7 +55,7 @@
                   </Button>
                   <Button fx:id="addPostButton" layoutX="853.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
                      <graphic>
-                        <ImageView fx:id="addPostButton" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="https://brainhive.s3.eu-west-3.amazonaws.com/plusRounded.png" />
                            </image>

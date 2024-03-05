@@ -74,7 +74,7 @@ public class PostPageController {
 
         int id = GlobalHolder.getCurrentPost().getId();
         System.out.println("Current post id: " + id);
-         post= postService.getOneByID(id);
+        post = postService.getOneByID(id);
 //         post = GlobalHolder.getCurrentPost();
 
 
@@ -128,7 +128,7 @@ public class PostPageController {
                     Parent root = loader.load();
                     navigateAcceuil.getScene().setRoot(root);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -137,16 +137,17 @@ public class PostPageController {
 
         Set<Commentaire> commentaires = commentaireService.getCommentairesByPost(post);
         for (Commentaire commentaire : commentaires) {
+            CommentaireController controller = new CommentaireController();
+            controller.setData(commentaire);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/CommentaireView.fxml"));
+            loader.setController(controller);
             try {
                 CommentsVBox.getChildren().add(loader.load());
-                //set spacing between posts
-                CommentsVBox.setSpacing(10);
-                CommentaireController controller = loader.getController();
-                controller.setData(commentaire);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
+            CommentsVBox.setSpacing(10);
+
         }
 
     }

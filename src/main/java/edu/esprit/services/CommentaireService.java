@@ -18,25 +18,22 @@ public class CommentaireService implements IService<Commentaire> {
 
     @Override
     public void ajouter(Commentaire commentaire) {
-        String req = "INSERT INTO commentaire (content, postId, userId, upVotes, downVotes, createdAt, updatedAt,parentComment) VALUES (?,?,?,?,?,?,?,?)";
+        String req = "INSERT INTO commentaire (content, postId, userId, createdAt, updatedAt,parentComment) VALUES (?,?,?,?,?,?)";
 
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setString(1, commentaire.getContent());
             pst.setInt(2, commentaire.getPost().getId());
             pst.setInt(3, commentaire.getUserId());
-            pst.setInt(4, 0);
-            pst.setInt(5, 0);
-            pst.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
-            pst.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
+            pst.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+            pst.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
             if (commentaire.getParent() != null) {
-                pst.setInt(8, commentaire.getParent().getId());
+                pst.setInt(6, commentaire.getParent().getId());
             } else {
-                pst.setInt(8, -1);
+                pst.setInt(6, -1);
             }
             pst.executeUpdate();
             System.out.println("Comment added !");
-//            postService.incrementComments(commentaire.getPost().getId());
             postService.incrementComments(commentaire.getPost().getId());
 
         } catch (SQLException e) {
@@ -48,19 +45,16 @@ public class CommentaireService implements IService<Commentaire> {
     //? add bad words filter
     @Override
     public void modifier(Commentaire commentaire) {
-        String req = "UPDATE commentaire SET content=?, postId=?, userId=?, upVotes=?, upVotes=?, nbreDownVotes=?, createdAt=?, updatedAt=?, parentId=? WHERE id=?";
+        String req = "UPDATE commentaire SET content=?, postId=?, userId=?, createdAt=?, updatedAt=?, parentId=? WHERE id=?";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setString(1, commentaire.getContent());
             pst.setInt(2, commentaire.getPost().getId());
             pst.setInt(3, commentaire.getUserId());
-            pst.setInt(4, commentaire.getNbreVotes());
-            pst.setInt(5, commentaire.getNbreUpVotes());
-            pst.setInt(6, commentaire.getNbreDownVotes());
-            pst.setTimestamp(7, commentaire.getCreatedAt());
-            pst.setTimestamp(8, commentaire.getUpdatedAt());
-            pst.setInt(9, commentaire.getParent().getId());
-            pst.setInt(10, commentaire.getId());
+            pst.setTimestamp(4, commentaire.getCreatedAt());
+            pst.setTimestamp(5, commentaire.getUpdatedAt());
+            pst.setInt(6, commentaire.getParent().getId());
+            pst.setInt(7, commentaire.getId());
             pst.executeUpdate();
             System.out.println("Comment updated !");
         } catch (SQLException e) {
@@ -95,6 +89,7 @@ public class CommentaireService implements IService<Commentaire> {
 
     @Override
     public void supprimer(int id) {
+        Post post = getOneByID(id).getPost();
         String req = "DELETE FROM commentaire WHERE id=?";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
@@ -104,11 +99,26 @@ public class CommentaireService implements IService<Commentaire> {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        postService.decrementComments(post.getId());
     }
 
     @Override
     public Set<Commentaire> getAll() {
-        String req = "SELECT c.*, v.type as voted FROM commentaire c LEFT JOIN userVotes v ON c.id = v.comment_id";
+        String req = "SELECT c.id,\n" +
+                "       c.content,\n" +
+                "       v.type                    as voted,\n" +
+                "       SUM(IF(v.type = 1, 1, 0)) as upVotes,\n" +
+                "       SUM(IF(v.type = 2, 1, 0)) as downVotes,\n" +
+                "       c.userId,\n" +
+                "       c.postId,\n" +
+                "       c.parentComment,\n" +
+                "       c.verified,\n" +
+                "       c.intOfreports,\n" +
+                "       c.createdAt,\n" +
+                "       c.updatedAt\n" +
+                "FROM commentaire c\n" +
+                "         LEFT JOIN userVotes v ON c.id = v.comment_id\n" +
+                "GROUP BY c.id, c.content, c.createdAt, c.userId, v.type\n";
         Set<Commentaire> commentaires = new HashSet<>();
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
@@ -142,17 +152,42 @@ public class CommentaireService implements IService<Commentaire> {
 
     @Override
     public Commentaire getOneByID(int id) {
-        String req = "SELECT c.*, v.type as voted FROM commentaire c LEFT JOIN userVotes v ON c.id = v.comment_id WHERE c.id=?";
+        System.out.println("id: " + id);
+        String req = "SELECT c.id,\n" +
+                "       c.content,\n" +
+                "       v.type                    as voted,\n" +
+                "       SUM(IF(v.type = 1, 1, 0)) as upVotes,\n" +
+                "       SUM(IF(v.type = 2, 1, 0)) as downVotes,\n" +
+                "       c.userId,\n" +
+                "       c.postId,\n" +
+                "       c.parentComment,\n" +
+                "       c.verified,\n" +
+                "       c.intOfreports,\n" +
+                "       c.createdAt,\n" +
+                "       c.updatedAt\n" +
+                "FROM commentaire c\n" +
+                "         LEFT JOIN userVotes v\n" +
+                "                   ON c.id = v.comment_id\n" +
+                "WHERE c.id = ?\n" +
+                "GROUP BY c.id, c.content, v.type, c.userId, c.postId, c.parentComment, c.verified, c.intOfreports, c.createdAt,\n" +
+                "         c.updatedAt;";
+        String req2 = "SELECT * FROM commentaire WHERE id=?";
         Commentaire commentaire = new Commentaire();
         try {
-            PreparedStatement pst = cnx.prepareStatement(req);
+            PreparedStatement pst = cnx.prepareStatement(req2);
             pst.setInt(1, id);
             pst.executeQuery();
+            pst.getResultSet().next();
             commentaire.setId(pst.getResultSet().getInt("id"));
             commentaire.setContent(pst.getResultSet().getString("content"));
             Post post = new Post();
-            post.setId(pst.getResultSet().getInt("postId"));
-            commentaire.setPost(post);
+            try {
+                post.setId(pst.getResultSet().getInt("postId"));
+                commentaire.setPost(post);
+            } catch (SQLException e) {
+                System.out.println("Post not found");
+                commentaire.setPost(null);
+            }
             commentaire.setUserId(pst.getResultSet().getInt("userId"));
             commentaire.setNbreVotes(pst.getResultSet().getInt("upVotes") - pst.getResultSet().getInt("downVotes"));
             commentaire.setNbreUpVotes(pst.getResultSet().getInt("upVotes"));
@@ -163,7 +198,8 @@ public class CommentaireService implements IService<Commentaire> {
             Commentaire parent = new Commentaire();
             parent.setId(pst.getResultSet().getInt("parentId"));
             commentaire.setParent(parent);
-            System.out.println("Comment selected !");
+
+            System.out.println("Comment selected !" + commentaire);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -171,7 +207,22 @@ public class CommentaireService implements IService<Commentaire> {
     }
 
     public Set<Commentaire> getCommentairesByPost(Post post) {
-        String req = "SELECT c.*, v.type as voted FROM commentaire c LEFT JOIN userVotes v ON c.id = v.comment_id WHERE c.postId=?";
+        String req = "SELECT c.id," +
+                "       c.content," +
+                "       v.type                    as voted,\n" +
+                "       SUM(IF(v.type = 1, 1, 0)) as upVotes,\n" +
+                "       SUM(IF(v.type = 2, 1, 0)) as downVotes,\n" +
+                "       c.userId,\n" +
+                "       c.postId,\n" +
+                "       c.parentComment,\n" +
+                "       c.verified,\n" +
+                "       c.intOfreports,\n" +
+                "       c.createdAt,\n" +
+                "       c.updatedAt\n" +
+                "FROM commentaire c\n" +
+                "         LEFT JOIN userVotes v ON c.id = v.comment_id\n" +
+                "WHERE c.postId = ?\n" +
+                "GROUP BY c.id, c.content, v.type, c.userId, c.postId, c.parentComment, c.verified, c.intOfreports, c.createdAt, c.updatedAt\n";
         Set<Commentaire> commentaires = new HashSet<>();
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
@@ -205,40 +256,42 @@ public class CommentaireService implements IService<Commentaire> {
     }
 
     public void upVote(Commentaire commentaire) {
-        String req = "UPDATE commentaire SET upVotes=? WHERE id=?";
         String req2 = "insert into userVotes (user_id,comment_id,type) values (?,?,1)";
+        String req3 = "UPDATE userVotes SET type=1 WHERE comment_id=?";
         try {
-            PreparedStatement pst = cnx.prepareStatement(req);
-            pst.setInt(1, commentaire.getNbreUpVotes() + 1);
-            pst.setInt(2, commentaire.getId());
-            pst.executeUpdate();
-            PreparedStatement pst2 = cnx.prepareStatement(req2);
-            //? add user id
-            pst2.setInt(1, 1);
-            pst2.setInt(2, commentaire.getId());
-            pst2.executeUpdate();
-            System.out.println("Comment upvoted !");
+            if (commentaire.getVoted() == 2) {
+                PreparedStatement pst3 = cnx.prepareStatement(req3);
+                pst3.setInt(1, commentaire.getId());
+                pst3.executeUpdate();
+            } else {
+                PreparedStatement pst2 = cnx.prepareStatement(req2);
+                pst2.setInt(1, 1);
+                pst2.setInt(2, commentaire.getId());
+                pst2.executeUpdate();
+            }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error in upvoting comment" + e.getMessage());
         }
     }
 
     public void downVote(Commentaire commentaire) {
-        String req = "UPDATE commentaire SET downVotes=? WHERE id=?";
         String req2 = "insert into userVotes (user_id,comment_id,type) values (?,?,2)";
+        String req3 = "UPDATE userVotes SET type=2 WHERE comment_id=?";
         try {
-            PreparedStatement pst = cnx.prepareStatement(req);
-            pst.setInt(1, commentaire.getNbreDownVotes() + 1);
-            pst.setInt(2, commentaire.getId());
-            pst.executeUpdate();
-            PreparedStatement pst2 = cnx.prepareStatement(req2);
-            //? add user id
-            pst2.setInt(1, 1);
-            pst2.setInt(2, commentaire.getId());
-            pst2.executeUpdate();
+            if (commentaire.getVoted() == 1) {
+                PreparedStatement pst3 = cnx.prepareStatement(req3);
+                pst3.setInt(1, commentaire.getId());
+                pst3.executeUpdate();
+            } else {
+                PreparedStatement pst2 = cnx.prepareStatement(req2);
+                //? add user id
+                pst2.setInt(1, 1);
+                pst2.setInt(2, commentaire.getId());
+                pst2.executeUpdate();
+            }
             System.out.println("Comment downvoted !");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error in downvoting comment" + e.getMessage());
         }
     }
 
