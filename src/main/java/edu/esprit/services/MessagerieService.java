@@ -1,111 +1,157 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Messagerie;
+import edu.esprit.entities.Utilisateur;
+import edu.esprit.utils.DataSource;
 
 import java.sql.*;
-import java.util.*;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class MessagerieService implements IService<Messagerie> {
-   /* private Connection connection;
+public class MessagerieService {
 
-    public MessagerieService() {
-        // Initialisation de la connexion à la base de données
+    static Connection connection = DataSource.getInstance().getCnx();
+    // Méthode pour ajouter un message à la base de données
+    public void ajouter(Messagerie messagerie){
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pidevusers", "username", "password");
-        } catch (SQLException ex) {
-            System.out.println("Erreur lors de la connexion à la base de données: " + ex.getMessage());
-        }
-    }
+            PreparedStatement pre = connection.prepareStatement("INSERT INTO `messagerie` (`idEmetteur`,`idRecepteur`,`date`,`contenu`) VALUES (?,?,?,?)");
+            pre.setInt(1, messagerie.getSender_message().getId());
+            pre.setInt(2, messagerie.getReceiver_message().getId());
+            pre.setString(4, messagerie.getContenu());
+            pre.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
 
-    @Override
-    public void ajouter(Messagerie messagerie) {
-        try {
-            PreparedStatement pre = connection.prepareStatement("INSERT INTO `message` (`id_disc`,`id_sender`,`message`) VALUES (?,?,?)");
-            pre.setInt(1, messagerie.getIdDiscussion());
-            pre.setInt(2, messagerie.getIdEmetteur());
-            pre.setString(3, messagerie.getMessage());
             pre.executeUpdate();
-            System.out.println("Message ajouté avec succès !");
-        } catch (SQLException ex) {
-            System.out.println("Exception lors de l'ajout du message: " + ex.getMessage());
+            System.out.println("Messaagerie added!");
+        } catch (SQLException e) {
+            System.err.println("Error adding Messaagerie: " + e.getMessage());
         }
     }
 
-    @Override
-    public void modifier(Messagerie messagerie) {
-        try {
-            PreparedStatement pst = connection.prepareStatement("UPDATE message SET id_disc = ?, id_sender = ?, message = ? WHERE id_message = ?");
-            pst.setInt(1, messagerie.getIdDiscussion());
-            pst.setInt(2, messagerie.getIdEmetteur());
-            pst.setString(3, messagerie.getMessage());
-            pst.setInt(4, messagerie.getIdMessage());
-            int rowsUpdated = pst.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("Message modifié avec succès !");
-            } else {
-                System.out.println("Aucune modification effectuée, le message avec l'ID " + messagerie.getIdMessage() + " n'existe pas.");
-            }
-        } catch (SQLException ex) {
-            System.out.println("Erreur lors de la modification du message: " + ex.getMessage());
+//     Méthode pour ajouter une nouvelle discussion à la base de données
+//    public void ajouterDiscussion(Messagerie nouvelleDiscussion) {
+//        try {
+//            PreparedStatement pre = connection.prepareStatement("INSERT INTO `discussion` (`idDiscussion`, `contenu`) VALUES (?, ?)");
+//            pre.setInt(1, nouvelleDiscussion.getIdDiscussion());
+//            pre.setString(2, nouvelleDiscussion.getContenu());
+//            pre.executeUpdate();
+//            System.out.println("Nouvelle discussion ajoutée avec succès !");
+//        } catch (SQLException ex) {
+//            System.out.println("Exception lors de l'ajout de la nouvelle discussion: " + ex.getMessage());
+//        }
+//    }
+
+public void modifier(Messagerie messagerie) {
+    try  {
+        PreparedStatement pre = connection.prepareStatement("UPDATE `messagerie` (`idRecepteur`,`idEmetteur`,`date`,`contenu`) VALUES (?,?,?,?) WHERE`id`=?");
+
+        pre.setTimestamp(3, new java.sql.Timestamp(messagerie.getDate().getTime()));
+
+        pre.setString(4, messagerie.getContenu());
+        pre.setInt(2, messagerie.getSender_message().getId());
+        pre.setInt(1, messagerie.getReceiver_message().getId());
+        pre.setInt(5, messagerie.getIdMessage());
+        pre.executeUpdate();
+        System.out.println("Messagerie updated!");
+    } catch (SQLException e) {
+        System.err.println("Error updating Messagerie: " + e.getMessage());
+    }
+}
+
+
+    public void supprimer(int id) {
+
+        try  {
+            PreparedStatement pre = connection.prepareStatement( "DELETE FROM `messagerie` WHERE `id`=?");
+            pre.setInt(1, id);
+            pre.executeUpdate();
+            System.out.println("Messagerie deleted!");
+        } catch (SQLException e) {
+            System.err.println("Error deleting Messagerie: " + e.getMessage());
         }
     }
 
-
-
-    public void supprimer(Messagerie messagerie) {
-        try {
-            String requete = "DELETE FROM message WHERE `id_message`=?";
-            PreparedStatement pst = connection.prepareStatement(requete);
-            pst.setInt(1, messagerie.getIdMessage());
-            pst.executeUpdate();
-            System.out.println("Message supprimé avec succès !");
-        } catch (SQLException ex) {
-            System.out.println("Erreur lors de la suppression du message: " + ex.getMessage());
-        }
-    }
-
-    @Override
-    public Set<Messagerie> getAll() {
-        Set<Messagerie> listOfMsgs = new HashSet<>();
+    // Méthode pour récupérer tous les messages de la base de données
+    public  List<Messagerie> getAll() {
+        List<Messagerie> listOfMsgs = new ArrayList<>();
         try {
             Statement ste = connection.createStatement();
-            ResultSet rs = ste.executeQuery("SELECT * FROM message");
+            ResultSet rs = ste.executeQuery("SELECT * FROM messagerie");
             while (rs.next()) {
-                int idRecepteur = rs.getInt("id_recepteur");
-                int idEmetteur = rs.getInt("id_emetteur");
-                int idDiscussion= rs.getInt("id_discution");
-                int idMessage = rs.getInt("id_message");
-                Date date = rs.getDate("date_message");
-                String contenu = rs.getString("contenu_message");
-                Messagerie messagerie = new Messagerie(idMessage, idEmetteur, idRecepteur, idDiscussion,date, contenu);
-                listOfMsgs.add(messagerie);
+                Messagerie mess = new Messagerie();
+                mess.setIdMessage(rs.getInt("id"));
+                mess.setContenu(rs.getString("contenu"));
+
+                mess.setDate(rs.getTimestamp("date"));
+                // Utilisez ServiceUtilisateur pour obtenir l'Utilisateur par ID
+                Utilisateur sender = new UserCRUD().getOneByID(rs.getInt("idEmetteur"));
+                Utilisateur receiver = new UserCRUD().getOneByID(rs.getInt("idRecepteur"));
+                mess.setSender_message(sender);
+                mess.setReceiver_message(receiver);
+
+                listOfMsgs.add(mess);
             }
-            System.out.println("Liste des messages récupérée avec succès !");
-        } catch (SQLException ex) {
-            System.out.println("Erreur lors de la récupération des messages: " + ex.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Error getting Messagerie: " + e.getMessage());
         }
         return listOfMsgs;
     }
 
-    @Override
+
     public Messagerie getOneByID(int id) {
-        try {
-            PreparedStatement pst = connection.prepareStatement("SELECT * FROM message WHERE id_message = ?");
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                int idRecepteur = rs.getInt("id_recepteur");
-                int idEmetteur = rs.getInt("id_emetteur");
-                int idDiscussion= rs.getInt("id_discution");
-                Date date = rs.getDate("date_message");
-                String contenu = rs.getString("contenu_message");
-                return new Messagerie(id, idEmetteur, idRecepteur,idDiscussion, date, contenu);
+        String req = "SELECT * FROM `messagerie` WHERE `id_message` = ?";
+        try (PreparedStatement ps = connection.prepareStatement(req)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Messagerie mess = new Messagerie();
+                    mess.setIdMessage(rs.getInt("id"));
+                    mess.setContenu(rs.getString("contenu"));
+                    mess.setDate(rs.getTimestamp("date"));
+
+                    // Utilisez ServiceUtilisateur pour obtenir l'Utilisateur par ID
+                    Utilisateur sender = new UserCRUD().getOneByID(rs.getInt("idEmetteur"));
+                    Utilisateur receiver = new UserCRUD().getOneByID(rs.getInt("idRecepteur"));
+                    mess.setSender_message(sender);
+                    mess.setReceiver_message(receiver);
+
+                    return mess;
+                }
             }
-        } catch (SQLException ex) {
-            System.out.println("Erreur lors de la récupération du message: " + ex.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Error retrieving Messagerie: " + e.getMessage());
         }
         return null;
-    }*/
+    }
+    public List<Messagerie> getAllMessagesByReciverAndSender(int senderId, int receiverId) {
+        List<Messagerie> messages = new ArrayList<>();
+        String req = "SELECT * FROM `messagerie` WHERE (idEmeteur = ? AND idRecepteur = ?) OR (idEmeteur = ? AND idRecepteur = ?) ORDER BY date";
+        try (PreparedStatement ps = connection.prepareStatement(req)) {
+            ps.setInt(1, senderId);
+            ps.setInt(2, receiverId);
+            ps.setInt(3, receiverId);
+            ps.setInt(4, senderId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Messagerie mess = new Messagerie();
+                    mess.setIdMessage(rs.getInt("id"));
+                    mess.setContenu(rs.getString("contenu"));
+                    mess.setDate(rs.getTimestamp("date"));
+
+                    Utilisateur sender = new UserCRUD().getOneByID(rs.getInt("sender_id"));
+                    Utilisateur receiver = new UserCRUD().getOneByID(rs.getInt("reciver_id"));
+                    mess.setSender_message(sender);
+                    mess.setReceiver_message(receiver);
+
+                    messages.add(mess);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error getting Messagerie: " + e.getMessage());
+        }
+        return messages;
+    }
+
+
 
 }

@@ -5,23 +5,19 @@ import edu.esprit.entities.Reclamation;
 import edu.esprit.services.ReclamationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class HboxReclamationController implements Initializable {
+public class VboxAdminController {
     @FXML
-    private VBox boxeReclamation1;
+    private    VBox boxeReclamation1;
 
     @FXML
     private Label dateRec;
+
     @FXML
-    private ImageView imageuser1;
+    private Avatar imageuser1;
 
     @FXML
     private Label objet1;
@@ -34,7 +30,6 @@ public class HboxReclamationController implements Initializable {
 
     @FXML
     private Label username;
-
     ReclamationService serviceReclamation = new ReclamationService();
 
     // Reference to the Reclamation object
@@ -42,24 +37,21 @@ public class HboxReclamationController implements Initializable {
 
     // Reference to the container (parent) HBox
     private AnchorPane container;
+    @FXML
+    void supprimerAction(ActionEvent event) {
 
-    // Create a method to set data from Reclamation object
+    }
     public void setReclamationData(Reclamation reclamation, AnchorPane container) {
         this.reclamation = reclamation;
         this.container = container;
 
         // Set data to UI elements
         username.setText(reclamation.getUser());
+
         probleme1.setText(reclamation.getContenu());
         objet1.setText(reclamation.getObjet());
         dateRec.setText(String.valueOf(reclamation.getDate()));
     }
 
-    // Create a method to set data from Reclamation object
 
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
 }

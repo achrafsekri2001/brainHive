@@ -4,7 +4,9 @@ import edu.esprit.entities.Utilisateur;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class UserCRUD {
@@ -27,27 +29,7 @@ public class UserCRUD {
         System.out.println("Personne added !");
     }
 
-    public Set<Utilisateur> getAll() {
-    Set<Utilisateur> utilisateurs = new HashSet<>();
 
-    String req = "Select * from utilisateur";
-        try {
-        Connection cnx = null;
-        Statement st = cnx.createStatement();
-        ResultSet res = st.executeQuery(req);
-        while (res.next()){
-            int id = res.getInt("id");
-            String nom = res.getString(2);
-            String prenom = res.getString("prenom");
-            Utilisateur p = new Utilisateur(id,nom,prenom);
-            utilisateurs.add(p);
-        }
-    } catch (SQLException e) {
-        System.out.println(e.getMessage());
-    }
-
-        return utilisateurs;
-}
 
     public Utilisateur getOneByID(int id) {
         Utilisateur utilisateur = null;
@@ -60,14 +42,26 @@ public class UserCRUD {
                 String nom = rs.getString("userName");
                 String image = rs.getString("imgUser");
 
-                int note = rs.getInt("note");
                 utilisateur = new Utilisateur(id, nom, image);
             }
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la récupération du produit : " + e.getMessage());
+            System.out.println("Erreur lors de la récupération de l'utilisateur : " + e.getMessage());
         }
         return utilisateur;
     }
+
+
+        public Utilisateur getByUsername(String username) {
+           List<Utilisateur> utilisateurs = new ArrayList<>();
+
+            for (Utilisateur utilisateur : utilisateurs) {
+                if (utilisateur.getUserName().equals(username)) {
+                    return utilisateur;
+                }
+            }
+            return null; // Retourne null si aucun utilisateur n'est trouvé avec ce nom d'utilisateur
+        }
     }
+
 
 

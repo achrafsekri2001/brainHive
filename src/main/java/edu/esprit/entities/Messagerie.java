@@ -3,59 +3,69 @@ package edu.esprit.entities;
 import java.util.Date;
 import java.util.Objects;
 
-public class Messagerie {/*
-  public   int idRecepteur , idEmetteur ,idDiscussion ;
- public    Date date;
- public int idMessage;
-   public String contenu;
-    public Messagerie(int idMessage, int idEmetteur, int idRecepteur, int idDiscussion, Date date, String contenu){
+public class Messagerie {
+    public int  idDiscussion;
+    public Date date;
+    private Utilisateur receiver_message;
+    private Utilisateur sender_message;
+    public int idMessage;
+    public String contenu;
 
+
+    public Messagerie() {
     }
-    public Messagerie(int idRecepteur, int idEmetteur,  Date date, String contenu,int idDiscussion) {
+
+    public Messagerie(int idDiscussion, Date date, Utilisateur receiver_message, Utilisateur sender_message, int idMessage, String contenu) {
         this.idDiscussion = idDiscussion;
-        this.idRecepteur = idRecepteur;
-        this.idEmetteur = idEmetteur;
         this.date = date;
-        this.contenu = contenu;
-    }
-
-    public Messagerie(int idRecepteur, int idEmetteur, int idMessage, Date date, String contenu, int idDiscussion) {
-        this.idRecepteur = idRecepteur;
-        this.idDiscussion = idDiscussion;
-
-        this.idEmetteur = idEmetteur;
+        this.receiver_message = receiver_message;
+        this.sender_message = sender_message;
         this.idMessage = idMessage;
-        this.date = date;
         this.contenu = contenu;
     }
 
-    public int getIdRecepteur() {
-        return idRecepteur;
+    public Messagerie(int idDiscussion, Date date, Utilisateur receiver_message, Utilisateur sender_message, String contenu) {
+        this.idDiscussion = idDiscussion;
+        this.date = date;
+        this.receiver_message = receiver_message;
+        this.sender_message = sender_message;
+        this.contenu = contenu;
     }
-
-    public void setIdRecepteur(int idRecepteur) {
-        this.idRecepteur = idRecepteur;
-    }
-
-    public int getIdEmetteur() {
-        return idEmetteur;
-    }
-
-    public void setIdEmetteur(int idEmetteur) {
-        this.idEmetteur = idEmetteur;
-    }
-
-    public int getIdMessage() {
-        return idMessage;
-    }
-
 
     public int getIdDiscussion() {
-        return  idDiscussion;
+        return idDiscussion;
     }
 
     public void setIdDiscussion(int idDiscussion) {
         this.idDiscussion = idDiscussion;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Utilisateur getReceiver_message() {
+        return receiver_message;
+    }
+
+    public void setReceiver_message(Utilisateur receiver_message) {
+        this.receiver_message = receiver_message;
+    }
+
+    public Utilisateur getSender_message() {
+        return sender_message;
+    }
+
+    public void setSender_message(Utilisateur sender_message) {
+        this.sender_message = sender_message;
+    }
+
+    public int getIdMessage() {
+        return idMessage;
     }
 
     public void setIdMessage(int idMessage) {
@@ -70,21 +80,12 @@ public class Messagerie {/*
         this.contenu = contenu;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     @Override
     public String toString() {
         return "Messagerie{" +
-                "idRecepteur=" + idRecepteur +
-                ", idEmetteur=" + idEmetteur +
-                ", id message=" + idMessage +
-                ", date=" + date +
+                "date=" + date +
+                ", receiver_message=" + receiver_message +
+                ", sender_message=" + sender_message +
                 ", contenu='" + contenu + '\'' +
                 '}';
     }
@@ -101,6 +102,4 @@ public class Messagerie {/*
     public int hashCode() {
         return Objects.hash(idMessage);
     }
-*/
-
 }

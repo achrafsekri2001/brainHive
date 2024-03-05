@@ -1,9 +1,6 @@
 package edu.esprit.entities;
 
-import com.gluonhq.charm.glisten.control.Avatar;
-
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Objects;
 
 public class Reclamation {

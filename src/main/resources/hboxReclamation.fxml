@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.Avatar?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.HboxReclamationController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.HboxReclamationController">
    <children>
-      <VBox fx:id="boxeReclamation1" prefHeight="93.0" prefWidth="690.0" style="-fx-background-color: #D3D8D3;">
+      <VBox fx:id="boxeReclamation1" layoutY="4.0" prefHeight="126.0" prefWidth="690.0" style="-fx-background-color: #D3D8D3;">
          <children>
-            <Label fx:id="dateRec" text="20:20">
+            <Label fx:id="dateRec" prefHeight="15.0" prefWidth="274.0" text="20:20">
                <VBox.margin>
                   <Insets left="500.0" top="15.0" />
                </VBox.margin>
@@ -20,7 +21,7 @@
                   <Font name="Roboto Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="username" text="RimaGuedria">
+            <Label fx:id="username" prefHeight="19.0" prefWidth="353.0" text="RimaGuedria">
                <VBox.margin>
                   <Insets left="120.0" />
                </VBox.margin>
@@ -30,23 +31,26 @@
             </Label>
             <Label fx:id="objet1" prefHeight="52.0" prefWidth="579.0" style="-fx-background-color: #D3D8D3;" text="Objet">
                <VBox.margin>
-                  <Insets left="150.0" top="5.0" />
+                  <Insets left="150.0" top="2.0" />
                </VBox.margin>
                <font>
                   <Font name="Roboto Bold" size="21.0" />
                </font>
             </Label>
-            <Avatar fx:id="imageuser1" radius="28.0">
+            <ImageView fx:id="imageuser1" fitHeight="56.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
                <image>
-                  <Image url="@../java/edu/esprit/assets/417957442_1478499912738648_2882908279475441643_n.jpg" />
+                  <Image url="@assets/IMG_7004.jpg" />
                </image>
                <VBox.margin>
                   <Insets bottom="-20.0" left="40.0" top="-40.0" />
                </VBox.margin>
-            </Avatar>
-            <Label fx:id="probleme1" prefHeight="20.0" prefWidth="532.0" text="J'ai confronté un problème ">
+            </ImageView>
+            <Label fx:id="probleme1" prefHeight="138.0" prefWidth="532.0" text="J'ai confronté un problème ">
                <VBox.margin>
-                  <Insets left="150.0" top="10.0" />
+                  <Insets left="150.0" top="-2.0" />
                </VBox.margin>
                <font>
                   <Font name="Roboto Bold" size="16.0" />

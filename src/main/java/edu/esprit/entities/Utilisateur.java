@@ -3,12 +3,12 @@ package edu.esprit.entities;
 import java.util.Objects;
 
 public class Utilisateur {
-    private static int id;
+    private  int id;
 
     private String UserName , imgUser;
 
 
-   public static Utilisateur Current_User;
+   public  Utilisateur Current_User;
 
 
     public Utilisateur(){
@@ -27,14 +27,14 @@ public class Utilisateur {
 
     }
 
-    public static Utilisateur getCurrent_User() {
+    public  Utilisateur getCurrent_User() {
         return Current_User;
     }
 
-    public static void setCurrent_User(Utilisateur Current_User) {
-        Utilisateur.Current_User = Current_User;
+    public  void setCurrent_User(Utilisateur Current_User) {
+       Current_User = Current_User;
     }
-    public static int getId() {
+    public  int getId() {
         return id;
     }
 

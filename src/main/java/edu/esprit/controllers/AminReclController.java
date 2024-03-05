@@ -1,6 +1,5 @@
 package edu.esprit.controllers;
 
-import com.gluonhq.charm.glisten.control.Avatar;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.services.ReclamationService;
 import javafx.event.ActionEvent;
@@ -18,22 +17,19 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
-public class ReclamtionController implements Initializable {
+public class AminReclController  implements Initializable {
     @FXML
     private VBox boxeReclamation1;
 
     @FXML
-    private Avatar imageUser;
-
-    @FXML
     private AnchorPane container;
 
-    private final ReclamationService serviceReclamation = new ReclamationService();
+    @FXML
+    private AnchorPane pane;
 
     @FXML
     private Label titre;
-
+    private final ReclamationService serviceReclamation = new ReclamationService();
 
     private void navigateTo(String fxmlFilePath) {
         try {
@@ -51,15 +47,17 @@ public class ReclamtionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
+
         try {
             List<Reclamation> reclamations = serviceReclamation.getAll();
 
             // Load and add ReclamationItemComponent for each Reclamation
             for (Reclamation reclamation : reclamations) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/hboxReclamation.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AdminRecVbox.fxml"));
                 try {
                     boxeReclamation1.getChildren().add(loader.load());
-                    HboxReclamationController controller = loader.getController();
+                   VboxAdminController controller = loader.getController();
                     controller.setReclamationData(reclamation, container);
 
                 } catch (IOException e) {
@@ -72,28 +70,7 @@ public class ReclamtionController implements Initializable {
 
 
     }
-    @FXML
-    void MessagerieAction(ActionEvent event) {
-        navigateTo("/Messagerie.fxml");
-    }
 
-    @FXML
-    void MesReclamationAction(ActionEvent event) {
-        navigateTo("/MesReclamations.fxml");
-
-    }
-
-
-
-
-
-    public void AjouterReclamationAction(ActionEvent actionEvent) {
-        navigateTo("/AjouterReclamation.fxml");
-    }
-
-    public void NavigateToFavorisAction(ActionEvent actionEvent) {
+    public void produitAction(ActionEvent actionEvent) {
     }
 }
-
-
-
