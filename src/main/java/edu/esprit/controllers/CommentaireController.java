@@ -90,7 +90,20 @@ public class CommentaireController {
         });
 
         editComment.setOnAction(event -> {
-
+            EditCommentaireController controller = new EditCommentaireController();
+            controller.setData(commentaire);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/EditCommentaire.fxml"));
+            loader.setController(controller);
+            try {
+                Parent root = loader.load();
+                editComment.getScene().setRoot(root);
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Navigation Error");
+                alert.setContentText("An error occurred while navigating to the next page.");
+                alert.showAndWait();
+            }
         });
 
     }

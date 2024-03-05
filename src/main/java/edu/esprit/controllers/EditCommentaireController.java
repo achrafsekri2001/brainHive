@@ -39,7 +39,7 @@ public class EditCommentaireController {
             }
             commentaire.setContent(commentaireInput.getText());
             commentaireService.modifier(commentaire);
-            navigateTo("/edu/esprit/views/Commentaire.fxml");
+            navigateTo("/Fxml/postPage.fxml");
         });
 
     }

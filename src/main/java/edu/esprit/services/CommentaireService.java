@@ -45,7 +45,7 @@ public class CommentaireService implements IService<Commentaire> {
     //? add bad words filter
     @Override
     public void modifier(Commentaire commentaire) {
-        String req = "UPDATE commentaire SET content=?, postId=?, userId=?, createdAt=?, updatedAt=?, parentId=? WHERE id=?";
+        String req = "UPDATE commentaire SET content=?, postId=?, userId=?, createdAt=?, updatedAt=? WHERE id=?";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setString(1, commentaire.getContent());
@@ -53,8 +53,7 @@ public class CommentaireService implements IService<Commentaire> {
             pst.setInt(3, commentaire.getUserId());
             pst.setTimestamp(4, commentaire.getCreatedAt());
             pst.setTimestamp(5, commentaire.getUpdatedAt());
-            pst.setInt(6, commentaire.getParent().getId());
-            pst.setInt(7, commentaire.getId());
+            pst.setInt(6, commentaire.getId());
             pst.executeUpdate();
             System.out.println("Comment updated !");
         } catch (SQLException e) {
