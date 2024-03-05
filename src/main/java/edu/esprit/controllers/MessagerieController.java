@@ -19,17 +19,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class MessagerieController implements Initializable {
 
-   Utilisateur user= new Utilisateur(5,"feriel","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
- Utilisateur user1= new Utilisateur(4,"rima","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
+    Utilisateur user= new Utilisateur(5,"feriel","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
+    Utilisateur user1= new Utilisateur(4,"rima","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
     private final MessagerieService ms=new MessagerieService();
-   private final UserCRUD su=new UserCRUD();
-  //Utilisateur userSender = su.getOneByID(user.getId());
-  //  Utilisateur userReciver = su.getOneByID(user1.getId());
+    private final UserCRUD su=new UserCRUD();
+    //Utilisateur userSender = su.getOneByID(user.getId());
+    //  Utilisateur userReciver = su.getOneByID(user1.getId());
     @FXML
     private AnchorPane container;
     @FXML
@@ -62,7 +64,7 @@ public class MessagerieController implements Initializable {
             alert.setContentText("An error occurred while navigating to the next page.");
             alert.showAndWait();
         }
-        }
+    }
 
 
     @FXML
@@ -91,7 +93,7 @@ public class MessagerieController implements Initializable {
         message.setContenu(messageContent);
         message.setSender_message(user); // Utilisateur émetteur
         message.setReceiver_message(user1); // Utilisateur récepteur
-  //      Envoyer le message en utilisant le service approprié
+        //      Envoyer le message en utilisant le service approprié
         MessagerieService messagerieService = new MessagerieService();
         messagerieService.ajouter(message);
     }
@@ -143,5 +145,23 @@ public class MessagerieController implements Initializable {
 
     public void NavigateToMessagerie(ActionEvent actionEvent) {
         navigateTo("/Messagerie.fxml");
+    }
+
+
+    public void updateChatMessages() {
+        // Get the messages from the database for both sender and receiver
+        List<Messagerie> senderMessages = ms.getAllMessagesByReciverAndSender(user.getId(), user1.getId());
+        List<Messagerie> receiverMessages = ms.getAllMessagesByReciverAndSender(user1.getId(), user.getId());
+
+        // Combine the messages
+        List<Messagerie> allMessages = new ArrayList<>();
+        allMessages.addAll(senderMessages);
+        allMessages.addAll(receiverMessages);
+
+        // Sort the messages by date
+        allMessages.sort(Comparator.comparing(Messagerie::getDate));
+
+
+
     }
 }

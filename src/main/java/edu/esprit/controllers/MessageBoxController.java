@@ -34,20 +34,24 @@ public class MessageBoxController {
 
     private Messagerie messagerie;
     private AnchorPane Anchorpane;
-//    private MessagerieService messagerieService;
+    //    private MessagerieService messagerieService;
     MessagerieService sm =  new MessagerieService();
-    //java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
 
 
 
     public void setMessageData(Messagerie messagerie, AnchorPane Anchorpane) {
         this.messagerie = messagerie;
         this.Anchorpane = Anchorpane;
-
-      nonUser1.setText(messagerie.getReceiver_message().getUserName());
+        if (messagerie.getReceiver_message() != null) {
+            nonUser1.setText(messagerie.getReceiver_message().getUserName());
+        } else {
+            // Gérer le cas où le destinataire est null
+            nonUser1.setText(messagerie.getSender_message().getUserName());
+        }
+     //   nonUser1.setText(messagerie.getReceiver_message().getUserName());
         msgTf1.setText(messagerie.getContenu());
         datetf.setText(String.valueOf(messagerie.getDate()));
-    //    imgUser1.setImage(Utilisateur.getImgUser());
+        //    imgUser1.setImage(Utilisateur.getImgUser());
 
 
 
