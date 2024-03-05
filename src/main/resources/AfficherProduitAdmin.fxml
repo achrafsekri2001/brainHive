@@ -48,7 +48,7 @@
                   <Font name="System Italic" size="18.0" />
                </font>
             </Button>
-            <TextField fx:id="recherche" layoutX="40.0" layoutY="25.0" prefHeight="26.0" prefWidth="359.0" promptText="rechercher" />
+            <TextField fx:id="recherche" layoutX="37.0" layoutY="26.0" onKeyReleased="#rechercherParNom" prefHeight="26.0" prefWidth="200.0" promptText="Rechercher parascolaire" />
          </children></Pane>
       <VBox layoutX="191.0" layoutY="76.0" prefHeight="630.0" prefWidth="791.0">
          <children>

@@ -19,8 +19,7 @@
       <children>
          <HBox alignment="CENTER" prefHeight="58.0" prefWidth="930.0" style="-fx-background-color: FFCD38;">
             <children>
-               <TextField prefHeight="26.0" prefWidth="359.0" promptText="rechercher" />
-               <Pane prefHeight="200.0" prefWidth="200.0" />
+               <TextField fx:id="recherche" onKeyReleased="#rechercherParNom" prefHeight="26.0" prefWidth="200.0" promptText="Rechercher parascolaire" />               <Pane prefHeight="200.0" prefWidth="200.0" />
                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="329.0">
                   <children>
                      <Label prefHeight="18.0" prefWidth="110.0" text="Rima Guedria">

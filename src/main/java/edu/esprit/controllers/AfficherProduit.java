@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -21,6 +22,8 @@ public class AfficherProduit implements Initializable {
     private GridPane container;
     @FXML
     private ComboBox<String> matiereBox;
+    @FXML
+    private TextField recherche;
     private final ServiceProduit sp = new ServiceProduit();
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,6 +78,17 @@ public class AfficherProduit implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+    @FXML
+    private void rechercherParNom() {
+        String texteRecherche = recherche.getText().trim();
+        if (!texteRecherche.isEmpty()) {
+            List<Produit> produitsParNom = sp.getProduitsByNom(texteRecherche);
+            afficherProduits(produitsParNom);
+        } else {
+            // Si le champ de recherche est vide, afficher tous les produits
+            afficherTousLesProduits();
         }
     }
 }

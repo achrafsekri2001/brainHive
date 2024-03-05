@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -26,6 +27,8 @@ public class AfficherProduitAdmin implements Initializable {
     private GridPane container;
     @FXML
     private ComboBox<String> matiereBox;
+    @FXML
+    private TextField recherche;
     private final ServiceProduit sp = new ServiceProduit();
 
     List<Produit> produitList = new ArrayList<>();
@@ -102,6 +105,17 @@ public class AfficherProduitAdmin implements Initializable {
     void navigatetoAjoutAction(ActionEvent event) {
         navigateTo("/AjouterParascolaire.fxml");
 
+    }
+    @FXML
+    private void rechercherParNom() {
+        String texteRecherche = recherche.getText().trim();
+        if (!texteRecherche.isEmpty()) {
+            List<Produit> produitsParNom = sp.getProduitsByNom(texteRecherche);
+            afficherProduits(produitsParNom);
+        } else {
+            // Si le champ de recherche est vide, afficher tous les produits
+            afficherTousLesProduits();
+        }
     }
 
 }

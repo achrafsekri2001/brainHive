@@ -179,6 +179,30 @@ public class ServiceProduit implements IService<Produit>{
         }
         return produitsParMatiere;
     }
+    public List<Produit> getProduitsByNom(String nom) {
+        List<Produit> produits = new ArrayList<>();
+
+        String req = "SELECT * FROM produit WHERE nom LIKE ?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, "%" + nom + "%"); // Utilisation de LIKE pour rechercher les produits par nom partiel
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int id = rs.getInt("id_produit");
+                String nomProduit = rs.getString("nom");
+                String image = rs.getString("image");
+                String description = rs.getString("description");
+                String matiere = rs.getString("matiere");
+                int note = rs.getInt("note");
+                Produit p = new Produit(id, image, nomProduit, description, matiere, note);
+                produits.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des produits par nom : " + e.getMessage());
+        }
+
+        return produits;
+    }
 
 
 }
