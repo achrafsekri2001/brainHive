@@ -15,10 +15,11 @@ public class Commentaire {
     public int nbreDownVotes;
     public Set<Object> Fichier = new HashSet<>();
     private Commentaire parent;
+    private int voted;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    public Commentaire(String content, Post post, int userId, int nbreVotes, int nbreUpVotes, int nbreDownVotes, Set<Object> fichier, Commentaire parent, Timestamp createdAt, Timestamp updatedAt) {
+    public Commentaire(String content, Post post, int userId, int nbreVotes, int voted, int nbreUpVotes, int nbreDownVotes, Set<Object> fichier, Commentaire parent, Timestamp createdAt, Timestamp updatedAt) {
         this.content = content;
         this.post = post;
         this.userId = userId;
@@ -27,11 +28,12 @@ public class Commentaire {
         this.nbreDownVotes = nbreDownVotes;
         Fichier = fichier;
         this.parent = parent;
+        this.voted = voted;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public Commentaire(int id, String content, Post post, int userId, int nbreVotes, int nbreUpVotes, int nbreDownVotes, Set<Object> fichier, Commentaire parent, Timestamp createdAt, Timestamp updatedAt) {
+    public Commentaire(int id, String content, Post post, int userId, int nbreVotes, int nbreUpVotes, int nbreDownVotes,int voted, Set<Object> fichier, Commentaire parent, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.content = content;
         this.post = post;
@@ -40,6 +42,7 @@ public class Commentaire {
         this.nbreUpVotes = nbreUpVotes;
         this.nbreDownVotes = nbreDownVotes;
         Fichier = fichier;
+        this.voted = voted;
         this.parent = parent;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -54,6 +57,14 @@ public class Commentaire {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getVoted() {
+        return voted;
+    }
+
+    public void setVoted(int voted) {
+        this.voted = voted;
     }
 
     public String getContent() {
@@ -162,6 +173,7 @@ public class Commentaire {
                 ", parent=" + parent +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", voted=" + voted +
                 '}';
     }
 }

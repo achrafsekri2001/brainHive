@@ -1,20 +1,18 @@
 package edu.esprit.controllers;
 
-import edu.esprit.entities.Post;
-import edu.esprit.services.PostService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.ListView;
 
 import java.io.IOException;
 import java.util.List;
 
-public class CreatePostController {
-
-    private final PostService postService = new PostService();
-
+public class SideBarController {
     @FXML
     private ListView<String> matiereList;
 
@@ -37,29 +35,12 @@ public class CreatePostController {
     @FXML
     private Hyperlink navigateReclamation = new Hyperlink();
 
-    @FXML
-    private TextArea descriptionInput = new TextArea();
-
-    @FXML
-    private TextField titleInput = new TextField();
-
-    @FXML
-    private ChoiceBox matiere = new ChoiceBox();
-
-    @FXML
-    private Button submitButton = new Button();
 
     @FXML
     public void initialize() {
 
         List<String> listeMatiere = List.of("Mathématiques", "Physique", "Informatique", "Anglais", "Français", "Histoire", "Géographie", "Philosophie", "SVT", "EPS", "Arts plastiques", "Musique", "Technologie", "Sciences de l'ingénieur", "Langues vivantes", "Latin", "Arabe");
         matiereList.getItems().addAll(listeMatiere);
-
-        // clone listMatiere and add a select option
-        List<String> listeMatiereCree = new java.util.ArrayList<>(List.copyOf(listeMatiere));
-        listeMatiereCree.add(0, "Sélectionner une matière");
-        matiere.getItems().addAll(listeMatiereCree);
-        matiere.getSelectionModel().selectFirst();
 
         // when a subject is selected, navigate to a page called "subjects"
         matiereList.setOnMouseClicked(event -> {
@@ -73,41 +54,6 @@ public class CreatePostController {
         navigateParascolaire.setOnAction(this::Navigate);
         navigateReclamation.setOnAction(this::Navigate);
 
-        // submit button
-        submitButton.setOnAction(event -> {
-
-            if (matiere.getSelectionModel().getSelectedIndex() == 0) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Matière non sélectionnée");
-                alert.setContentText("Veuillez sélectionner une matière.");
-                alert.showAndWait();
-                return;
-            }
-            //form validation
-            if (titleInput.getText().isEmpty() || descriptionInput.getText().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Champs vides");
-                alert.setContentText("Veuillez remplir tous les champs.");
-                alert.showAndWait();
-                return;
-            }
-            // create a post
-            Post post = new Post();
-            post.setTitle(titleInput.getText());
-            post.setDescription(descriptionInput.getText());
-            post.setMatiere(matiere.getSelectionModel().getSelectedItem().toString());
-            post.setUserId(1);
-            postService.ajouter(post);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setHeaderText("Post créé");
-            alert.setContentText("Votre post a été créé avec succès.");
-            alert.showAndWait();
-            // when click on "OK", navigate to the postPage and send the post id
-            navigateTo("/Fxml/pageAcceuil.fxml");
-        });
 
     }
 
@@ -118,7 +64,7 @@ public class CreatePostController {
             navigateTo("/Fxml/pageAcceuil.fxml");
         }
         if (event.getSource() == navigatePopulaire) {
-            navigateTo("/Fxml/test.fxml");
+            navigateTo("/Fxml/poppulaire.fxml");
         }
         if (event.getSource() == navigateSauveguardee) {
             navigateTo("/Fxml/pageSauveguardee.fxml");
@@ -132,6 +78,7 @@ public class CreatePostController {
         if (event.getSource() == navigateReclamation) {
             navigateTo("/Fxml/pageReclamation.fxml");
         }
+
 
     }
 
@@ -148,5 +95,4 @@ public class CreatePostController {
             alert.showAndWait();
         }
     }
-
 }

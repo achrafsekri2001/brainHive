@@ -28,22 +28,28 @@ public class PostService implements IService<Post> {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
     }
+
+    public void save(Post post) {
+        System.out.println("Post saved !");
+    }
+
 
     @Override
     public void modifier(Post post) {
-        String req = "UPDATE post SET title=?, description=?, matiere=?, groupeId=?, userId=?, nbrOfComments=?, createdAt=?, updatedAt=? WHERE id=?";
+        String req = "UPDATE post SET title=?, description=?, matiere=?, userId=?, nbrOfComments=?, createdAt=?, updatedAt=? WHERE id=?";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setString(1, post.getTitle());
             pst.setString(2, post.getDescription());
             pst.setString(3, post.getMatiere());
-            pst.setInt(4, post.getGroupId());
-            pst.setInt(5, post.getUserId());
-            pst.setInt(6, post.getNumberOfComments());
-            pst.setTimestamp(7, post.getCreatedAt());
-            pst.setTimestamp(8, post.getUpdatedAt());
-            pst.setInt(9, post.getId());
+
+            pst.setInt(4, post.getUserId());
+            pst.setInt(5, post.getNumberOfComments());
+            pst.setTimestamp(6, post.getCreatedAt());
+            pst.setTimestamp(7, post.getUpdatedAt());
+            pst.setInt(8, post.getId());
             pst.executeUpdate();
             System.out.println("Post updated !");
         } catch (SQLException e) {
@@ -130,7 +136,6 @@ public class PostService implements IService<Post> {
                 post.setTitle(pst.getResultSet().getString("title"));
                 post.setDescription(pst.getResultSet().getString("description"));
                 post.setMatiere(pst.getResultSet().getString("matiere"));
-                post.setGroupId(pst.getResultSet().getInt("groupeId"));
                 post.setUserId(pst.getResultSet().getInt("userId"));
                 post.setNumberOfComments(pst.getResultSet().getInt("nbrOfComments"));
                 post.setCreatedAt(pst.getResultSet().getTimestamp("createdAt"));
@@ -146,37 +151,26 @@ public class PostService implements IService<Post> {
 
     @Override
     public Post getOneByID(int id) {
-//        private int id;
-//        private String title;
-//        private String description;
-//        private String matiere;
-//        private int groupId;
-//        private int userId;
-//        private int numberOfComments;
-//        public Set<Commentaire> commentaires = new HashSet<>();
-//        private Timestamp createdAt;
-//        private Timestamp updatedAt;
-//        private Set<Object> fichiers = new HashSet<>();
-
         String req = "SELECT * FROM post WHERE id=?";
         Post post = new Post();
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setInt(1, id);
             pst.executeQuery();
+            pst.getResultSet().next();
             post.setId(pst.getResultSet().getInt("id"));
             post.setTitle(pst.getResultSet().getString("title"));
             post.setDescription(pst.getResultSet().getString("description"));
             post.setMatiere(pst.getResultSet().getString("matiere"));
-            post.setGroupId(pst.getResultSet().getInt("groupeId"));
             post.setUserId(pst.getResultSet().getInt("userId"));
             post.setNumberOfComments(pst.getResultSet().getInt("nbrOfComments"));
             post.setCreatedAt(pst.getResultSet().getTimestamp("createdAt"));
             post.setUpdatedAt(pst.getResultSet().getTimestamp("updatedAt"));
             System.out.println("Post selected !");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(" select on post error:" + e.getMessage());
         }
+        System.out.println("selected post" + post);
         return post;
     }
 }

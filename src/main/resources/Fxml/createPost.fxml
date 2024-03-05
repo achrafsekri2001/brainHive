@@ -161,7 +161,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Creer une poste">
+                        <Label text="Créer une poste">
                            <font>
                               <Font name="Arial" size="22.0" />
                            </font>
@@ -189,7 +189,7 @@
                         <TextField fx:id="titleInput" promptText="Donner un titre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextArea fx:id="descriptionInput" prefHeight="200.0" prefWidth="200.0" promptText="Donner une description" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <ChoiceBox fx:id="matiere" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Button fx:id="submitButton" mnemonicParsing="false" text="Creer" GridPane.rowIndex="5" />
+                        <Button fx:id="submitButton" mnemonicParsing="false" text="Créer " GridPane.rowIndex="5" />
                      </children>
                      <padding>
                         <Insets left="20.0" right="20.0" />

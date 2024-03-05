@@ -10,8 +10,8 @@ public class Post {
     private String title;
     private String description;
     private String matiere;
-    private int groupId;
     private int userId;
+    // will become User object
     private int numberOfComments;
     public Set<Commentaire> commentaires = new HashSet<>();
     private Timestamp createdAt;
@@ -26,7 +26,6 @@ public class Post {
         this.title = title;
         this.description = description;
         this.matiere = matiere;
-        this.groupId = groupId;
         this.userId = userId;
         this.numberOfComments = numberOfComments;
         this.createdAt = createdAt;
@@ -38,7 +37,6 @@ public class Post {
         this.title = title;
         this.description = description;
         this.matiere = matiere;
-        this.groupId = groupId;
         this.userId = userId;
         this.numberOfComments = numberOfComments;
         this.createdAt = createdAt;
@@ -84,14 +82,6 @@ public class Post {
 
     public void setMatiere(String matiere) {
         this.matiere = matiere;
-    }
-
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
     }
 
     public int getUserId() {
@@ -141,7 +131,6 @@ public class Post {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", matiere='" + matiere + '\'' +
-                ", groupId=" + groupId +
                 ", userId=" + userId +
                 ", numberOfComments=" + numberOfComments +
                 ", createdAt=" + createdAt +
