@@ -43,7 +43,7 @@ public class ReclamationService {
         return reclamations;
     }
     public void ajouterReclamation(Reclamation reclamtion) throws SQLException {
-        String req = "INSERT INTO `reclamation`( `idUser`, `user`, `contenu`, `objet`, `date`) VALUES ( ?,?, ?, ?,?)";
+        String req = "INSERT INTO `reclamation`( `idUser`,`contenu`, `objet`, `date`) VALUES ( ?,?, ?, ?,?)";
         PreparedStatement ps = cnx.prepareStatement(req);
         // Utiliser l'identifiant de l'utilisateur associé à la réclamation
         ps.setInt(1, reclamtion.getIdReclamation()); // Assurez-vous que getIdUser() retourne l'identifiant de l'utilisateur
@@ -65,6 +65,14 @@ public class ReclamationService {
 
 
     public void supprimer(int id) {
+        try  {
+            PreparedStatement pre = cnx.prepareStatement( "DELETE FROM `reclamation` WHERE `id`=?");
+            pre.setInt(1, id);
+            pre.executeUpdate();
+            System.out.println("Reclamation deleted!");
+        } catch (SQLException e) {
+            System.err.println("Error deleting reclamation: " + e.getMessage());
+        }
 
     }
 
@@ -103,15 +111,14 @@ public class ReclamationService {
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
             while (res.next()){
-                int id = res.getInt(1);
-                int idUser = res.getInt(2);
-                //String user = res.getString("user");
-                String contenu = res.getString("contenu");
-                String objet = res.getString("objet");
-
-                Timestamp date= res.getTimestamp("date");
-                Reclamation p = new Reclamation(  contenu, objet,  date,  id);
-                reclamations.add(p);
+                Reclamation rec = new Reclamation();
+                rec.setIdReclamation(res.getInt(1));
+                rec.setObjet(res.getString(4));
+                rec.setContenu(res.getString(3));
+                rec.setDate(res.getTimestamp(5));
+                Utilisateur user = new UserCRUD().getOneByID(res.getInt(2));
+                 rec.setUtilisateur(user);
+                reclamations.add(rec);
 
                 //  Utilisateur utilisateur = new Utilisateur(4,"feriel ben mamia","f");
                 // utilisateur.setId(idUser);
@@ -131,7 +138,7 @@ public class ReclamationService {
     public List<Reclamation> getReclamationsByUserName(String texteRecherche) {
         List<Reclamation> reclamations = new ArrayList<>();
 
-        String req = "SELECT * FROM reclamation WHERE user LIKE ?";
+        String req = "SELECT * FROM reclamation WHERE reclamation.idUser LIKE ?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, "%" + texteRecherche + "%"); // Utilisation de LIKE pour rechercher les réclamations par nom d'utilisateur partiel
