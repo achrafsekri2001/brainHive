@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -45,7 +46,16 @@ public class postContainerController {
         postNbrOfComments.setText(post.getNumberOfComments() + "");
         postChip.setText(post.getMatiere());
 //        postAvatar.setImage(post.getUser().getAvatar());
-//        postFile.setImage(post.getFichiers().iterator().next().getLink());
+        if (post.getFichiers() != null && !post.getFichiers().isEmpty()) {
+            //getFichiers returns a set of files if the first file is not null and is pdf fisplay image link else display the file string link
+            if (post.getFichiers().iterator().next().endsWith(".pdf")) {
+                postFile.setImage(new Image("https://play-lh.googleusercontent.com/BkRfMfIRPR9hUnmIYGDgHHKjow-g18-ouP6B2ko__VnyUHSi1spcc78UtZ4sVUtBH4g"));
+            } else {
+                postFile.setImage(new Image("file:" + post.getFichiers().iterator().next()));
+            }
+        } else {
+            postFile.setVisible(false);
+        }
 
         postContainer.setOnMouseClicked(event -> {
             // navigate to post page

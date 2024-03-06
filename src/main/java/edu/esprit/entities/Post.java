@@ -16,7 +16,7 @@ public class Post {
     public Set<Commentaire> commentaires = new HashSet<>();
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private Set<Object> fichiers = new HashSet<>();
+    private Set<String> fichiers = new HashSet<>();
 
     public Post() {
 
@@ -116,11 +116,11 @@ public class Post {
         this.updatedAt = updatedAt;
     }
 
-    public Set<Object> getFichiers() {
+    public Set<String> getFichiers() {
         return fichiers;
     }
 
-    public void setFichiers(Set<Object> fichiers) {
+    public void setFichiers(Set<String> fichiers) {
         this.fichiers = fichiers;
     }
 

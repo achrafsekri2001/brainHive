@@ -11,9 +11,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import org.jpedal.examples.viewer.Viewer;
+import org.jpedal.examples.viewer.ViewerCommands;
 
 import java.io.IOException;
 import java.util.List;
@@ -58,7 +62,7 @@ public class PostPageController {
     @FXML
     private Avatar postAvatar = new Avatar();
     @FXML
-    private ImageView postFile = new ImageView();
+    private HBox postFile = new HBox();
     @FXML
     private Button postNbrOfComments = new Button();
     @FXML
@@ -73,9 +77,7 @@ public class PostPageController {
     public void initialize() {
 
         int id = GlobalHolder.getCurrentPost().getId();
-        System.out.println("Current post id: " + id);
         post = postService.getOneByID(id);
-//         post = GlobalHolder.getCurrentPost();
 
 
         List<String> listeMatiere = List.of("Mathématiques", "Physique", "Informatique", "Anglais", "Français", "Histoire", "Géographie", "Philosophie", "SVT", "EPS", "Arts plastiques", "Musique", "Technologie", "Sciences de l'ingénieur", "Langues vivantes", "Latin", "Arabe");
@@ -98,7 +100,44 @@ public class PostPageController {
         postNbrOfComments.setText(post.getNumberOfComments() + "");
         postChip.setText(post.getMatiere());
 
+        if (post.getFichiers().isEmpty()) {
+            postFile.setVisible(false);
+        } else {
+            //if post is pdf print pdf else print image
+            try {
+                for (String file : post.getFichiers()) {
+                    if (file.endsWith(".pdf")) {
+                        // add button to open pdf
+                        Button openPdfButton = new Button("Open PDF");
+                        openPdfButton.setOnAction(event -> {
+                            Viewer viewer = new Viewer();
+                            viewer.setupViewer();
+                            viewer.executeCommand(ViewerCommands.OPENFILE, new Object[]{file});
+                        });
+                        postFile.getChildren().add(openPdfButton);
 
+                    } else {
+                        ImageView imageView = new ImageView();
+                        // url is the absolute path of the file
+                        imageView.setImage(new Image("file:" + file));
+                        imageView.setFitWidth(350);
+                        imageView.setFitHeight(223);
+                        imageView.setPreserveRatio(true);
+                        imageView.setSmooth(true);
+                        postFile.getChildren().add(imageView);
+                    }
+                }
+                postFile.setSpacing(10);
+                // add a border in between the files
+                postFile.setStyle("-fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 5px;");
+
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+// add comment
         addCommentField.setOnAction(event -> {
             // perform form validation
             if (addCommentField.getText().isEmpty()) {

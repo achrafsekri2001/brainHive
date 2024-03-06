@@ -46,9 +46,26 @@
             <artifactId>atlantafx-base</artifactId>
             <version>2.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.idrsolutions</groupId>
+            <artifactId>jpedal-trial</artifactId>
+            <version>2024.01</version>
+        </dependency>
 
     </dependencies>
     <repositories>
+
+        <repository>
+            <id>IDRsolutions</id>
+            <name>IDR Solutions</name>
+            <url>https://maven.idrsolutions.com</url>
+        </repository>
+
         <repository>
             <id>charm-glisten</id>
             <name>charm-glisten Repository</name>

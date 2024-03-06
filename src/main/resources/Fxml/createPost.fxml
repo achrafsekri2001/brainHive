@@ -189,7 +189,16 @@
                         <TextField fx:id="titleInput" promptText="Donner un titre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextArea fx:id="descriptionInput" prefHeight="200.0" prefWidth="200.0" promptText="Donner une description" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <ChoiceBox fx:id="matiere" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Button fx:id="submitButton" mnemonicParsing="false" text="Créer " GridPane.rowIndex="5" />
+                        <Button fx:id="submitButton" mnemonicParsing="false" style="-fx-background-color: FFCD38;" text="Créer " GridPane.rowIndex="5" />
+                        <Button fx:id="uploadButton" mnemonicParsing="false" style="-fx-background-color: FFCD38;" text="Attacher une fichier" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="https://brainhive.s3.eu-west-3.amazonaws.com/material-symbols_upload.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
                      <padding>
                         <Insets left="20.0" right="20.0" />
