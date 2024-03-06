@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="708.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterQuizController">
+   <children>
+      <Label alignment="CENTER" layoutX="352.0" text="Creer un quiz" textFill="#c3b716">
+         <font>
+            <Font name="Gabriola" size="43.0" />
+         </font>
+      </Label>
+      <Label layoutX="222.0" layoutY="140.0" text="Matiere:">
+         <font>
+            <Font size="23.0" />
+         </font></Label>
+      <Label layoutX="218.0" layoutY="83.0" prefHeight="34.0" prefWidth="145.0" text="Code de quiz:">
+         <font>
+            <Font size="23.0" />
+         </font></Label>
+      <TextField fx:id="TFCode_quiz" layoutX="411.0" layoutY="88.0" prefHeight="25.0" prefWidth="200.0" promptText="Saisir l'auteur" />
+      <Label layoutX="218.0" layoutY="206.0" text="Date de creation:">
+         <font>
+            <Font size="23.0" />
+         </font></Label>
+      <TextField fx:id="TFDatedecreation" layoutX="407.0" layoutY="211.0" prefHeight="25.0" prefWidth="200.0" promptText="Saisir la date de creation" />
+      <Label layoutX="214.0" layoutY="283.0" text="Score :">
+         <font>
+            <Font size="23.0" />
+         </font></Label>
+      <Label layoutX="206.0" layoutY="356.0" text="Durée en minutes:">
+         <font>
+            <Font size="23.0" />
+         </font></Label>
+      <Label layoutX="210.0" layoutY="447.0" text="Disponibilitée:">
+         <font>
+            <Font size="23.0" />
+         </font></Label>
+      <TextField fx:id="TFScore" layoutX="411.0" layoutY="283.0" prefHeight="25.0" prefWidth="200.0" promptText="Saisir le score maximum" />
+      <TextField fx:id="TFDureeenminutes" layoutX="410.0" layoutY="361.0" prefHeight="25.0" prefWidth="200.0" promptText="Saisir la durée en minutes" />
+      <CheckBox fx:id="TFtrue" layoutX="428.0" layoutY="449.0" mnemonicParsing="false" text="True">
+         <font>
+            <Font size="21.0" />
+         </font></CheckBox>
+      <CheckBox fx:id="TFFalse" layoutX="560.0" layoutY="449.0" mnemonicParsing="false" text="False">
+         <font>
+            <Font size="21.0" />
+         </font></CheckBox>
+      <AnchorPane layoutY="-2.0" prefHeight="714.0" prefWidth="200.0" style="-fx-background-color: FFCD38;">
+         <children>
+            <Label layoutX="11.0" layoutY="41.0" prefHeight="55.0" prefWidth="185.0" text="BrainHive">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+            <Button layoutX="47.0" layoutY="209.0" mnemonicParsing="false" onAction="#ajouterAction" text="Ajouter">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button layoutX="45.0" layoutY="322.0" mnemonicParsing="false" onAction="#navigatetoAfficherQuizActino" text="Afficher">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <ChoiceBox fx:id="TFmatiere" layoutX="410.0" layoutY="144.0" prefHeight="26.0" prefWidth="220.0" />
+   </children>
+</AnchorPane>
