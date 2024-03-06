@@ -1,10 +1,11 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Post;
+import edu.esprit.entities.User;
 
 public class GlobalHolder {
     public static int currentPostId;
-    public static int currentUserId;
+    public static User currentUser;
     public static int currentCommentId;
     public static Post currentPost;
     public static String currentMatiere;
@@ -34,12 +35,12 @@ public class GlobalHolder {
         GlobalHolder.currentPostId = currentPostId;
     }
 
-    public static int getCurrentUserId() {
-        return currentUserId;
+    public static User getcurrentUser() {
+        return currentUser;
     }
 
-    public static void setCurrentUserId(int currentUserId) {
-        GlobalHolder.currentUserId = currentUserId;
+    public static void setcurrentUser(User currentUser) {
+        GlobalHolder.currentUser = currentUser;
     }
 
     public static int getCurrentCommentId() {

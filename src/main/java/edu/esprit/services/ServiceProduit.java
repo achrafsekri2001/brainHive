@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ServiceProduit implements IService<Produit>{
+public class ServiceProduit {
     Connection cnx = DataSource.getInstance().getCnx();
 
     public void ajouter(Produit produit) throws SQLException {
@@ -24,8 +24,8 @@ public class ServiceProduit implements IService<Produit>{
         System.out.println("produit ajouté !");
     }
 
-    public void modifier(Produit p) throws SQLException {
-        String sql = "UPDATE produit SET `nom`=?,`image`=?,`description`=?,`matiere`=? WHERE id_produit=" + p.getId_produit();
+    public void modifier(Produit p) {
+        String sql = "UPDATE produit SET `nom`=?,`image`=?,`description`=?,`matiere`=? WHERE id=" + p.getId_produit();
         PreparedStatement ste;
         try {
             ste = cnx.prepareStatement(sql);
@@ -48,7 +48,7 @@ public class ServiceProduit implements IService<Produit>{
 
     public void supprimer(int id) {
         try {
-            String req = "DELETE FROM produit WHERE id_produit=?";
+            String req = "DELETE FROM produit WHERE id=?";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -65,10 +65,10 @@ public class ServiceProduit implements IService<Produit>{
         try {
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
-            while(rs.next()){
-                int id = rs.getInt("id_produit");
+            while (rs.next()) {
+                int id = rs.getInt("id");
                 String nom = rs.getString("nom");
-                String image = rs.getString("assets");
+                String image = rs.getString("image");
                 String description = rs.getString("description");
                 String matiere = rs.getString("matiere");
 
@@ -82,45 +82,25 @@ public class ServiceProduit implements IService<Produit>{
         return (List<Produit>) produits;
     }
 
-    public Produit getOneByID(int id_produit) {
+    public Produit getOneByID(int id) {
         Produit p = null;
         try {
-            String req = "SELECT * FROM produit WHERE id_produit=?";
+            String req = "SELECT * FROM produit WHERE id=?";
             PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setInt(1, id_produit);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String nom = rs.getString("nom");
-                String image = rs.getString("assets");
+                String image = rs.getString("image");
                 String description = rs.getString("description");
                 String matiere = rs.getString("matiere");
 
-                p = new Produit(id_produit, nom, image, description, matiere);
+                p = new Produit(id, nom, image, description, matiere);
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération du produit : " + e.getMessage());
         }
         return p;
-    }
-
-    public void ajouterNote(int idProduit, int note) throws SQLException {
-        String requete = "INSERT INTO note (id_produit, note) VALUES (?, ?)";
-        PreparedStatement preparedStatement = cnx.prepareStatement(requete);
-        preparedStatement.setInt(1, idProduit);
-        preparedStatement.setInt(2, note);
-        preparedStatement.executeUpdate();
-    }
-
-    public double calculerMoyenneNotes(int idProduit) throws SQLException {
-        String requete = "SELECT AVG(note) AS moyenne FROM note WHERE id_produit=?";
-        PreparedStatement preparedStatement = cnx.prepareStatement(requete);
-        preparedStatement.setInt(1, idProduit);
-        ResultSet resultat = preparedStatement.executeQuery();
-        double moyenne = 0;
-        if (resultat.next()) {
-            moyenne = resultat.getDouble("moyenne");
-        }
-        return moyenne;
     }
 
     public List<String> getMatiereList() {
@@ -155,6 +135,7 @@ public class ServiceProduit implements IService<Produit>{
         // Retourne la liste des matières disponibles
         return matieres;
     }
+
     public List<Produit> getProduitsByMatiere(String matiere) {
         List<Produit> produitsParMatiere = new ArrayList<>();
         String req = "SELECT * FROM produit WHERE matiere=?";
@@ -162,10 +143,10 @@ public class ServiceProduit implements IService<Produit>{
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, matiere);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                int id = rs.getInt("id_produit");
+            while (rs.next()) {
+                int id = rs.getInt("id");
                 String nom = rs.getString("nom");
-                String image = rs.getString("assets");
+                String image = rs.getString("image");
                 String description = rs.getString("description");
                 int note = rs.getInt("note");
                 Produit p = new Produit(id, image, nom, description, matiere);
@@ -176,6 +157,7 @@ public class ServiceProduit implements IService<Produit>{
         }
         return produitsParMatiere;
     }
+
     public List<Produit> getProduitsByNom(String nom) {
         List<Produit> produits = new ArrayList<>();
 
@@ -184,10 +166,10 @@ public class ServiceProduit implements IService<Produit>{
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, "%" + nom + "%"); // Utilisation de LIKE pour rechercher les produits par nom partiel
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                int id = rs.getInt("id_produit");
+            while (rs.next()) {
+                int id = rs.getInt("id");
                 String nomProduit = rs.getString("nom");
-                String image = rs.getString("assets");
+                String image = rs.getString("image");
                 String description = rs.getString("description");
                 String matiere = rs.getString("matiere");
                 Produit p = new Produit(id, image, nomProduit, description, matiere);

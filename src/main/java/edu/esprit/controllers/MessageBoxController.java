@@ -2,7 +2,7 @@ package edu.esprit.controllers;
 
 import com.gluonhq.charm.glisten.control.Avatar;
 import edu.esprit.entities.Messagerie;
-import edu.esprit.entities.Utilisateur;
+import edu.esprit.entities.User;
 import edu.esprit.services.MessagerieService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,10 +46,10 @@ public class MessageBoxController {
         this.messagerie = messagerie;
         this.Anchorpane = Anchorpane;
         if (messagerie.getReceiver_message() != null) {
-            nonUser1.setText(messagerie.getReceiver_message().getUserName());
+            nonUser1.setText(messagerie.getReceiver_message().getNom());
         } else {
             // Gérer le cas où le destinataire est null
-            nonUser1.setText(messagerie.getSender_message().getUserName());
+            nonUser1.setText(messagerie.getSender_message().getNom());
         }
      //   nonUser1.setText(messagerie.getReceiver_message().getUserName());
         msgTf1.setText(messagerie.getContenu());

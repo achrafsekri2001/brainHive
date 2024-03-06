@@ -33,7 +33,7 @@ public class ServiceQuestion implements IService<Question> {
     }
 
     @Override
-    public void modifier(Question question) throws SQLException {
+    public void modifier(Question question) {
         try {
             String query = "UPDATE question SET question = ?, choix = ?, id = ?, reponse_correcte = ? WHERE id = ?";
             try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
@@ -53,7 +53,7 @@ public class ServiceQuestion implements IService<Question> {
     }
 
     @Override
-    public void supprimer(int id) throws SQLException {
+    public void supprimer(int id) {
         String query = "DELETE FROM `question` WHERE `id`= ?";
 
         try (
@@ -67,7 +67,7 @@ public class ServiceQuestion implements IService<Question> {
     }
 
     @Override
-    public Set<Question> getAll() throws SQLException {
+    public Set<Question> getAll() {
         Set<Question> questions = new HashSet<>();
 
         String req = "Select * from question";
@@ -96,7 +96,7 @@ public class ServiceQuestion implements IService<Question> {
     }
 
     @Override
-    public Question getOneByID(int id) throws SQLException {try {
+    public Question getOneByID(int id) {try {
         String query = "SELECT * FROM question WHERE id = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
             preparedStatement.setInt(1, id);

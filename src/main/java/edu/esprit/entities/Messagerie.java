@@ -6,8 +6,8 @@ import java.util.Objects;
 public class Messagerie {
     public int  idDiscussion;
     public Date date;
-    private Utilisateur receiver_message;
-    private Utilisateur sender_message;
+    private User receiver_message;
+    private User sender_message;
     public int idMessage;
     public String contenu;
 
@@ -15,7 +15,7 @@ public class Messagerie {
     public Messagerie() {
     }
 
-    public Messagerie(int idDiscussion, Date date, Utilisateur receiver_message, Utilisateur sender_message, int idMessage, String contenu) {
+    public Messagerie(int idDiscussion, Date date, User receiver_message, User sender_message, int idMessage, String contenu) {
         this.idDiscussion = idDiscussion;
         this.date = date;
         this.receiver_message = receiver_message;
@@ -24,7 +24,7 @@ public class Messagerie {
         this.contenu = contenu;
     }
 
-    public Messagerie(int idDiscussion, Date date, Utilisateur receiver_message, Utilisateur sender_message, String contenu) {
+    public Messagerie(int idDiscussion, Date date, User receiver_message, User sender_message, String contenu) {
         this.idDiscussion = idDiscussion;
         this.date = date;
         this.receiver_message = receiver_message;
@@ -48,19 +48,19 @@ public class Messagerie {
         this.date = date;
     }
 
-    public Utilisateur getReceiver_message() {
+    public User getReceiver_message() {
         return receiver_message;
     }
 
-    public void setReceiver_message(Utilisateur receiver_message) {
+    public void setReceiver_message(User receiver_message) {
         this.receiver_message = receiver_message;
     }
 
-    public Utilisateur getSender_message() {
+    public User getSender_message() {
         return sender_message;
     }
 
-    public void setSender_message(Utilisateur sender_message) {
+    public void setSender_message(User sender_message) {
         this.sender_message = sender_message;
     }
 

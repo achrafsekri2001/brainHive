@@ -33,7 +33,8 @@ public class SideBarController {
 
     @FXML
     private Hyperlink navigateReclamation = new Hyperlink();
-
+    @FXML
+    private Hyperlink navigateQuiz = new Hyperlink();
 
     @FXML
     public void initialize() {
@@ -52,6 +53,7 @@ public class SideBarController {
         navigateMessagerie.setOnAction(this::Navigate);
         navigateParascolaire.setOnAction(this::Navigate);
         navigateReclamation.setOnAction(this::Navigate);
+        navigateQuiz.setOnAction(this::Navigate);
 
 
     }
@@ -72,10 +74,13 @@ public class SideBarController {
             navigateTo("/Fxml/pageMessagerie.fxml");
         }
         if (event.getSource() == navigateParascolaire) {
-            navigateTo("/Fxml/pageParascolaire.fxml");
+            navigateTo("/Fxml/AfficherProduit.fxml");
         }
         if (event.getSource() == navigateReclamation) {
-            navigateTo("/Fxml/pageReclamation.fxml");
+            navigateTo("/Fxml/Reclamation.fxml");
+        }
+        if (event.getSource() == navigateQuiz) {
+            navigateTo("/Fxml/AfficherQuiz.fxml");
         }
 
 

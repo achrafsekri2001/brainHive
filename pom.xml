@@ -24,16 +24,11 @@
             <groupId>com.idrsolutions</groupId>
             <version>2024.01</version>
         </dependency>
-        </dependency>
+        <dependency>
             <version>3.0.1</version>
             <artifactId>pdfbox</artifactId>
             <groupId>org.apache.pdfbox</groupId>
-        <dependency>
         </dependency>
-            <version>2.0.1</version>
-            <artifactId>atlantafx-base</artifactId>
-        <dependency>
-            <groupId>io.github.mkpaz</groupId>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
@@ -54,11 +49,11 @@
             <artifactId>charm-glisten</artifactId>
             <version>6.2.2</version>
         </dependency>
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>itextpdf</artifactId>
-            <version>5.5.13.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.itextpdf</groupId>-->
+<!--            <artifactId>itextpdf</artifactId>-->
+<!--            <version>5.5.13.2</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.sun.mail</groupId>
@@ -80,16 +75,16 @@
             <artifactId>javax.mail-api</artifactId>
             <version>1.6.1</version>
         </dependency>
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.api-client</groupId>
-            <artifactId>google-api-client</artifactId>
-            <version>2.0.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>javax.mail</groupId>-->
+<!--            <artifactId>mail</artifactId>-->
+<!--            <version>1.4</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.google.api-client</groupId>-->
+<!--            <artifactId>google-api-client</artifactId>-->
+<!--            <version>2.0.0</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.google.oauth-client</groupId>
             <artifactId>google-oauth-client-jetty</artifactId>
@@ -105,16 +100,16 @@
             <artifactId>mail</artifactId>
             <version>1.4.7</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.email.durgesh</groupId>-->
+<!--            <version>1.0</version>-->
+<!--            <artifactId>email</artifactId>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>com.email.durgesh</groupId>
-            <version>1.0</version>
-            <artifactId>email</artifactId>
-        </dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>connect</artifactId>
-        <dependency>
-        </dependency>
             <version>1.4.3</version>
+        </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-glisten</artifactId>

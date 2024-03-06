@@ -54,7 +54,7 @@ public class AfficherProduitAdmin implements Initializable {
         });
     }
     private void afficherTousLesProduits() {
-        List<Produit> tousLesProduits = sp.getAll();
+        List<Produit> tousLesProduits = (List<Produit>) sp.getAll();
         afficherProduits(tousLesProduits);
     }
 

@@ -5,11 +5,8 @@ import edu.esprit.entities.AvisProduit;
 import edu.esprit.services.ServiceAvis;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.Rating;
-
-import java.io.File;
 
 public class AvisItem {
 
@@ -29,7 +26,7 @@ public class AvisItem {
     private AnchorPane containerAvis;
 
 
-    public void setAvisData(AvisProduit avisProduit, AnchorPane containerAvis)  {
+    public void setAvisData(AvisProduit avisProduit, AnchorPane containerAvis) {
         this.avisProduit = avisProduit;
         this.containerAvis = containerAvis;
 
@@ -37,19 +34,9 @@ public class AvisItem {
         contenuavis.setText(avisProduit.getContenu());
         rate.setRating(avisProduit.getNote());
 
-        // Récupérer l'utilisateur associé à l'avisProduit
-       // UserCRUD userCRUD = new UserCRUD();
-       // Utilisateur utilisateur = userCRUD.getOneByID(avisProduit.getIdUser());
 
-        // Vérifier si l'utilisateur existe
-     //   if (utilisateur != null) {
-            // Mettre à jour l'image et le nom de l'utilisateur dans l'interface utilisateur
-        //    userimg.setImage(new Image(new File(utilisateur.getImgUser()).toURI().toString()));
-          //  username.setText(utilisateur.getUserName());
-      //  } else {
-            // Gérer le cas où l'utilisateur n'est pas trouvé
-            userimg.setImage(null); // Effacer l'image
-            username.setText("Utilisateur inconnu");
-      //  }
+        userimg.setImage(null); // Effacer l'image
+        username.setText(avisProduit.getUser().getNom());
+        //  }
     }
 }

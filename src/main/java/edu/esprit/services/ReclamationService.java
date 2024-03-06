@@ -1,19 +1,18 @@
 package edu.esprit.services;
 
+import edu.esprit.controllers.GlobalHolder;
 import edu.esprit.entities.Reclamation;
-import edu.esprit.entities.Utilisateur;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
-
-import java.util.*;
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ReclamationService {
 
     static Connection cnx = DataSource.getInstance().getCnx();
+
     public List<Reclamation> afficherReclamationsParUtilisateur(int idUser) {
         List<Reclamation> reclamations = new ArrayList<>();
 
@@ -23,35 +22,34 @@ public class ReclamationService {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, idUser);
             ResultSet res = ps.executeQuery();
-            while (res.next()){
+            while (res.next()) {
                 // Récupérer les détails de la réclamation depuis le ResultSet
                 int id = res.getInt(2);
                 String user = res.getString("user");
                 String contenu = res.getString("contenu");
                 String objet = res.getString("objet");
-              //  String imgUser = res.getString("imgUser");
+                //  String imgUser = res.getString("imgUser");
                 Timestamp date = res.getTimestamp("date");
 
                 // Créer un objet Reclamation et l'ajouter à la liste
-                Reclamation reclamation = new Reclamation( contenu, objet,date, id);
+                Reclamation reclamation = new Reclamation(contenu, objet, date, id);
                 reclamations.add(reclamation);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erreur lors de la récupération des réclamations par utilisateur : " + e.getMessage());
         }
 
         return reclamations;
     }
+
     public void ajouterReclamation(Reclamation reclamtion) throws SQLException {
-        String req = "INSERT INTO `reclamation`( `idUser`,`contenu`, `objet`, `date`) VALUES ( ?,?, ?, ?,?)";
+        String req = "INSERT INTO `reclamation`( `idUser`,`contenu`, `objet`, `date`) VALUES ( ?,?, ?,?)";
         PreparedStatement ps = cnx.prepareStatement(req);
         // Utiliser l'identifiant de l'utilisateur associé à la réclamation
-        ps.setInt(1, reclamtion.getIdReclamation()); // Assurez-vous que getIdUser() retourne l'identifiant de l'utilisateur
-        ps.setString(2, reclamtion.getUser());
-        ps.setString(3, reclamtion.getContenu());
-        ps.setString(4, reclamtion.getObjet());
-        //    ps.setDate(6, (Date) reclamtion.getDate());
-        ps.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+        ps.setInt(1, GlobalHolder.getcurrentUser().getId());
+        ps.setString(2, reclamtion.getContenu());
+        ps.setString(3, reclamtion.getObjet());
+        ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
         //ps.setString(6, reclamtion.getImgUser());
 
         ps.executeUpdate();
@@ -65,8 +63,8 @@ public class ReclamationService {
 
 
     public void supprimer(int id) {
-        try  {
-            PreparedStatement pre = cnx.prepareStatement( "DELETE FROM `reclamation` WHERE `id`=?");
+        try {
+            PreparedStatement pre = cnx.prepareStatement("DELETE FROM `reclamation` WHERE `id`=?");
             pre.setInt(1, id);
             pre.executeUpdate();
             System.out.println("Reclamation deleted!");
@@ -88,10 +86,10 @@ public class ReclamationService {
                 String objet = rs.getString("objet");
                 String contenu = rs.getString("contenu");
                 Timestamp date = rs.getTimestamp("date");
-                UserCRUD su = new UserCRUD();
-                Utilisateur utilisateur= su.getOneByID(idUser);
-                Reclamation reclamation1 =new Reclamation(contenu,objet,date,idUser);
-                return reclamation1 ;
+//                UserCRUD su = new UserCRUD();
+//                Utilisateur utilisateur= su.getOneByID(idUser);
+                Reclamation reclamation1 = new Reclamation(contenu, objet, date, idUser);
+                return reclamation1;
             } else {
                 System.out.println("Reclamation with ID " + id + " not found");
                 return null;
@@ -103,26 +101,23 @@ public class ReclamationService {
     }
 
 
-    public  List<Reclamation> getAll() {
+    public List<Reclamation> getAll() {
         List<Reclamation> reclamations = new ArrayList<>();
 
         String req = "Select * from reclamation";
         try {
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
-            while (res.next()){
+            while (res.next()) {
                 Reclamation rec = new Reclamation();
-                rec.setIdReclamation(res.getInt(1));
-                rec.setObjet(res.getString(4));
-                rec.setContenu(res.getString(3));
-                rec.setDate(res.getTimestamp(5));
-                Utilisateur user = new UserCRUD().getOneByID(res.getInt(2));
-                 rec.setUtilisateur(user);
+//                commentaire.setId(pst.getResultSet().getInt("id"));
+                rec.setIdReclamation(res.getInt("id"));
+                rec.setContenu(res.getString("contenu"));
+                rec.setObjet(res.getString("objet"));
+                rec.setDate(res.getTimestamp("date"));
+                rec.setIdUser(res.getInt("idUser"));
+                rec.setUtilisateur(new ServiceUser().getOneByID(res.getInt("idUser")));
                 reclamations.add(rec);
-
-                //  Utilisateur utilisateur = new Utilisateur(4,"feriel ben mamia","f");
-                // utilisateur.setId(idUser);
-                //    Reclamation reclamation = new Reclamation(user, contenu, objet,imgUser,date,id);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -130,9 +125,6 @@ public class ReclamationService {
 
         return reclamations;
     }
-
-
-
 
 
     public List<Reclamation> getReclamationsByUserName(String texteRecherche) {
@@ -143,16 +135,16 @@ public class ReclamationService {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, "%" + texteRecherche + "%"); // Utilisation de LIKE pour rechercher les réclamations par nom d'utilisateur partiel
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("idReclamation");
-              //  String nom = rs.getString("user");
+                //  String nom = rs.getString("user");
                 String contenu = rs.getString("contenu");
                 String objet = rs.getString("objet");
-              //  String imgUser = rs.getString("imgUser");
-                Timestamp date= rs.getTimestamp("date");
+                //  String imgUser = rs.getString("imgUser");
+                Timestamp date = rs.getTimestamp("date");
                 int idUser = rs.getInt("idUser");
 
-                Reclamation p = new Reclamation( contenu, objet,  date, id, idUser);
+                Reclamation p = new Reclamation(contenu, objet, date, id, idUser);
                 reclamations.add(p);
             }
         } catch (SQLException e) {

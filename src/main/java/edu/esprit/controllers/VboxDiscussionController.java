@@ -28,7 +28,7 @@ public class VboxDiscussionController implements Initializable {
          this.container = container;
 
 
-         nomEmetteur1.setText(messagerie.getReceiver_message().getUserName());
+         nomEmetteur1.setText(messagerie.getReceiver_message().getNom());
          contenuMsg1.setText(messagerie.getContenu());
 
      }

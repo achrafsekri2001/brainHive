@@ -31,11 +31,7 @@ public class AfficherQuizController {
     Set<Quiz> setQ;
 
     {
-        try {
-            setQ = serviceQ.getAll();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        setQ = serviceQ.getAll();
     }
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

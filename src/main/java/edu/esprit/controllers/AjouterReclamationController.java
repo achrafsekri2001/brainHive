@@ -3,9 +3,11 @@ package edu.esprit.controllers;
 
 import com.gluonhq.charm.glisten.control.Avatar;
 import edu.esprit.entities.Reclamation;
-import edu.esprit.entities.Utilisateur;
+import edu.esprit.entities.User;
+import edu.esprit.entities.User;
 import edu.esprit.services.ReclamationService;
-import edu.esprit.services.UserCRUD;
+import edu.esprit.services.ServiceUser;
+import edu.esprit.services.ServiceUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,9 +33,9 @@ public class AjouterReclamationController  implements Initializable {
 
     @FXML
     private TextField TFp;
-    Utilisateur user= new Utilisateur(5,"feriel","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
+    User user= new User();
     private final ReclamationService rec=new ReclamationService();
-    private final UserCRUD su=new UserCRUD();
+    private final ServiceUser su=new ServiceUser();
 
 
     @FXML
@@ -91,12 +93,12 @@ public class AjouterReclamationController  implements Initializable {
     public void AjouterReclamationAction(ActionEvent actionEvent) throws SQLException {
 
         if (isValidInput()) {
-            // Utilisateur user = Utilisateur.getCurrent_User();
+            // User user = User.getCurrent_User();
 
             Reclamation reclamation = new Reclamation();
             reclamation.setObjet(TF.getText());
             reclamation.setContenu(TFp.getText());
-           reclamation.setUser(user.getCurrent_User().getUserName()); // Définissez l'utilisateur actuel comme le "user" de la réclamation
+//           reclamation.setUser(user.getCurrent_User().getUserName()); // Définissez l'utilisateur actuel comme le "user" de la réclamation
             reclamation.setIdUser(user.getId()); // Définissez l'ID de l'utilisateur actuel comme l'ID de l'utilisateur de la réclamation
             //reclamation.setImgUser(user.getImgUser());
             rec.ajouterReclamation(reclamation);

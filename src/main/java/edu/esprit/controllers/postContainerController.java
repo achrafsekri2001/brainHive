@@ -1,6 +1,5 @@
 package edu.esprit.controllers;
 
-import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.control.Chip;
 import edu.esprit.entities.Post;
 import javafx.fxml.FXML;
@@ -18,7 +17,7 @@ import java.io.IOException;
 
 public class postContainerController {
     @FXML
-    private Chip postChip = new Chip();
+    private Label postChip = new Label();
     @FXML
     private Text postTitle = new Text();
     @FXML
@@ -28,7 +27,7 @@ public class postContainerController {
     @FXML
     private AnchorPane postContainer = new AnchorPane();
     @FXML
-    private Avatar postAvatar = new Avatar();
+    private ImageView postAvatar = new ImageView();
     @FXML
     private ImageView postFile = new ImageView();
     @FXML

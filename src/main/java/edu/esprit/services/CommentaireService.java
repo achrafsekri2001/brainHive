@@ -62,7 +62,7 @@ public class CommentaireService implements IService<Commentaire> {
     }
 
     public void ajouterFichier(Commentaire commentaire, String fichier) {
-        String req = "INSERT INTO fichierCommentaire (commentaireId, fileLink) VALUES (?,?)";
+        String req = "INSERT INTO fichierCommentaire (commentId, fileLink) VALUES (?,?)";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setInt(1, commentaire.getId());

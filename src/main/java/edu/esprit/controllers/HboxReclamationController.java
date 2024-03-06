@@ -1,9 +1,7 @@
 package edu.esprit.controllers;
 
-import com.gluonhq.charm.glisten.control.Avatar;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.services.ReclamationService;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -49,7 +47,7 @@ public class HboxReclamationController implements Initializable {
         this.container = container;
 
         // Set data to UI elements
-        username.setText(String.valueOf(reclamation.getUtilisateur()));
+        username.setText(reclamation.getUtilisateur().getNom());
         probleme1.setText(reclamation.getContenu());
         objet1.setText(reclamation.getObjet());
         dateRec.setText(String.valueOf(reclamation.getDate()));

@@ -2,7 +2,7 @@ package edu.esprit.controllers;
 
 import com.gluonhq.charm.glisten.control.Avatar;
 import edu.esprit.entities.Reclamation;
-import edu.esprit.entities.Utilisateur;
+import edu.esprit.entities.User;
 import edu.esprit.services.ReclamationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,7 +34,7 @@ public class MesReclamationController implements Initializable  {
 
     @FXML
     private Label titre;
-    Utilisateur user= new Utilisateur(5,"feriel","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
+    User user= new User();
 
     private final ReclamationService serviceReclamation = new ReclamationService();
 

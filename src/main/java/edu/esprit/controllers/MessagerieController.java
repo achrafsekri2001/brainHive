@@ -2,9 +2,10 @@ package edu.esprit.controllers;
 
 import edu.esprit.entities.Messagerie;
 
-import edu.esprit.entities.Utilisateur;
+import edu.esprit.entities.User;
 import edu.esprit.services.MessagerieService;
-import edu.esprit.services.UserCRUD;
+import edu.esprit.services.ServiceUser;
+import edu.esprit.services.ServiceUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,12 +27,12 @@ import java.util.ResourceBundle;
 
 public class MessagerieController implements Initializable {
 
-    Utilisateur user= new Utilisateur();
-    Utilisateur user1= new Utilisateur();
+    User user= new User();
+    User user1= new User();
     private final MessagerieService ms=new MessagerieService();
-    private final UserCRUD su=new UserCRUD();
-    //Utilisateur userSender = su.getOneByID(user.getId());
-    //  Utilisateur userReciver = su.getOneByID(user1.getId());
+    private final ServiceUser su=new ServiceUser();
+    //User userSender = su.getOneByID(user.getId());
+    //  User userReciver = su.getOneByID(user1.getId());
     @FXML
     private AnchorPane container;
     @FXML
@@ -86,8 +87,8 @@ public class MessagerieController implements Initializable {
         }
         Messagerie message = new Messagerie();
         message.setContenu(messageContent);
-        message.setSender_message(user); // Utilisateur émetteur
-        message.setReceiver_message(user1); // Utilisateur récepteur
+        message.setSender_message(user); // User émetteur
+        message.setReceiver_message(user1); // User récepteur
         //      Envoyer le message en utilisant le service approprié
         MessagerieService messagerieService = new MessagerieService();
         messagerieService.ajouter(message);

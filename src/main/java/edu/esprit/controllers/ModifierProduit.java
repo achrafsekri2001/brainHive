@@ -118,25 +118,16 @@ public class ModifierProduit implements Initializable {
         Produit nouveauProduit = new Produit(produit.getId_produit(), produit.getImage(), titre, description, matiere);
 
         // Appeler la méthode de service pour modifier le produit
-        try {
-            sp.modifier(nouveauProduit);
-            // Afficher un message de succès
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Succès");
-            alert.setHeaderText(null);
-            alert.setContentText("Le parascolaire a été modifié avec succès.");
-            alert.showAndWait();
+        sp.modifier(nouveauProduit);
+        // Afficher un message de succès
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Succès");
+        alert.setHeaderText(null);
+        alert.setContentText("Le parascolaire a été modifié avec succès.");
+        alert.showAndWait();
 
-            // Naviguer vers la page d'affichage des produits administrateur après la modification
-            navigatetoAffichageAction(event);
-        } catch (SQLException ex) {
-            // En cas d'erreur lors de la modification, afficher un message d'erreur
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Erreur lors de la modification");
-            alert.setContentText("Une erreur est survenue lors de la modification du parascolaire. Veuillez réessayer.");
-            alert.showAndWait();
-        }
+        // Naviguer vers la page d'affichage des produits administrateur après la modification
+        navigatetoAffichageAction(event);
     }
 
     private void navigateTo(String fxmlFilePath) {

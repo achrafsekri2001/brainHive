@@ -1,6 +1,6 @@
 package edu.esprit.controllers;
 
-import edu.esprit.Services.ServiceUser;
+import edu.esprit.services.ServiceUser;
 import edu.esprit.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -68,42 +68,33 @@ public class ModifierUser  implements Initializable {
 
                 // Validate user input (implement validation logic here)
 
-                try {
-                    // Use findByEmailAndRole for precise search (assuming email field is correct)
-                    User admin = serviceUtilisateur.findByRole( 0);
+            // Use findByEmailAndRole for precise search (assuming email field is correct)
+            User admin = serviceUtilisateur.findByRole( 0);
 
-                    if (admin != null) {
-                        // Update administrator attributes
-                        admin.setNom(nom);
-                        admin.setPrenom(prenom);
-                        admin.setPassword(mdp);
+            if (admin != null) {
+                // Update administrator attributes
+                admin.setNom(nom);
+                admin.setPrenom(prenom);
+                admin.setPassword(mdp);
 
-                        // Update admin information using serviceUtilisateur.Modifier
-                        serviceUtilisateur.Modifier(admin);
+                // Update admin information using serviceUtilisateur.Modifier
+                serviceUtilisateur.modifier(admin);
 
-                        // Success message
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Succès");
-                        alert.setHeaderText("Modifications enregistrées");
-                        alert.setContentText("Les coordonnées de l'administrateur ont été modifiées avec succès.");
-                        alert.showAndWait();
-                    } else {
-                        // Error message if administrator not found
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Erreur");
-                        alert.setHeaderText("Administrateur introuvable");
-                        alert.setContentText("L'administrateur avec l'email \"" + email + "\" et le rôle \"administrateur\" n'existe pas.");
-                        alert.showAndWait();
-                    }
-                } catch (SQLException e) {
-                    // Error message in case of database issues
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Erreur");
-                    alert.setHeaderText("Échec de la modification des informations");
-                    alert.setContentText("Une erreur est survenue lors de la modification des informations de l'administrateur. Veuillez réessayer ultérieurement.");
-                    alert.showAndWait();
-                }
+                // Success message
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Succès");
+                alert.setHeaderText("Modifications enregistrées");
+                alert.setContentText("Les coordonnées de l'administrateur ont été modifiées avec succès.");
+                alert.showAndWait();
+            } else {
+                // Error message if administrator not found
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Administrateur introuvable");
+                alert.setContentText("L'administrateur avec l'email \"" + email + "\" et le rôle \"administrateur\" n'existe pas.");
+                alert.showAndWait();
             }
+        }
 
         }
 

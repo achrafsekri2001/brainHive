@@ -5,118 +5,83 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="953.0" style="-fx-background-color: #D3D8D3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ReclamtionController">
-    <children>
-        <Pane layoutY="1.0" prefHeight="657.0" prefWidth="239.0" style="-fx-background-color: #D3D8D3;">
-            <children>
-                <Separator layoutX="-2.0" layoutY="99.0" prefHeight="16.0" prefWidth="240.0" />
-                <Button layoutX="17.0" layoutY="143.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="191.0" style="-fx-background-color: #FFCD38;" text="Acceuil">
-                    <font>
-                        <Font name="Roboto Bold" size="20.0" />
-                    </font>
-                </Button>
-                <Button layoutX="14.0" layoutY="230.0" mnemonicParsing="false" onAction="#NavigateToFavorisAction" prefHeight="46.0" prefWidth="191.0" style="-fx-background-color: #FFCD38;" text="Favoris">
-                    <font>
-                        <Font size="20.0" />
-                    </font></Button>
-                <Button layoutX="19.0" layoutY="319.0" mnemonicParsing="false" onAction="#MessagerieAction" prefHeight="46.0" prefWidth="191.0" style="-fx-background-color: #FFCD38;" text="Messagerie">
-                    <font>
-                        <Font size="20.0" />
-                    </font></Button>
-                <Button layoutX="19.0" layoutY="412.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="191.0" style="-fx-background-color: #FFCD38;" text="Produits">
-                    <font>
-                        <Font name="Roboto Bold" size="20.0" />
-                    </font></Button>
-                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/favori.png" />
-               </image>
-                </ImageView>
-                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/accueil.png" />
-               </image>
-                </ImageView>
-                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/conversation.png" />
-               </image>
-                </ImageView>
-                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/livre.png" />
-               </image>
-                </ImageView>
-                <ImageView fitHeight="71.0" fitWidth="223.0" layoutX="8.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../assets/logooo.png" />
-                    </image>
-                </ImageView>
-            <Button layoutX="19.0" layoutY="503.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="191.0" style="-fx-background-color: #FFCD38;" text="Reclamation">
-               <font>
-                  <Font name="Roboto Bold" size="20.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="56.0" fitWidth="30.0" layoutX="27.0" layoutY="511.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/fichier.png" />
-               </image>
-            </ImageView>
-            </children>
-        </Pane>
-      <Button layoutX="266.0" layoutY="115.0" mnemonicParsing="false" onAction="#AjouterReclamationAction" style="-fx-background-color: #FFCD38;" text="Ajouter réclamation">
-         <font>
-            <Font name="Roboto Bold" size="16.0" />
-         </font>
-      </Button>
-      <Label fx:id="titre" layoutX="477.0" layoutY="24.0" prefHeight="46.0" prefWidth="182.0" text="Réclamations">
-         <font>
-            <Font name="Roboto Bold" size="28.0" />
-         </font>
-      </Label>
-      <Separator layoutX="208.0" layoutY="1.0" orientation="VERTICAL" prefHeight="657.0" prefWidth="70.0" />
-      <Button layoutX="810.0" layoutY="115.0" mnemonicParsing="false" onAction="#MesReclamationAction" style="-fx-background-color: #FFCD38;" text="Mes réclamations">
-         <font>
-            <Font name="Roboto Bold" size="16.0" />
-         </font>
-      </Button>
-      <AnchorPane fx:id="container" layoutX="250.0" layoutY="171.0" prefHeight="476.0" prefWidth="690.0">
-         <children>
-            <ScrollPane layoutX="-1.0" prefHeight="476.0" prefWidth="690.0">
-               <content>
-                  <VBox fx:id="boxeReclamation1" prefHeight="126.0" prefWidth="690.0" style="-fx-background-color: ffffff;">
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
-                  </VBox>
-               </content>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0"
+            prefWidth="1050.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ReclamtionController">
+    <effect>
+        <DropShadow color="#1b1eeb"/>
+    </effect>
+
+    <BorderPane prefHeight="576.0" prefWidth="1050.0">
+        <top>
+            <fx:include source="topBar.fxml"/>
+        </top>
+        <left>
+            <fx:include source="sideBar.fxml"/>
+        </left>
+        <center>
+            <ScrollPane prefHeight="442.0" prefWidth="818.0" BorderPane.alignment="CENTER">
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                            prefHeight="635.0" prefWidth="838.0" style="-fx-background-color: #D3D8D3;"
+                            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+                    <children>
+                        <Button layoutX="84.0" layoutY="103.0" mnemonicParsing="false"
+                                onAction="#AjouterReclamationAction" style="-fx-background-color: #FFCD38;"
+                                text="Ajouter réclamation">
+                            <font>
+                                <Font name="Roboto Bold" size="16.0"/>
+                            </font>
+                        </Button>
+                        <Label fx:id="titre" layoutX="295.0" layoutY="12.0" prefHeight="46.0" prefWidth="182.0"
+                               text="Réclamations">
+                            <font>
+                                <Font name="Roboto Bold" size="28.0"/>
+                            </font>
+                        </Label>
+                        <Button layoutX="628.0" layoutY="103.0" mnemonicParsing="false" onAction="#MesReclamationAction"
+                                style="-fx-background-color: #FFCD38;" text="Mes réclamations">
+                            <font>
+                                <Font name="Roboto Bold" size="16.0"/>
+                            </font>
+                        </Button>
+                        <AnchorPane fx:id="container" layoutX="68.0" layoutY="159.0" prefHeight="476.0"
+                                    prefWidth="690.0">
+                            <children>
+                                <ScrollPane layoutX="-1.0" prefHeight="476.0" prefWidth="690.0">
+                                    <content>
+                                        <VBox fx:id="boxeReclamation1" prefHeight="126.0" prefWidth="690.0"
+                                              style="-fx-background-color: ffffff;">
+                                            <padding>
+                                                <Insets bottom="5.0"/>
+                                            </padding>
+                                        </VBox>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+
+                        <TextField fx:id="recherche" layoutX="279.0" layoutY="76.0" onKeyReleased="#rechercherParNom"
+                                   prefHeight="26.0" prefWidth="253.0" promptText="Rechercher">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <padding>
+                                <Insets top="20.0"/>
+                            </padding>
+                        </TextField>
+                    </children>
+                </AnchorPane>
             </ScrollPane>
-         </children>
-      </AnchorPane>
-      <ImageView fitHeight="56.0" fitWidth="58.0" layoutX="841.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-         <image>
-            <Image url="@../assets/IMG_7004.jpg" />
-         </image>
-      </ImageView>
-      <TextField fx:id="recherche" layoutX="461.0" layoutY="88.0" onKeyReleased="#rechercherParNom" prefHeight="26.0" prefWidth="253.0" promptText="Rechercher">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <padding>
-            <Insets top="20.0" />
-         </padding>
-      </TextField>
-    </children>
+        </center>
+    </BorderPane>
+
 </AnchorPane>

@@ -48,6 +48,7 @@ public class AfficherProduit implements Initializable {
             }
         });
     }
+
     private void afficherTousLesProduits() {
         List<Produit> tousLesProduits = sp.getAll();
         afficherProduits(tousLesProduits);
@@ -80,6 +81,7 @@ public class AfficherProduit implements Initializable {
             }
         }
     }
+
     @FXML
     private void rechercherParNom() {
         String texteRecherche = recherche.getText().trim();

@@ -1,13 +1,13 @@
 package edu.esprit.services;
 
+import edu.esprit.controllers.GlobalHolder;
 import edu.esprit.entities.AvisProduit;
+import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +21,7 @@ public class ServiceAvis {
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setInt(1, avis.getIdProduit());
         ps.setString(2, avis.getContenu());
-        ps.setInt(3, avis.getIdUser());
+        ps.setInt(3, GlobalHolder.currentUser.getId());
         ps.setInt(4, avis.getNote());
 
         ps.executeUpdate();
@@ -47,7 +47,7 @@ public class ServiceAvis {
     }*/
 
     public void supprimer(AvisProduit avis) {
-        String req = "DELETE FROM avis_produit WHERE id_commentaire = ?";
+        String req = "DELETE FROM avisproduit WHERE id = ?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, avis.getId());
@@ -63,49 +63,50 @@ public class ServiceAvis {
     }
 
 
-        public List<AvisProduit> getAll() {
-            List<AvisProduit> avisList = new ArrayList<>();
-            String req = "SELECT * FROM avis_produit";
-            try {
-                Statement st = cnx.createStatement();
-                ResultSet rs = st.executeQuery(req);
-                while (rs.next()) {
-                    int id_commentaire = rs.getInt("id");
-                    int user_id = rs.getInt("user_id");
-                    String contenu = rs.getString("contenu");
-                    int id_produit = rs.getInt("id_produit");
-                    int note = rs.getInt("note");
+    public List<AvisProduit> getAll() {
+        List<AvisProduit> avisList = new ArrayList<>();
+        String req = "SELECT * FROM avisproduit";
+        try {
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                int id_commentaire = rs.getInt("id");
+                User user = new ServiceUser().getOneByID(rs.getInt("idUser"));
+                String contenu = rs.getString("contenu");
+                int id_produit = rs.getInt("id_produit");
+                int note = rs.getInt("note");
 
-                    AvisProduit avis = new AvisProduit(id_commentaire, user_id, contenu, id_produit, note);
-                    avisList.add(avis);
-                }
-            } catch (SQLException e) {
-                System.out.println("Erreur lors de la récupération des avis : " + e.getMessage());
+                AvisProduit avis = new AvisProduit(id_commentaire, user, contenu, id_produit, note);
+                avisList.add(avis);
             }
-            return avisList;
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des avis : " + e.getMessage());
         }
+        return avisList;
+    }
 
-        public AvisProduit getOneById(int id) {
-            AvisProduit avis = null;
-            String req = "SELECT * FROM avis WHERE id_commentaire = ?";
-            try {
-                PreparedStatement ps = cnx.prepareStatement(req);
-                ps.setInt(1, id);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    int id_commentaire = rs.getInt("id");
-                    int user_id = rs.getInt("user_id");
-                    String contenu = rs.getString("contenu");
-                    int id_produit = rs.getInt("id_produit");
-                    int note = rs.getInt("note");
+    public AvisProduit getOneById(int id) {
+        AvisProduit avis = null;
+        String req = "SELECT * FROM avisproduit WHERE id = ?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int id_commentaire = rs.getInt("id");
+                User user = new ServiceUser().getOneByID(rs.getInt("idUser"));
+                String contenu = rs.getString("contenu");
+                int id_produit = rs.getInt("id_produit");
+                int note = rs.getInt("note");
 
-                    avis = new AvisProduit(id_commentaire, user_id, contenu, id_produit, note);
-                }
-            } catch (SQLException e) {
-                System.out.println("Erreur lors de la récupération de l'avis : " + e.getMessage());
+                avis = new AvisProduit(id_commentaire, user, contenu, id_produit, note);
             }
-            return avis;
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération de l'avis : " + e.getMessage());
         }
+        return avis;
+    }
+
     public double getMoyenneNotesParProduit(int idProduit) {
         String req = "SELECT AVG(note) AS moyenne FROM avisproduit WHERE idProduit = ?";
         double moyenne = 0;
@@ -135,7 +136,7 @@ public class ServiceAvis {
                     AvisProduit avis = new AvisProduit();
                     avis.setId(resultSet.getInt("id"));
                     avis.setIdProduit(resultSet.getInt("idProduit"));
-                    avis.setIdUser(resultSet.getInt("idUser"));
+                    avis.setUser(new ServiceUser().getOneByID(resultSet.getInt("idUser")));
                     avis.setContenu(resultSet.getString("contenu"));
                     avis.setNote(resultSet.getInt("note"));
                     // Ajoute l'avis à la liste des réclamations

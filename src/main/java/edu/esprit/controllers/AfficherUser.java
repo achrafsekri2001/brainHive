@@ -1,6 +1,6 @@
 package edu.esprit.controllers;
 
-import edu.esprit.Services.ServiceUser;
+import edu.esprit.services.ServiceUser;
 import edu.esprit.entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -180,7 +180,7 @@ public class AfficherUser implements Initializable {
                 userSelected.setEmail(nouveauemail.getText());
 
                 // Call the service method to update the user in the database
-                serviceUser.Modifier(userSelected);
+                serviceUser.modifier(userSelected);
 
                 // Refresh the ListView with the updated data from the database
                 listView.setItems(FXCollections.observableArrayList(serviceUser.getAll()));}

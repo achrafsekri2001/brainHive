@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import edu.esprit.Services.ServiceUser;
+import edu.esprit.services.ServiceUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,11 +16,9 @@ import javax.swing.JOptionPane;
 
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 
 

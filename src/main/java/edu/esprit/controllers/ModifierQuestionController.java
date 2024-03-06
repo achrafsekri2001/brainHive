@@ -114,11 +114,7 @@ public class ModifierQuestionController {
                 question.getQuiz().setCode(selectedCodeQuiz);
                 question.setReponse_correcte(modifiedReponseCorrecte);
 
-                try {
-                    qs.modifier(question);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                qs.modifier(question);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("Question modifiée avec succès.");

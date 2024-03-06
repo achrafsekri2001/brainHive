@@ -2,9 +2,10 @@ package edu.esprit.controllers;
 
 import edu.esprit.entities.Messagerie;
 
-import edu.esprit.entities.Utilisateur;
+import edu.esprit.entities.User;
+import edu.esprit.entities.User;
 import edu.esprit.services.MessagerieService;
-import edu.esprit.services.UserCRUD;
+import edu.esprit.services.ServiceUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,12 +33,12 @@ public class AjouterMessageController implements Initializable {
     @FXML
     private TextField nomReceiver;
 
-    Utilisateur user= new Utilisateur(5,"feriel","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
-    Utilisateur user1= new Utilisateur(4,"rima","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
+    User user= new User();
+    User user1= new User();
     private final MessagerieController ms=new MessagerieController();
-    private final UserCRUD su=new UserCRUD();
-    Utilisateur userSender = su.getOneByID(user.getId());
-    Utilisateur userReciver = su.getOneByID(user1.getId());
+    private final ServiceUser su=new ServiceUser();
+    User userSender = su.getOneByID(user.getId());
+    User userReciver = su.getOneByID(user1.getId());
 
     @FXML
     void AjouterDiscussionAction(ActionEvent event) {
@@ -52,7 +53,7 @@ public class AjouterMessageController implements Initializable {
             if (userReciver == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur");
-                alert.setContentText("Utilisateur destinataire introuvable.");
+                alert.setContentText("User destinataire introuvable.");
                 alert.showAndWait();
                 return;
             }

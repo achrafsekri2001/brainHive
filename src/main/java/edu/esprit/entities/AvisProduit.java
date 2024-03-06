@@ -5,16 +5,16 @@ import java.util.Objects;
 public class AvisProduit {
     private int id; // L'identifiant de l'avis
     private int idProduit; // L'identifiant du produit associé à cet avis
-    private int idUser; // L'identifiant de l'utilisateur qui a laissé cet avis
+    private User User; // L'identifiant de l'utilisateur qui a laissé cet avis
     private String contenu; // Le contenu de l'avis
     private int note;
 
 
 
 
-    public AvisProduit(int id, int idUser, String contenu, int idProduit, int note) {
+    public AvisProduit(int id, User User, String contenu, int idProduit, int note) {
         this.id = id;
-        this.idUser = idUser;
+        this.User = User;
         this.contenu = contenu;
         this.idProduit = idProduit;
         this.note = note;
@@ -48,12 +48,12 @@ public class AvisProduit {
         this.idProduit = idProduit;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public User getUser() {
+        return User;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUser(User User) {
+        this.User = User;
     }
 
     public String getContenu() {
@@ -75,7 +75,7 @@ public class AvisProduit {
     @Override
     public String toString() {
         return "AvisProduit{" +
-                " user_id=" + idUser +
+                " user_id=" + User +
                 ", contenu='" + contenu + '\'' +
                 ", id_produit=" + idProduit +
                 '}';

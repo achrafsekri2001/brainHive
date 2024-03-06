@@ -4,13 +4,15 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Reclamation {
-    public   String user , contenu, objet , imgUser;
+    public String contenu, objet, imgUser, user;
     public Timestamp date;
-    public    int idReclamation, idUser;
-    private Utilisateur utilisateur;
-    public Reclamation(String nom, String contenu, String objet, Timestamp date, int id, int idUser){
+    public int idReclamation, idUser;
+    private User utilisateur;
+
+    public Reclamation(String nom, String contenu, String objet, Timestamp date, int id, int idUser) {
 
     }
+
     public Reclamation(String contenu, String objet, Timestamp date, int id, int idUser) {
 
         this.contenu = contenu;
@@ -92,11 +94,12 @@ public class Reclamation {
     public void setImgUser(String imgUser) {
         this.imgUser = imgUser;
     }
-    public Utilisateur getUtilisateur() {
+
+    public User getUtilisateur() {
         return utilisateur;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
+    public void setUtilisateur(User utilisateur) {
         this.utilisateur = utilisateur;
     }
 

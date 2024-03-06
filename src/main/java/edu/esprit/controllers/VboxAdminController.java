@@ -46,7 +46,7 @@ public class VboxAdminController {
         this.container = container;
 
         // Set data to UI elements
-        username.setText(reclamation.getUtilisateur().getUserName());
+        username.setText(reclamation.getUtilisateur().getNom());
 
         probleme1.setText(reclamation.getContenu());
         objet1.setText(reclamation.getObjet());

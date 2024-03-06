@@ -1,7 +1,7 @@
 package edu.esprit.controllers;
 
-import edu.esprit.Services.ServiceUser;
 import edu.esprit.entities.User;
+import edu.esprit.services.ServiceUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,13 +19,7 @@ import java.util.ResourceBundle;
 
 public class SampleController implements Initializable {
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
 
-
-
-        // TODO
-    }
 
     @FXML
     private Button button_login;
@@ -42,7 +36,7 @@ public class SampleController implements Initializable {
     private Button button_sign_up;
     @FXML
     private PasswordField pf_password;
-    public User u ;
+    public User u;
     @FXML
     private TextField email;
 
@@ -50,20 +44,18 @@ public class SampleController implements Initializable {
     private PasswordField password;
 
 
-    /**
-     * Initializes the controller class.
-     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        email.setText("achraf@achraf.com");
+        password.setText("brainHive123");
+    }
 
 
     @FXML
     private void handleLogin(ActionEvent event) throws SQLException, IOException {
         ServiceUser serviceUtilisateur = new ServiceUser();
-
-// Get user input
-        String Email =email.getText();
+        String Email = email.getText();
         String mdp = password.getText();
-
-// Validate user input
         if (Email.isEmpty() || mdp.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
@@ -92,42 +84,40 @@ public class SampleController implements Initializable {
          */
 
 
-            // Check if user exists in the database
-            User existingUser = serviceUtilisateur.findByEmail(Email);
+        // Check if user exists in the database
+        User existingUser = serviceUtilisateur.findByEmail(Email);
+        System.out.println("existingUser" + existingUser.equals(mdp));
+
+        // If user exists, authenticate
+        if (existingUser != null) {
+            if (existingUser.getPassword().equals(mdp)) {
+                GlobalHolder.setcurrentUser(existingUser);
+                // User authenticated successfully
+                System.out.println("Utilisateur authentifié avec succès !");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Reclamation.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                email.clear();
+
+                // Obtenir la scène actuelle
+                Stage currentStage = (Stage) button_login.getScene().getWindow();
+
+                // Afficher la nouvelle scène
+                currentStage.setScene(scene);
+                currentStage.show();
+
+            } else {
+                // Incorrect password
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setContentText("Mot de passe incorrect.");
+                alert.show();
+            }
 
 
-            // If user exists, authenticate
-            if ( existingUser!= null) {
-                if (existingUser.equals(mdp)) {
-                    // User authenticated successfully
-                    System.out.println("Utilisateur authentifié avec succès !");
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Accueil.fxml"));
-                    Parent root = loader.load();
-                    Scene scene = new Scene(root);
-                    email.clear();
-
-                    // Obtenir la scène actuelle
-                    Stage currentStage = (Stage) button_login.getScene().getWindow();
-
-                    // Afficher la nouvelle scène
-                    currentStage.setScene(scene);
-                    currentStage.show();
-
-                }  else {
-                    // Incorrect password
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Erreur");
-                    alert.setContentText("Mot de passe incorrect.");
-                    alert.show();
-                }
-
-
-
-
-                 if (existingUser.equals(mdp) )
-                 {
-                     if (existingUser.getRoles() == 0)
-                     { // Assuming "0" indicates admin role
+            if (existingUser.getPassword().equals(mdp)) {
+                GlobalHolder.setcurrentUser(existingUser);
+                if (existingUser.getRoles() == 0) { // Assuming "0" indicates admin role
                     System.out.println("Utilisateur administrateur authentifié avec succès !");
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/CRUD.fxml")); // Load CRUD page
                     Parent root = loader.load();
@@ -141,22 +131,24 @@ public class SampleController implements Initializable {
                     currentStage.setScene(scene);
                     currentStage.show();
 
-                } }else {
-                    // Incorrect password
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Erreur");
-                    alert.setContentText("Mot de passe incorrect.");
-                    alert.show();
-                }}
-            else{
-                // User does not exist, display information message
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information");
-                alert.setContentText("Aucun utilisateur avec cet email n'existe. Veuillez créer un compte.");
+                }
+            } else {
+                // Incorrect password
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setContentText("Mot de passe incorrect.");
                 alert.show();
+            }
+        } else {
+            // User does not exist, display information message
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setContentText("Aucun utilisateur avec cet email n'existe. Veuillez créer un compte.");
+            alert.show();
 
 
-            }}/*
+        }
+    }/*
 
         // If user exists, authenticate and check role
         if (existingUser != null) {
@@ -197,38 +189,37 @@ public class SampleController implements Initializable {
     */
 
 
-
-
-
-        @FXML
+    @FXML
     private void handlebutton_sign_up(ActionEvent event) throws IOException {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Signup.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            email.clear();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Signup.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        email.clear();
 
-            // Obtenir la scène actuelle
-            Stage currentStage = (Stage) button_login.getScene().getWindow();
+        // Obtenir la scène actuelle
+        Stage currentStage = (Stage) button_login.getScene().getWindow();
 
-            // Afficher la nouvelle scène
-            currentStage.setScene(scene);
-            currentStage.show();
-        }
-
-
-@FXML
-void handlebutton_forgot(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ForgotPassword.fxml"));
-    Parent root = loader.load();
-    Scene scene = new Scene(root);
+        // Afficher la nouvelle scène
+        currentStage.setScene(scene);
+        currentStage.show();
+    }
 
 
-    // Obtenir la scène actuelle
-    Stage currentStage = (Stage)mdp_oublié.getScene().getWindow();
+    @FXML
+    void handlebutton_forgot(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ForgotPassword.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
 
-    // Afficher la nouvelle scène
-    currentStage.setScene(scene);
-    currentStage.show();}}
+
+        // Obtenir la scène actuelle
+        Stage currentStage = (Stage) mdp_oublié.getScene().getWindow();
+
+        // Afficher la nouvelle scène
+        currentStage.setScene(scene);
+        currentStage.show();
+    }
+}
 
 
 

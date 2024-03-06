@@ -35,11 +35,7 @@ public class AfficherQuestionController implements Initializable {
     Set<Question> setQ;
 
     {
-        try {
-            setQ = serviceQ.getAll();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        setQ = serviceQ.getAll();
     }
 
 
