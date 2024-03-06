@@ -3,7 +3,6 @@ package edu.esprit.controllers;
 
 
 import edu.esprit.entities.Question;
-import edu.esprit.entities.Quiz;
 import edu.esprit.services.ServiceQuestion;
 import edu.esprit.services.ServiceQuiz;
 import javafx.event.ActionEvent;
@@ -165,7 +164,7 @@ public class ModifierQuestionController {
 
     public void navigateToAfficher(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherQuestion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AfficherQuestion.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) TFcode_quizModify.getScene().getWindow(); // Utilisez la même fenêtre (Stage) actuelle

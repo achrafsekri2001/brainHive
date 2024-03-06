@@ -44,7 +44,7 @@ public class AfficherQuizController {
         try {
             for (Quiz quiz : setQ) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/QuizItem.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/Fxml/QuizItem.fxml"));
                 HBox hbox = fxmlLoader.load();
 
                 QuizItemController itemController = fxmlLoader.getController();
@@ -73,7 +73,7 @@ public class AfficherQuizController {
     @FXML
     void navigateToAjouter(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherQuestion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AfficherQuestion.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) gridA.getScene().getWindow(); // Utilisez la même fenêtre (Stage) actuelle
@@ -91,7 +91,7 @@ public class AfficherQuizController {
     @FXML
     void navigateToafficherQuestions(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterQuiz.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AjouterQuiz.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) gridA.getScene().getWindow(); // Utilisez la même fenêtre (Stage) actuelle

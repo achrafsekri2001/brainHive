@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ModifierQuizController implements Initializable {
@@ -82,7 +81,7 @@ public class ModifierQuizController implements Initializable {
     @FXML
     void navigateToAfficher(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherQuiz.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AfficherQuiz.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) TFCode1.getScene().getWindow(); // Utilisez la même fenêtre (Stage) actuelle

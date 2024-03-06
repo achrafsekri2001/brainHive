@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -60,7 +59,7 @@ public class QuizItemController {
     public void actualiserVueQuiz() {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/AfficherQuiz.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Fxml/AfficherQuiz.fxml"));
             LabelScore.getScene().setRoot(root);
         } catch (IOException e) {
 
@@ -102,7 +101,7 @@ public class QuizItemController {
     @FXML
     void supprimerQuizOnClick(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierQuiz.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ModifierQuiz.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) labelCode.getScene().getWindow(); // Utilisez la même fenêtre (Stage) actuelle

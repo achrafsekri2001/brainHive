@@ -109,7 +109,7 @@ public class AjouterQuizController implements Initializable {
 
 
     public void navigatetoAfficherQuizActino(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherQuiz.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AfficherQuiz.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
 

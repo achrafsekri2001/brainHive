@@ -3,26 +3,20 @@ package edu.esprit.controllers;
 import edu.esprit.entities.Question;
 import edu.esprit.services.ServiceQuestion;
 
-import edu.esprit.services.ServiceQuiz;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import edu.esprit.controllers.AfficherQuestionController;
+
 public class QuestionItemController {
     @FXML
     private Text LabelChoix;
@@ -119,7 +113,7 @@ public class QuestionItemController {
     public void actualiserVueQuestions() {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/AfficherQuestion.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Fxml/AfficherQuestion.fxml"));
             LabelReponseCorrecte.getScene().setRoot(root);
         } catch (IOException e) {
 
@@ -131,7 +125,7 @@ public class QuestionItemController {
     }
     public void modifierQuestionOnClick(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierQuestion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ModifierQuestion.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) labelCodeQuiz.getScene().getWindow(); // Utilisez la même fenêtre (Stage) actuelle

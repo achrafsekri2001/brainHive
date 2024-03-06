@@ -1,7 +1,6 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Question;
-import edu.esprit.entities.Quiz;
 import edu.esprit.services.ServiceQuestion;
 import java.io.IOException;
 import java.sql.Connection;
@@ -179,7 +178,7 @@ public class AjouterQuestionController {
     }
     public void navigateToAfficher(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherQuestion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AfficherQuestion.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) TFcode_quiz.getScene().getWindow(); // Utilisez la même fenêtre (Stage) actuelle

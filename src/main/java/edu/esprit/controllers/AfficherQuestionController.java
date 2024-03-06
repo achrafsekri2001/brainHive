@@ -3,28 +3,23 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Question;
-import edu.esprit.entities.Quiz;
 import edu.esprit.services.ServiceQuestion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -58,7 +53,7 @@ public class AfficherQuestionController implements Initializable {
         try {
             for (Question question : setQ) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/QuestionItem.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/Fxml/QuestionItem.fxml"));
                 HBox hbox = fxmlLoader.load();
 
                 QuestionItemController itemController = fxmlLoader.getController();
@@ -86,7 +81,7 @@ public class AfficherQuestionController implements Initializable {
     @FXML
     void navigateToAjouter(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterQuestion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AjouterQuestion.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) gridA.getScene().getWindow(); // Utilisez la même fenêtre (Stage) actuelle
@@ -104,7 +99,7 @@ public class AfficherQuestionController implements Initializable {
     @FXML
     void navigateToQuiz(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherQuiz.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AfficherQuiz.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) gridA.getScene().getWindow(); // Utilisez la même fenêtre (Stage) actuelle
