@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.HboxReclamationController">
+   <children>
+      <VBox fx:id="boxeReclamation1" layoutY="4.0" prefHeight="126.0" prefWidth="690.0" style="-fx-background-color: #D3D8D3;">
+         <children>
+            <Label fx:id="dateRec" prefHeight="15.0" prefWidth="274.0" text="20:20">
+               <VBox.margin>
+                  <Insets left="500.0" top="15.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Roboto Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="username" prefHeight="19.0" prefWidth="353.0" text="RimaGuedria">
+               <VBox.margin>
+                  <Insets left="120.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Roboto Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="objet1" prefHeight="52.0" prefWidth="579.0" style="-fx-background-color: #D3D8D3;" text="Objet">
+               <VBox.margin>
+                  <Insets left="150.0" top="2.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Roboto Bold" size="21.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imageuser1" fitHeight="56.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+               <image>
+                  <Image url="@../assets/accueil.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="-20.0" left="40.0" top="-40.0" />
+               </VBox.margin>
+            </ImageView>
+            <Label fx:id="probleme1" prefHeight="138.0" prefWidth="532.0" text="J'ai confronté un problème ">
+               <VBox.margin>
+                  <Insets left="150.0" top="-2.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Roboto Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
