@@ -82,7 +82,7 @@
                         <Cursor fx:constant="TEXT" />
                      </cursor>
                   </TextField>
-                  <Button mnemonicParsing="false" onAction="#EnvoyerMsgAction" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #FFCD38;" text="envoyer">
+                  <Button mnemonicParsing="false" onAction="#EnvoyerMsgAction" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #FFCD38;" text="Envoyer">
                      <font>
                         <Font name="Roboto Bold" size="15.0" />
                      </font>
@@ -182,7 +182,7 @@
             </ImageView>
          </children>
       </Pane>
-      <HBox layoutX="332.0" prefHeight="80.0" prefWidth="632.0">
+      <HBox layoutX="304.0" layoutY="6.0" prefHeight="45.0" prefWidth="372.0">
          <children>
             <TextField prefHeight="26.0" prefWidth="440.0" promptText="Rechercher">
                <opaqueInsets>
@@ -192,10 +192,23 @@
                   <Insets top="20.0" />
                </padding>
                <HBox.margin>
-                  <Insets left="50.0" right="50.0" top="20.0" />
+                  <Insets left="50.0" right="50.0" top="10.0" />
                </HBox.margin>
             </TextField>
          </children>
       </HBox>
+      <Button layoutX="836.0" layoutY="64.0" mnemonicParsing="false" onAction="#AjouterDiscussionAction" style="-fx-background-color: #FFCD38;" text="Ajouter une nouvelle discussion">
+         <font>
+            <Font name="Roboto Bold" size="12.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="56.0" fitWidth="58.0" layoutX="1074.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+         <image>
+            <Image url="@assets/IMG_7004.jpg" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

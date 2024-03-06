@@ -60,7 +60,7 @@ public class MesReclamationController implements Initializable  {
 
     @FXML
     void MessagerieAction(ActionEvent event) {
-        navigateTo("/Messagerie.fxml");
+        navigateTo("/Message.fxml");
 
 
     }

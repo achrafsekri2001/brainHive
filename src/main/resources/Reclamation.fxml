@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -77,18 +78,13 @@
             <Font name="Roboto Bold" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="titre" layoutX="428.0" layoutY="37.0" prefHeight="46.0" prefWidth="182.0" text="Réclamations">
+      <Label fx:id="titre" layoutX="477.0" layoutY="24.0" prefHeight="46.0" prefWidth="182.0" text="Réclamations">
          <font>
             <Font name="Roboto Bold" size="28.0" />
          </font>
       </Label>
       <Separator layoutX="208.0" layoutY="1.0" orientation="VERTICAL" prefHeight="657.0" prefWidth="70.0" />
-      <Button fx:id="moncomptebutton" layoutX="830.0" layoutY="115.0" mnemonicParsing="false" style="-fx-background-color: #FFCD38;" text="Mon compte">
-         <font>
-            <Font name="Roboto Bold" size="16.0" />
-         </font>
-      </Button>
-      <Button layoutX="526.0" layoutY="115.0" mnemonicParsing="false" onAction="#MesReclamationAction" style="-fx-background-color: #FFCD38;" text="Mes réclamations">
+      <Button layoutX="810.0" layoutY="115.0" mnemonicParsing="false" onAction="#MesReclamationAction" style="-fx-background-color: #FFCD38;" text="Mes réclamations">
          <font>
             <Font name="Roboto Bold" size="16.0" />
          </font>
@@ -114,5 +110,13 @@
             <Image url="@assets/IMG_7004.jpg" />
          </image>
       </ImageView>
+      <TextField fx:id="recherche" layoutX="461.0" layoutY="88.0" onKeyReleased="#rechercherParNom" prefHeight="26.0" prefWidth="253.0" promptText="Rechercher">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </TextField>
     </children>
 </AnchorPane>

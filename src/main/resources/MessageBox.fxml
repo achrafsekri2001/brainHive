@@ -43,14 +43,6 @@
                   <Insets left="65.0" top="-30.0" />
                </VBox.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#ModifierMsgAction" prefHeight="49.0" prefWidth="64.0" style="-fx-background-color: #fff6d1;" text="Modifier">
-               <VBox.margin>
-                  <Insets bottom="-30.0" left="430.0" />
-               </VBox.margin>
-               <cursor>
-                  <Cursor fx:constant="CLOSED_HAND" />
-               </cursor>
-            </Button>
             <Button mnemonicParsing="false" onAction="#SupprimerMsgAction" prefHeight="46.0" prefWidth="79.0" style="-fx-background-color: #fff6d1;" text="Supprimer">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />

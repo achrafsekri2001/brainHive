@@ -8,13 +8,17 @@ public class Reclamation {
   public Timestamp date;
   public    int idReclamation, idUser;
     private Utilisateur utilisateur;
-    public Reclamation(){
+    public Reclamation(String nom, String contenu, String objet, Timestamp date, int id, int idUser){
 
     }
     public Reclamation( String contenu, String objet) {
 
         this.contenu = contenu;
         this.objet = objet;
+
+    }
+
+    public Reclamation() {
 
     }
 

@@ -73,11 +73,6 @@ public class MessagerieController implements Initializable {
     }
 
 
-
-    public void ajouterDiscussion(Messagerie messagerie) {
-    }
-
-
     public void EnvoyerMsgAction(ActionEvent actionEvent) {
         String messageContent = msgenvoyee.getText();
 
@@ -96,6 +91,7 @@ public class MessagerieController implements Initializable {
         //      Envoyer le message en utilisant le service approprié
         MessagerieService messagerieService = new MessagerieService();
         messagerieService.ajouter(message);
+        navigateTo("/Message.fxml");
     }
     private boolean isTextFieldEmpty(TextField textField) {
         return textField.getText().trim().isEmpty();
@@ -107,6 +103,8 @@ public class MessagerieController implements Initializable {
     }
 
     public void NavigateToMessages(ActionEvent actionEvent) {
+        navigateTo("/Message.fxml");
+
     }
 
     public void NavigateToProduit(ActionEvent actionEvent) {

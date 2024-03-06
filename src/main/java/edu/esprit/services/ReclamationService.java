@@ -125,4 +125,36 @@ public class ReclamationService {
 
         return reclamations;
     }
+
+
+
+
+
+    public List<Reclamation> getReclamationsByUserName(String texteRecherche) {
+        List<Reclamation> reclamations = new ArrayList<>();
+
+        String req = "SELECT * FROM reclamation WHERE user LIKE ?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, "%" + texteRecherche + "%"); // Utilisation de LIKE pour rechercher les réclamations par nom d'utilisateur partiel
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int id = rs.getInt("idReclamation");
+                String nom = rs.getString("user");
+                String contenu = rs.getString("contenu");
+                String objet = rs.getString("objet");
+                String imgUser = rs.getString("imgUser");
+                Timestamp date= rs.getTimestamp("date");
+                int idUser = rs.getInt("idUser");
+
+                Reclamation p = new Reclamation(nom, contenu, objet, imgUser, date, id, idUser);
+                reclamations.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des reclamations par nom : " + e.getMessage());
+        }
+
+        return reclamations;
+    }
+
 }

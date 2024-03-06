@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -22,6 +23,8 @@ import java.util.ResourceBundle;
 public class ReclamtionController implements Initializable {
     @FXML
     private VBox boxeReclamation1;
+    @FXML
+    private TextField recherche;
 
     @FXML
     private Avatar imageUser;
@@ -48,8 +51,8 @@ public class ReclamtionController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    public void afficherToutesLesReclamations() {
 
         try {
             List<Reclamation> reclamations = serviceReclamation.getAll();
@@ -74,7 +77,7 @@ public class ReclamtionController implements Initializable {
     }
     @FXML
     void MessagerieAction(ActionEvent event) {
-        navigateTo("/Messagerie.fxml");
+        navigateTo("/Message.fxml");
     }
 
     @FXML
@@ -83,7 +86,31 @@ public class ReclamtionController implements Initializable {
 
     }
 
+    @FXML
+    private void rechercherParNom() {
+        String texteRecherche = recherche.getText().trim();
+        if (!texteRecherche.isEmpty()) {
+            // Utiliser le service ReclamationService pour obtenir les réclamations par nom d'utilisateur
+            List<Reclamation> reclamationsParNom = serviceReclamation.getReclamationsByUserName(texteRecherche);
 
+            // Effacer le contenu actuel de la boîte de réclamations
+            boxeReclamation1.getChildren().clear();
+
+            // Charger et ajouter les composants de réclamation pour chaque réclamation trouvée
+            for (Reclamation reclamation : reclamationsParNom) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/hboxReclamation.fxml"));
+                try {
+                    boxeReclamation1.getChildren().add(loader.load());
+                    HboxReclamationController controller = loader.getController();
+                    controller.setReclamationData(reclamation, container);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            // Si le champ de recherche est vide, afficher tous les réclamations
+            afficherToutesLesReclamations();        }
+    }
 
 
 
@@ -92,6 +119,11 @@ public class ReclamtionController implements Initializable {
     }
 
     public void NavigateToFavorisAction(ActionEvent actionEvent) {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        afficherToutesLesReclamations();
     }
 }
 
