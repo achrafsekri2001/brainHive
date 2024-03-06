@@ -2,13 +2,9 @@ package edu.esprit.controllers;
 
 import edu.esprit.entities.AvisProduit;
 import edu.esprit.entities.Produit;
-import edu.esprit.entities.Utilisateur;
 import edu.esprit.services.ServiceAvis;
 
 import edu.esprit.services.ServiceProduit;
-import edu.esprit.services.UserCRUD;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,9 +49,6 @@ public class NoteEtAvis implements Initializable {
     private ServiceProduit sp;
 
     private Produit produit;
-    Utilisateur user= new Utilisateur(1,"rima","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
-    Utilisateur user1= new Utilisateur(2,"feriel","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
-    Utilisateur user2= new Utilisateur(3,"achref","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
 
 
    /* Utilisateur user = new Utilisateur(1,"rima","sdfghj");
@@ -78,7 +71,7 @@ public class NoteEtAvis implements Initializable {
             AvisProduit avis = new AvisProduit();
             avis.setContenu(avisTF.getText());
             avis.setIdProduit(produit.getId_produit()); // Supposons que votre produit ait une méthode getId() qui retourne son identifiant
-            avis.setIdUser(user1.getId()); // Supposons que votre utilisateur ait une méthode getId() qui retourne son identifiant
+         //   avis.setIdUser(user1.getId()); // Supposons que votre utilisateur ait une méthode getId() qui retourne son identifiant
 
             double note = rating.getRating();
             avis.setNote((int) note);
