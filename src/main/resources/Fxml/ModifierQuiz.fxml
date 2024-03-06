@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="583.0" prefWidth="816.0" styleClass="text-field" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierQuizController">
+    <children>
+        <Label alignment="CENTER" layoutX="271.0" layoutY="14.0" prefHeight="46.0" prefWidth="201.0" text="Modifier Quiz" textFill="#000000a9">
+            <font>
+                <Font size="31.0" />
+            </font>
+        </Label>
+        <TextField fx:id="TFCode1" layoutX="454.0" layoutY="135.0" prefHeight="46.0" prefWidth="290.0" styleClass="text-field">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="TFDate1" layoutX="453.0" layoutY="215.0" prefHeight="46.0" prefWidth="290.0" styleClass="text-field">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </TextField>
+
+
+        <Button layoutX="290.0" layoutY="504.0" mnemonicParsing="false" onAction="#ModifierQuizAction" prefHeight="46.0" prefWidth="95.0" styleClass="label2" text="MODIFIER" textFill="WHITE">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Button>
+        <TextField fx:id="TFScore1" layoutX="453.0" layoutY="292.0" prefHeight="46.0" prefWidth="290.0" />
+        <Label layoutX="15.0" layoutY="142.0" prefHeight="32.0" prefWidth="410.0" text="DONNEZ LE NOUVEAU CODE:" textOverrun="WORD_ELLIPSIS">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="15.0" layoutY="222.0" text="DONNEZ LE  NOUVELLE DATE DE CREATION:" textOverrun="WORD_ELLIPSIS">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Label>
+        <Label layoutX="15.0" layoutY="299.0" prefHeight="32.0" prefWidth="438.0" text="DONNEZ LE NOUVEAU SCORE:" textOverrun="WORD_ELLIPSIS">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Label>
+        <Button layoutX="455.0" layoutY="504.0" mnemonicParsing="false" onAction="#navigateToAfficher" prefHeight="46.0" prefWidth="95.0" styleClass="label2" text="AFFICHER" textFill="WHITE">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Button>
+        <ChoiceBox fx:id="TFChoice1" layoutX="455.0" layoutY="83.0" prefHeight="25.0" prefWidth="288.0" />
+        <Label layoutX="15.0" layoutY="373.0" text="DONNER LA NOUVELLE DUREE:" textOverrun="WORD_ELLIPSIS">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Label>
+        <TextField fx:id="TFDuree1" layoutX="454.0" layoutY="366.0" prefHeight="46.0" prefWidth="290.0" />
+        <Label layoutX="15.0" layoutY="80.0" text="CHOISISSEZ DE NOUVEAU LA MATIERE:" textOverrun="WORD_ELLIPSIS">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Label>
+        <CheckBox fx:id="TFtrue1" layoutX="503.0" layoutY="455.0" mnemonicParsing="false" text="True">
+            <font>
+                <Font size="21.0" />
+            </font>
+        </CheckBox>
+        <CheckBox fx:id="TFFalse1" layoutX="659.0" layoutY="455.0" mnemonicParsing="false" text="False">
+            <font>
+                <Font size="21.0" />
+            </font>
+        </CheckBox>
+        <Label layoutX="15.0" layoutY="454.0" text="CHOISISSEZ DE NOUVEAU LA DISPONIBILITEE:" textOverrun="WORD_ELLIPSIS">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Label>
+
+    </children>
+</AnchorPane>
