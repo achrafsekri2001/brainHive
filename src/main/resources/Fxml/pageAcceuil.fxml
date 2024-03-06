@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0"
+            prefWidth="1050.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AcceuilController">
+    <effect>
+        <DropShadow color="#1b1eeb"/>
+    </effect>
+    <children>
+        <BorderPane prefHeight="576.0" prefWidth="1050.0">
+            <top>
+                <fx:include source="topBar.fxml"/>
+            </top>
+            <left>
+                <fx:include source="sideBar.fxml"/>
+            </left>
+            <center>
+                <ScrollPane prefHeight="442.0" prefWidth="818.0" BorderPane.alignment="CENTER">
+                    <content>
+                        <VBox fx:id="postsVBox" prefHeight="430.0" prefWidth="799.0">
+                            <children>
+
+                            </children>
+                        </VBox>
+                    </content>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
+                </ScrollPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

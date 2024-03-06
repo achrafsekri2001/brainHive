@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.Avatar?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane fx:id="commentContainer" prefHeight="50.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <HBox prefHeight="100.0" prefWidth="221.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Button fx:id="upVote" layoutX="10.0" layoutY="28.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitHeight="18.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                    <image>
+                                        <Image url="https://brainhive.s3.eu-west-3.amazonaws.com/bx_upvote-1.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Label fx:id="commentVotes" prefHeight="18.0" prefWidth="60.0" text="150" textAlignment="CENTER" />
+                        <Button fx:id="downVote" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitHeight="18.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="https://brainhive.s3.eu-west-3.amazonaws.com/bx_upvote-1.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+                <Avatar fx:id="CommentCreatorAvatar" style="-fx-background-color: ebebebeb;">
+                    <HBox.margin>
+                        <Insets right="8.0" />
+                    </HBox.margin>
+                </Avatar>
+                <VBox prefHeight="100.0" prefWidth="164.0">
+                    <children>
+                        <Text fx:id="CommentCreator" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <TextFlow fx:id="commentContent" prefHeight="200.0" prefWidth="200.0" />
+                        <Label fx:id="CommentDate" text="15/02/2024">
+                            <font>
+                                <Font name="Arial" size="8.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="editComment" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="https://brainhive.s3.eu-west-3.amazonaws.com/edit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="deleteComment" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="https://brainhive.s3.eu-west-3.amazonaws.com/delete.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            </children>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+</AnchorPane>
