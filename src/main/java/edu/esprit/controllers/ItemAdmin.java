@@ -102,6 +102,10 @@ public class ItemAdmin {
             }
         }
     }
+    @FXML
+    void avisAction(ActionEvent event) {
+
+    }
 
 
 }

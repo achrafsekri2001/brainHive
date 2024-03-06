@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="707.0" prefWidth="953.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutY="-11.0" prefHeight="718.0" prefWidth="190.0" style="-fx-background-color: FFCD38;">
+         <children>
+            <ImageView fitHeight="51.0" fitWidth="200.0" layoutY="14.0" />
+            <Button layoutX="24.0" layoutY="105.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="158.0" style="-fx-background-color: white;" text="Acceuil" textAlignment="CENTER">
+               <font>
+                  <Font name="Roboto Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="24.0" layoutY="187.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="158.0" style="-fx-background-color: white;" text="        les parascolaires">
+               <font>
+                  <Font name="Roboto Bold" size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="24.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Downloads/346a1f4363e1b59f6860fdce6abc1082.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="34.0" fitWidth="30.0" layoutX="32.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Downloads/téléchargement.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="188.0" layoutY="-9.0" prefHeight="76.0" prefWidth="766.0" style="-fx-background-color: FFCD38;">
+         <children>
+            <TextField fx:id="recherche" layoutX="37.0" layoutY="26.0" onKeyReleased="#rechercherParNom" prefHeight="37.0" prefWidth="234.0" promptText="Rechercher parascolaire" />
+         </children>
+      </Pane>
+      <AnchorPane fx:id="container" layoutX="190.0" layoutY="67.0" prefHeight="641.0" prefWidth="766.0">
+         <children>
+            <ScrollPane prefHeight="642.0" prefWidth="766.0">
+               <content>
+                  <VBox fx:id="vcontainer" prefHeight="195.0" prefWidth="766.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
