@@ -16,25 +16,25 @@ public class ServiceAvis {
     Connection cnx = DataSource.getInstance().getCnx();
 
     public void ajouter(AvisProduit avis) throws SQLException {
-        String req = "INSERT INTO avisproduit (id_produit, contenu, user_id, note) VALUES (?, ?, ?, ?, ?)";
+        String req = "INSERT INTO avisproduit (idProduit, contenu, idUser, note) VALUES (?, ?, ?, ?)";
 
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setInt(1, avis.getId_produit());
-            ps.setString(2, avis.getContenu());
-            ps.setInt(3, avis.getUser_id());
-            ps.setInt(4, avis.getNote());
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setInt(1, avis.getIdProduit());
+        ps.setString(2, avis.getContenu());
+        ps.setInt(3, avis.getIdUser());
+        ps.setInt(4, avis.getNote());
 
-            ps.executeUpdate();
-            System.out.println("Avis ajouté avec succès !");
-
+        ps.executeUpdate();
+        System.out.println("Avis ajouté avec succès !");
     }
 
-    public void modifier(AvisProduit avis) {
+
+   /* public void modifier(AvisProduit avis) {
         String req = "UPDATE avis_produit SET contenu = ? WHERE id_commentaire = ?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, avis.getContenu());
-            ps.setInt(2, avis.getId_commentaire());
+            ps.setInt(2, avis.getId);
             int rowsUpdated = ps.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Avis modifié avec succès !");
@@ -44,13 +44,13 @@ public class ServiceAvis {
         } catch (SQLException ex) {
             Logger.getLogger(ServiceAvis.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
 
     public void supprimer(AvisProduit avis) {
         String req = "DELETE FROM avis_produit WHERE id_commentaire = ?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setInt(1, avis.getId_commentaire());
+            ps.setInt(1, avis.getId());
             int rowsDeleted = ps.executeUpdate();
             if (rowsDeleted > 0) {
                 System.out.println("Avis supprimé avec succès !");
@@ -106,4 +106,43 @@ public class ServiceAvis {
             }
             return avis;
         }
+    public double getMoyenneNotesParProduit(int idProduit) {
+        String req = "SELECT AVG(note) AS moyenne FROM avisproduit WHERE idProduit = ?";
+        double moyenne = 0;
+
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, idProduit);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                moyenne = rs.getDouble("moyenne");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération de la moyenne des notes : " + e.getMessage());
+        }
+
+        return moyenne;
+    }
+
+    public List<AvisProduit> recupererReclamationsParProduit(int idProduit) throws SQLException {
+        List<AvisProduit> reclamations = new ArrayList<>();
+        String query = "SELECT * FROM avisproduit WHERE idProduit = ?";
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setInt(1, idProduit);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    AvisProduit avis = new AvisProduit();
+                    avis.setId(resultSet.getInt("id"));
+                    avis.setIdProduit(resultSet.getInt("idProduit"));
+                    avis.setIdUser(resultSet.getInt("idUser"));
+                    avis.setContenu(resultSet.getString("contenu"));
+                    avis.setNote(resultSet.getInt("note"));
+                    // Ajoute l'avis à la liste des réclamations
+                    reclamations.add(avis);
+                }
+            }
+        }
+        return reclamations;
+    }
 }

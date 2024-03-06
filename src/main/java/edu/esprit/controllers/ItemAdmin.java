@@ -46,7 +46,6 @@ public class ItemAdmin {
 
         parascolaireNom.setText(produit.getNom());
         parascolaireMatiere.setText(produit.getMatiere());
-        parascolaireNote.setText(String.valueOf(produit.getNote())); // Supposant que la note est un double
         // Charger l'image depuis le chemin du fichier
         parascolaireImage.setImage(new Image(new File(produit.getImage()).toURI().toString()));
 
@@ -54,19 +53,30 @@ public class ItemAdmin {
 
     @FXML
     void modifierAction(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierProduit.fxml"));
-        Parent root;
-        try {
-            root = loader.load();
-            ModifierProduit controller = loader.getController();
-            controller.initData(produit); // Passer les données du produit sélectionné au contrôleur de modification
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+            try {
+                // Charger le fichier FXML de la fenêtre de modification du produit
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierProduit.fxml"));
+                Parent root = loader.load();
+
+                // Récupérer le contrôleur associé à la fenêtre de modification
+                ModifierProduit modifierProduitController = loader.getController();
+
+                // Passer les données du produit à modifier au contrôleur de modification
+                modifierProduitController.initData(produit);
+
+                // Créer une nouvelle scène avec la racine chargée depuis le fichier FXML
+                Scene scene = new Scene(root);
+
+                // Créer une nouvelle fenêtre (stage) pour la scène
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.initModality(Modality.APPLICATION_MODAL); // Définir la modalité de la fenêtre
+                stage.showAndWait(); // Afficher la fenêtre et attendre qu'elle soit fermée
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
     }
     private AfficherProduitAdmin parentController; // Référence vers le contrôleur AfficherProduit
 

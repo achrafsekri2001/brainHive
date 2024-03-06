@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -81,17 +82,23 @@
                               <Insets left="20.0" right="10.0" top="60.0" />
                            </VBox.margin>
                         </ImageView>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <Label fx:id="nom" prefHeight="40.0" prefWidth="185.0" text="Label" textFill="#31b783">
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="61.0" prefWidth="276.0">
                            <children>
-                              <Label prefHeight="58.0" prefWidth="111.0" text="           Note :" textFill="#31b783">
-                                 <font>
-                                    <Font name="System Bold Italic" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="note" prefHeight="57.0" prefWidth="110.0">
+                              <Label fx:id="description" prefHeight="58.0" prefWidth="270.0">
                                  <font>
                                     <Font name="System Italic" size="16.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </HBox.margin>
                               </Label>
                            </children>
                         </HBox>
@@ -125,7 +132,10 @@
                                                 <Font name="System Italic" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Rating fx:id="rating" />
+                                          <Rating fx:id="rating">
+                                             <effect>
+                                                <Blend />
+                                             </effect></Rating>
                                        </children>
                                     </HBox>
                                  </children>
@@ -139,7 +149,7 @@
                         </HBox>
                         <AnchorPane fx:id="conatinerAvis" prefHeight="278.0" prefWidth="540.0">
                            <children>
-                              <ScrollPane layoutY="-1.0" prefHeight="404.0" prefWidth="540.0">
+                              <ScrollPane layoutY="18.0" prefHeight="385.0" prefWidth="540.0">
                                  <content>
                                     <VBox fx:id="vcontainer" prefHeight="93.0" prefWidth="543.0" />
                                  </content>

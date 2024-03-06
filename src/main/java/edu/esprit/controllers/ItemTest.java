@@ -1,11 +1,13 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Produit;
+import edu.esprit.services.ServiceAvis;
 import edu.esprit.services.ServiceProduit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -13,6 +15,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,14 +45,51 @@ public class ItemTest{
 
         parascolaireNom.setText(produit.getNom());
         parascolaireMatiere.setText(produit.getMatiere());
-        parascolaireNote.setText(String.valueOf(produit.getNote()));
         parascolaireImage.setImage(new Image(new File(produit.getImage()).toURI().toString()));
+
+
+        // Calculer la moyenne des notes pour ce produit
+        double moyenneNotes = calculerMoyenneNotes(produit.getId_produit());
+        parascolaireNote.setText(String.valueOf(moyenneNotes)); // Mettre à jour la moyenne des notes
     }
 
-    @FXML
-    private void evaluerAction(ActionEvent event) {
-        navigateTo("/NoteEtAvis.fxml");
+    private double calculerMoyenneNotes(int idProduit) {
+        // Utilisez votre service ServiceAvis pour récupérer la moyenne des notes pour le produit spécifié
+        // Je suppose que vous avez une méthode dans ServiceAvis pour récupérer la moyenne des notes par produit
+        ServiceAvis serviceAvis = new ServiceAvis();
+        return serviceAvis.getMoyenneNotesParProduit(idProduit);
     }
+
+
+    @FXML
+    private void evaluerAction(ActionEvent event){
+
+
+            try {
+                // Charger le fichier FXML de la fenêtre de modification du produit
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/NoteEtAvis.fxml"));
+                Parent root = loader.load();
+
+                // Récupérer le contrôleur associé à la fenêtre de modification
+                NoteEtAvis NoteEtAvis = loader.getController();
+
+                // Passer les données du produit à évaluer au contrôleur d'avis'
+                NoteEtAvis.initDataPara(produit);
+
+                // Créer une nouvelle scène avec la racine chargée depuis le fichier FXML
+                Scene scene = new Scene(root);
+
+                // Créer une nouvelle fenêtre (stage) pour la scène
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.initModality(Modality.APPLICATION_MODAL); // Définir la modalité de la fenêtre
+                stage.showAndWait(); // Afficher la fenêtre et attendre qu'elle soit fermée
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+
+
 
     private void navigateTo(String fxmlFilePath) {
         try {

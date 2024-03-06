@@ -10,27 +10,27 @@ public class Produit {
     private  String image;
     private String nom;
     private String description;
-    private int note;
+
     private String matiere;
 
     public Produit() {
     }
 
-    public Produit(String nom, String image, String description, String matiere, int note) {
+    public Produit(String nom, String image, String description, String matiere) {
 
         this.nom = nom;
         this.image = image;
         this.description = description;
-        this.note = note;
+
         this.matiere = matiere;
     }
 
-    public Produit(int id_produit, String image, String nom, String description, String matiere, int note) {
+    public Produit(int id_produit, String image, String nom, String description, String matiere) {
         this.id_produit = id_produit;
         this.image = image;
         this.nom = nom;
         this.description = description;
-        this.note = note;
+
         this.matiere = matiere;
     }
 
@@ -66,13 +66,7 @@ public class Produit {
         this.description = description;
     }
 
-    public int getNote() {
-        return note;
-    }
 
-    public void setNote(int note) {
-        this.note = note;
-    }
 
     public String getMatiere() {
         return matiere;
@@ -88,7 +82,6 @@ public class Produit {
                 "image='" + image + '\'' +
                 ", nom='" + nom + '\'' +
                 ", description='" + description + '\'' +
-                ", note=" + note +
                 ", matiere='" + matiere + '\'' +
                 '}';
     }

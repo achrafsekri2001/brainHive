@@ -16,19 +16,18 @@ public class ServiceProduit implements IService<Produit>{
 
     public void ajouter(Produit produit) throws SQLException {
 
-        String req = "INSERT INTO `produit`(`nom`,`image`, `description`, `matiere`,`note` ) VALUES (?,?,?,?,?)";
+        String req = "INSERT INTO `produit`(`nom`,`image`, `description`, `matiere` ) VALUES (?,?,?,?)";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, produit.getNom());
         ps.setString(2, produit.getImage());
         ps.setString(3, produit.getDescription());
         ps.setString(4, produit.getMatiere());
-        ps.setInt(5, produit.getNote());
         ps.executeUpdate();
         System.out.println("produit ajouté !");
     }
 
     public void modifier(Produit p) throws SQLException {
-        String sql = "UPDATE produit SET `nom`=?,`image`=?,`description`=?,`matiere`=?,`note`=? WHERE id_produit=" + p.getId_produit();
+        String sql = "UPDATE produit SET `nom`=?,`image`=?,`description`=?,`matiere`=? WHERE id_produit=" + p.getId_produit();
         PreparedStatement ste;
         try {
             ste = cnx.prepareStatement(sql);
@@ -37,7 +36,7 @@ public class ServiceProduit implements IService<Produit>{
             ste.setString(2, p.getImage());
             ste.setString(3, p.getDescription());
             ste.setString(4, p.getMatiere());
-            ste.setInt(5, p.getNote());
+
 
             int rowsUpdated = ste.executeUpdate();
             if (rowsUpdated > 0) {
@@ -74,8 +73,8 @@ public class ServiceProduit implements IService<Produit>{
                 String image = rs.getString("image");
                 String description = rs.getString("description");
                 String matiere = rs.getString("matiere");
-                int note = rs.getInt("note");
-                Produit p = new Produit(id, image, nom, description, matiere, note);
+
+                Produit p = new Produit(id, image, nom, description, matiere);
                 produits.add(p);
             }
         } catch (SQLException e) {
@@ -97,8 +96,8 @@ public class ServiceProduit implements IService<Produit>{
                 String image = rs.getString("image");
                 String description = rs.getString("description");
                 String matiere = rs.getString("matiere");
-                int note = rs.getInt("note");
-                p = new Produit(id_produit, nom, image, description, matiere, note);
+
+                p = new Produit(id_produit, nom, image, description, matiere);
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération du produit : " + e.getMessage());
@@ -171,7 +170,7 @@ public class ServiceProduit implements IService<Produit>{
                 String image = rs.getString("image");
                 String description = rs.getString("description");
                 int note = rs.getInt("note");
-                Produit p = new Produit(id, image, nom, description, matiere, note);
+                Produit p = new Produit(id, image, nom, description, matiere);
                 produitsParMatiere.add(p);
             }
         } catch (SQLException e) {
@@ -193,8 +192,7 @@ public class ServiceProduit implements IService<Produit>{
                 String image = rs.getString("image");
                 String description = rs.getString("description");
                 String matiere = rs.getString("matiere");
-                int note = rs.getInt("note");
-                Produit p = new Produit(id, image, nomProduit, description, matiere, note);
+                Produit p = new Produit(id, image, nomProduit, description, matiere);
                 produits.add(p);
             }
         } catch (SQLException e) {

@@ -66,7 +66,7 @@ public class AjouterProduit implements Initializable {
 
             try {
                 if (isValidInput()) {
-                    Produit produit = new Produit(titreTF.getText(), selectedFile.getAbsolutePath(), descriptionTF.getText(), matierepara.getValue(), 0);
+                    Produit produit = new Produit(titreTF.getText(), selectedFile.getAbsolutePath(), descriptionTF.getText(), matierepara.getValue());
                     sp.ajouter(produit);
 
 

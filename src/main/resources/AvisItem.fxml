@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.Rating?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AvisItem">
    <children>
@@ -18,9 +19,10 @@
                         <Insets left="20.0" right="20.0" top="10.0" />
                      </HBox.margin>
                   </Avatar>
-                  <Label fx:id="username" prefHeight="42.0" prefWidth="198.0" text="Label" />
+                  <Label fx:id="username" prefHeight="49.0" prefWidth="198.0" text="Label" />
+                  <Rating fx:id="rate" prefHeight="30.0" prefWidth="214.0" />
                </children></HBox>
-            <Label fx:id="contenuavis" prefHeight="64.0" prefWidth="477.0" text="Label">
+            <Label fx:id="contenuavis" prefHeight="64.0" prefWidth="517.0" text="Label">
                <VBox.margin>
                   <Insets left="50.0" right="50.0" />
                </VBox.margin>
