@@ -1,6 +1,7 @@
 package edu.esprit.tests;
 
 
+import edu.esprit.controllers.GMailer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +13,7 @@ public class MainFX extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
+//        new GMailer("rayenbencheikh261@gmail.com").sendMail("Test","Hamdoullah khedmet");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);

@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Crud">
     <children>
-        <AnchorPane layoutX="386.0" layoutY="-7.0" prefHeight="453.0" prefWidth="325.0" style="-fx-background-color: #ffcd38;">
+        <AnchorPane layoutX="386.0" layoutY="-1.0" prefHeight="453.0" prefWidth="325.0" style="-fx-background-color: #ffcd38;">
             <children>
                 <TextField fx:id="TF_Nom" layoutX="194.0" layoutY="32.0" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: white;" />
                 <TextField fx:id="tf_Prenom" layoutX="194.0" layoutY="65.0" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: white;" />
@@ -35,6 +35,7 @@
             <Label layoutX="45.0" layoutY="72.0" text="id" />
             <TextField fx:id="id_asuprimer" layoutX="100.0" layoutY="68.0" />
             <Button fx:id="afficher" layoutX="72.0" layoutY="276.0" mnemonicParsing="false" onAction="#afficher" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #743cd6;" text="Passer Al'Affichage " />
+            <Button fx:id="modif_admin" layoutX="219.0" layoutY="216.0" mnemonicParsing="false" onAction="#passer_modif_admin" text="modifier mo compte" />
          </children>
         </AnchorPane>
     </children>

@@ -20,7 +20,7 @@
                 </Button>
             </children>
         </VBox>
-      <Button layoutX="468.0" layoutY="167.0" mnemonicParsing="false" onAction="#modifier" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: #743cd6;" text="modifier" />
+      <Button fx:id="sup_button" layoutX="468.0" layoutY="167.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: #743cd6;" text="supprimer" />
           <Button alignment="CENTER" contentDisplay="CENTER" layoutX="466.0" layoutY="7.0" mnemonicParsing="false" onAction="#afficheruserbtn" prefHeight="56.0" prefWidth="151.0" style="-fx-background-color: #743cd6;" text="afficheruser">
               <font>
                   <Font size="15.0" />
@@ -34,7 +34,9 @@
       <TextField fx:id="nouveau_prenom" layoutX="198.0" layoutY="286.0" />
       <TextField fx:id="nouveauemail" layoutX="198.0" layoutY="329.0" />
       <TextField fx:id="nouveaupswd" layoutX="198.0" layoutY="368.0" />
-      <Button fx:id="save" layoutX="483.0" layoutY="312.0" mnemonicParsing="false" onAction="#save" prefHeight="56.0" prefWidth="75.0" style="-fx-background-color: #743cd6;" text="save" />
+      <Button fx:id="modif_btn" layoutX="483.0" layoutY="312.0" mnemonicParsing="false" onAction="#modifier" prefHeight="56.0" prefWidth="75.0" style="-fx-background-color: #743cd6;" text="save" />
       <Button fx:id="retour" layoutX="582.0" layoutY="416.0" mnemonicParsing="false" onAction="#retour_page" style="-fx-background-color: #743cd6;" text="retour" />
+      <Button fx:id="affiche_etudiant" layoutX="521.0" layoutY="237.0" mnemonicParsing="false" onAction="#afficherEtudiant" text="afficher etudiant" />
+      <Button fx:id="afficher_Enseignant" layoutX="398.0" layoutY="245.0" mnemonicParsing="false" onAction="#afficherEnseignant" text="afficher ens" />
     </children>
 </AnchorPane>

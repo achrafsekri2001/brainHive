@@ -31,6 +31,9 @@ public class Crud  implements Initializable {
 
     @FXML
     private Button button_delete;
+    @FXML
+    private Button modif_admin;
+
 
     @FXML
     private Button button_logout;
@@ -126,7 +129,14 @@ public class Crud  implements Initializable {
 
 
 
+    @FXML
+    void passer_modif_admin(ActionEvent event)  throws IOException{
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierUser.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+    }
 
 
 

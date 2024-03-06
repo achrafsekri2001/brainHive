@@ -14,8 +14,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
@@ -68,85 +71,7 @@ public class InscrireController implements Initializable {
     @FXML
     private void ajouter(ActionEvent event) {
 
-/*
-        String nom=tf_nom.getText();
-        String email = tf_email.getText();
-        String lastname = tf_lastname.getText();
-        String password = tf_password.getText();
-        int role= Integer.parseInt(tf_role.getText());
-        try {
 
-
-        if (nom.isEmpty() || lastname.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            throw new IllegalArgumentException("Veuillez remplir tous les champs obligatoires.");
-        }
-        if (email.isEmpty() || !email.matches("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}")) {
-            // Si l'email est vide ou invalide
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Email invalide");
-            alert.setContentText("Veuillez saisir un email valide.");
-            alert.showAndWait();
-            return;
-        }
-        // Validate role
-        if ( role != 1 && role != 2) {
-            throw new IllegalArgumentException("Veuillez saisir un rôle valide ( 1 pour étudiant, 2 pour enseignant).");
-        }
-
-        if (lastname.isEmpty() || !lastname.matches("[a-zA-Z]+")) {
-            // Si le nom est vide ou contient des caractères non alphabétiques
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Nom invalide");
-            alert.setContentText("Veuillez saisir un prenom valide (lettres uniquement).");
-            alert.showAndWait();
-            return;
-        }
-
-        if (nom.isEmpty() || !nom.matches("[a-zA-Z]+")) {
-            // Si le nom est vide ou contient des caractères non alphabétiques
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Nom invalide");
-            alert.setContentText("Veuillez saisir un nom valide (lettres uniquement).");
-            alert.showAndWait();
-            return;
-        }
-
-        if (password.isEmpty() || password.length() < 8 || !password.matches(".*[A-Z]+.*") || !password.matches(".*[a-z]+.*") || !password.matches(".*[0-9]+.*")) {
-            // Si le mot de passe est vide, trop court ou ne contient pas de lettres majuscules, minuscules et chiffres
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Mot de passe invalide");
-            alert.setContentText("Veuillez saisir un mot de passe valide (8 caractères minimum, avec au moins une lettre majuscule, une lettre minuscule et un chiffre).");
-            alert.showAndWait();
-            return;
-        }
-
-        ServiceUser us = new ServiceUser();
-        User s = new User();
-        us.ajouter(s);
-
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Succès");
-        alert.setHeaderText("Utilisateur ajouté");
-        alert.setContentText("L'utilisateur a été ajouté avec succès.");
-        alert.showAndWait();
-    }
-        catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Veuillez saisir un rôle valide.");
-            alert.show();
-
-        } catch (IllegalArgumentException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText(e.getMessage());
-            alert.show();
-
- */
         ServiceUser serviceUtilisateur = new ServiceUser();
 
         // Get user input
@@ -170,7 +95,15 @@ try{
             // Validate email format
             if (!email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}")) {
                 throw new IllegalArgumentException("Veuillez saisir une adresse email valide.");
+
             }
+
+// Vérifier le format de l'email
+    if (!email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}")) {
+        throw new IllegalArgumentException("Veuillez saisir une adresse email valide.");
+    }
+
+
     if (mdp.isEmpty() || mdp.length() < 8 || !mdp.matches(".*[A-Z]+.*") || !mdp.matches(".*[a-z]+.*") || !mdp.matches(".*[0-9]+.*")) {
         // Si le mot de passe est vide, trop court ou ne contient pas de lettres majuscules, minuscules et chiffres
         Alert alert = new Alert(Alert.AlertType.ERROR);

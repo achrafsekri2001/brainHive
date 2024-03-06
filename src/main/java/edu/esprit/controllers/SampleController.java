@@ -33,6 +33,8 @@ public class SampleController implements Initializable {
     private Hyperlink ForgotPassword;
     @FXML
     private Button mdp_oublié;
+    @FXML
+    private Button retou;
 
 
     @FXML
@@ -71,7 +73,8 @@ public class SampleController implements Initializable {
         }
 
 // Check for specific email and password
-        if (Email.equals("rayen@rayen.tn") && mdp.equals("rayen")) {
+
+        /*(Email.equals("raytn") && mdp.equals("rayn")) {
             // Navigate to Accueil.fxml directly for specific credentials
             System.out.println("Utilisateur rayen@rayen.tn authentifié avec succès !");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/CRUD.fxml"));
@@ -86,13 +89,16 @@ public class SampleController implements Initializable {
             currentStage.setScene(scene);
             currentStage.show();
 
-        } else {
+         */
+
+
             // Check if user exists in the database
             User existingUser = serviceUtilisateur.findByEmail(Email);
 
+
             // If user exists, authenticate
-            if (existingUser != null) {
-                if (existingUser.getPassword().equals(mdp)) {
+            if ( existingUser!= null) {
+                if (existingUser.equals(mdp)) {
                     // User authenticated successfully
                     System.out.println("Utilisateur authentifié avec succès !");
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
@@ -107,8 +113,35 @@ public class SampleController implements Initializable {
                     currentStage.setScene(scene);
                     currentStage.show();
 
+                }  else {
+                    // Incorrect password
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erreur");
+                    alert.setContentText("Mot de passe incorrect.");
+                    alert.show();
                 }
-                else {
+
+
+
+
+                 if (existingUser.equals(mdp) )
+                 {
+                     if (existingUser.getRoles() == 0)
+                     { // Assuming "0" indicates admin role
+                    System.out.println("Utilisateur administrateur authentifié avec succès !");
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/CRUD.fxml")); // Load CRUD page
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    email.clear();
+
+                    // Obtenir la scène actuelle
+                    Stage currentStage = (Stage) button_login.getScene().getWindow();
+
+                    // Afficher la nouvelle scène
+                    currentStage.setScene(scene);
+                    currentStage.show();
+
+                } }else {
                     // Incorrect password
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Erreur");
@@ -123,148 +156,48 @@ public class SampleController implements Initializable {
                 alert.show();
 
 
-            }}}
+            }}/*
 
-                /*
-
-                    // Navigate to Accueil.fxml (code corrected for navigation)
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
-                        Parent root = loader.load();
-                        Scene scene = new Scene(root);
-
-                        // Get the current stage
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        System.out.println("Erreur lors du chargement de Accueil.fxml");
-                        e.printStackTrace();
-                    }
-                } else {
-                    // Incorrect password
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Erreur");
-                    alert.setContentText("Mot de passe incorrect.");
-                    alert.show();
-                }
-            } else {
-                // User does not exist
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information");
-                alert.setContentText("Aucun utilisateur avec cet email n'existe. Veuillez créer un compte.");
-                alert.show();
-            } /*
-        }
-
-    }
-
-/*
-
-           ServiceUser serviceUtilisateur = new ServiceUser();
-
-            // Get user input
-            String Email = email.getText();
-            String mdp = password.getText();
-
-            // Validate user input
-            if (Email.isEmpty() || mdp.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setContentText("Veuillez remplir tous les champs obligatoires.");
-                alert.show();
-                return;
-            }
-
-            // Check if user exists
-            User existingUser = serviceUtilisateur.findByEmail(Email);
-
-            // If user exists, authenticate
-            if (existingUser != null) {
-                if (existingUser.getPassword().equals(mdp)) {
-                    // User authenticated successfully
-                    // ... handle successful login (e.g., navigate to home page)
-                    System.out.println("Utilisateur authentifié avec succès !");
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
+        // If user exists, authenticate and check role
+        if (existingUser != null) {
+            if (existingUser.equals(mdp)) {
+                // User authenticated successfully
+                if (existingUser.getRoles() == 0) { // Assuming "0" indicates admin role
+                    System.out.println("Utilisateur administrateur authentifié avec succès !");
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/CRUD.fxml")); // Load CRUD page
                     Parent root = loader.load();
                     Scene scene = new Scene(root);
-                }
+                    email.clear();
 
+                    // Obtenir la scène actuelle
+                    Stage currentStage = (Stage) button_login.getScene().getWindow();
 
-
-
-
-                else {
-                    // Incorrect password
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Erreur");
-                    alert.setContentText("Mot de passe incorrect.");
-                    alert.show();
-                }}
-             else{
-            // User does not exist, display information message
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setContentText("Aucun utilisateur avec cet email n'existe. Veuillez créer un compte.");
-            alert.show();
-        }}
-
-/*
-
-
-
-
-        /*
-            // Get user input
-            String Email = email.getText();
-            String mdp = password.getText();
-
-            // Validate user input
-            if (Email.isEmpty() || mdp.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setContentText("Veuillez remplir tous les champs obligatoires.");
-                alert.show();
-                return;
-            }
-
-            // Check if user exists
-            User existingUser = ServiceUser.findByEmail ( Email);
-
-            // If user exists, authenticate
-            if (existingUser != null) {
-                if (existingUser.getPassword().equals(mdp)) {
-                    // User authenticated successfully
-                    // ... handle successful login (e.g., navigate to home page)
-                    System.out.println("Utilisateur authentifié avec succès !");
-
-                    // Load the Accueil.fxml scene
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
-                    Parent root = loader.load();
-
-                    // Get the current stage
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-                    // Set the new scene on the stage
-                    stage.setScene(new Scene(root));
-
-                    // Show the new scene
-                    stage.show();
+                    // Afficher la nouvelle scène
+                    currentStage.setScene(scene);
+                    currentStage.show();
                 } else {
-                    // Incorrect password
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Erreur");
-                    alert.setContentText("Mot de passe incorrect.");
-                    alert.show();
+                    System.out.println("Utilisateur authentifié avec succès, mais n'a pas le rôle administrateur.");
+                    // Handle non-administrator login here (e.g., navigate to a different page)
                 }
             } else {
-                // User does not exist
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information");
-                alert.setContentText("Aucun utilisateur avec cet email n'existe. Veuillez créer un compte.");
+                // Incorrect password
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setContentText("Mot de passe incorrect.");
                 alert.show();
             }
-        }*/
+        } else {
+            // User not found
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setContentText("Utilisateur non trouvé.");
+            alert.show();
+        }
+    }
+    */
+
+
+
 
 
         @FXML
@@ -281,6 +214,8 @@ public class SampleController implements Initializable {
             currentStage.setScene(scene);
             currentStage.show();
         }
+
+
 @FXML
 void handlebutton_forgot(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ForgotPassword.fxml"));
