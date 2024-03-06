@@ -26,8 +26,8 @@ import java.util.ResourceBundle;
 
 public class MessagerieController implements Initializable {
 
-    Utilisateur user= new Utilisateur(5,"feriel","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
-    Utilisateur user1= new Utilisateur(4,"rima","assets/417957442_1478499912738648_2882908279475441643_n.jpg");
+    Utilisateur user= new Utilisateur();
+    Utilisateur user1= new Utilisateur();
     private final MessagerieService ms=new MessagerieService();
     private final UserCRUD su=new UserCRUD();
     //Utilisateur userSender = su.getOneByID(user.getId());

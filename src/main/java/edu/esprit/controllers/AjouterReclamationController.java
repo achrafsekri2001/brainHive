@@ -68,21 +68,21 @@ public class AjouterReclamationController  implements Initializable {
     }
 
     private void navigateTo(String fxmlFilePath) {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource(fxmlFilePath));
-                TF.getScene().setRoot(root);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlFilePath));
+            TF.getScene().setRoot(root);
 
-            } catch (IOException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Navigation Error");
-                alert.setContentText("An error occurred while navigating to the next page.");
-                alert.showAndWait();
-            }}
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Navigation Error");
+            alert.setContentText("An error occurred while navigating to the next page.");
+            alert.showAndWait();
+        }}
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-            // Initialiser les champs objettf et problemetf si nécessaire
+        // Initialiser les champs objettf et problemetf si nécessaire
 
 
 
@@ -91,21 +91,21 @@ public class AjouterReclamationController  implements Initializable {
     public void AjouterReclamationAction(ActionEvent actionEvent) throws SQLException {
 
         if (isValidInput()) {
-           // Utilisateur user = Utilisateur.getCurrent_User();
+            // Utilisateur user = Utilisateur.getCurrent_User();
 
-                Reclamation reclamation = new Reclamation();
-                reclamation.setObjet(TF.getText());
-                reclamation.setContenu(TFp.getText());
-                reclamation.setUser(user.getUserName()); // Définissez l'utilisateur actuel comme le "user" de la réclamation
-                reclamation.setIdUser(user.getId()); // Définissez l'ID de l'utilisateur actuel comme l'ID de l'utilisateur de la réclamation
-            reclamation.setImgUser(user.getImgUser());
+            Reclamation reclamation = new Reclamation();
+            reclamation.setObjet(TF.getText());
+            reclamation.setContenu(TFp.getText());
+           reclamation.setUser(user.getCurrent_User().getUserName()); // Définissez l'utilisateur actuel comme le "user" de la réclamation
+            reclamation.setIdUser(user.getId()); // Définissez l'ID de l'utilisateur actuel comme l'ID de l'utilisateur de la réclamation
+            //reclamation.setImgUser(user.getImgUser());
             rec.ajouterReclamation(reclamation);
 
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setContentText("Reclamation ajouté avec succès !");
-                alert.show();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setContentText("Reclamation ajouté avec succès !");
+            alert.show();
 
 
         }else {
@@ -133,6 +133,3 @@ public class AjouterReclamationController  implements Initializable {
         return lines.length;
     }
 }
-
-
-

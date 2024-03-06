@@ -182,7 +182,7 @@
             </ImageView>
          </children>
       </Pane>
-      <HBox layoutX="304.0" layoutY="6.0" prefHeight="45.0" prefWidth="372.0">
+      <HBox layoutX="304.0" layoutY="6.0" prefHeight="58.0" prefWidth="484.0">
          <children>
             <TextField prefHeight="26.0" prefWidth="440.0" promptText="Rechercher">
                <opaqueInsets>

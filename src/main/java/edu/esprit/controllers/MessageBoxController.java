@@ -7,10 +7,13 @@ import edu.esprit.services.MessagerieService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.ByteArrayInputStream;
+import java.util.Base64;
 import java.util.Date;
 
 public class MessageBoxController {
@@ -51,7 +54,14 @@ public class MessageBoxController {
      //   nonUser1.setText(messagerie.getReceiver_message().getUserName());
         msgTf1.setText(messagerie.getContenu());
         datetf.setText(String.valueOf(messagerie.getDate()));
-        //    imgUser1.setImage(Utilisateur.getImgUser());
+//        // Convertir la chaîne de caractères base64 en un tableau d'octets
+//        String imageString = messagerie.getSender_message().getImgUser();
+//        byte[] imageData = Base64.getDecoder().decode(imageString);
+//
+//        // Créer une image à partir du tableau d'octets et l'assigner à votre élément d'interface utilisateur (supposons qu'il s'appelle "imageView")
+//        Image image = new Image(new ByteArrayInputStream(imageData));
+//        imgUser1.setImage(image);
+//        //    imgUser1.setImage(Utilisateur.getImgUser());
 
 
 

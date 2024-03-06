@@ -49,7 +49,7 @@ public class HboxReclamationController implements Initializable {
         this.container = container;
 
         // Set data to UI elements
-        username.setText(reclamation.getUser());
+        username.setText(String.valueOf(reclamation.getUtilisateur()));
         probleme1.setText(reclamation.getContenu());
         objet1.setText(reclamation.getObjet());
         dateRec.setText(String.valueOf(reclamation.getDate()));

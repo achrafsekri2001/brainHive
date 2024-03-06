@@ -42,7 +42,7 @@
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor>
                <image>
-                  <Image url="@assets/IMG_7004.jpg" />
+                  <Image url="@assets/accueil.png" />
                </image>
                <VBox.margin>
                   <Insets bottom="-20.0" left="40.0" top="-40.0" />

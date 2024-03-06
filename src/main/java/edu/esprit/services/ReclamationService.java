@@ -29,11 +29,11 @@ public class ReclamationService {
                 String user = res.getString("user");
                 String contenu = res.getString("contenu");
                 String objet = res.getString("objet");
-                String imgUser = res.getString("imgUser");
+              //  String imgUser = res.getString("imgUser");
                 Timestamp date = res.getTimestamp("date");
 
                 // Créer un objet Reclamation et l'ajouter à la liste
-                Reclamation reclamation = new Reclamation(user, contenu, objet, imgUser, date, id);
+                Reclamation reclamation = new Reclamation( contenu, objet,date, id);
                 reclamations.add(reclamation);
             }
         } catch (SQLException e) {
@@ -43,16 +43,16 @@ public class ReclamationService {
         return reclamations;
     }
     public void ajouterReclamation(Reclamation reclamtion) throws SQLException {
-        String req = "INSERT INTO `reclamation`( `idUser`, `user`, `contenu`, `objet`, `date`, `imgUser`) VALUES ( ?, ?, ?, ?, ?,?)";
+        String req = "INSERT INTO `reclamation`( `idUser`, `user`, `contenu`, `objet`, `date`) VALUES ( ?,?, ?, ?,?)";
         PreparedStatement ps = cnx.prepareStatement(req);
         // Utiliser l'identifiant de l'utilisateur associé à la réclamation
-        ps.setInt(1, reclamtion.getIdUser()); // Assurez-vous que getIdUser() retourne l'identifiant de l'utilisateur
+        ps.setInt(1, reclamtion.getIdReclamation()); // Assurez-vous que getIdUser() retourne l'identifiant de l'utilisateur
         ps.setString(2, reclamtion.getUser());
         ps.setString(3, reclamtion.getContenu());
         ps.setString(4, reclamtion.getObjet());
-   //    ps.setDate(6, (Date) reclamtion.getDate());
+        //    ps.setDate(6, (Date) reclamtion.getDate());
         ps.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
-        ps.setString(6, reclamtion.getImgUser());
+        //ps.setString(6, reclamtion.getImgUser());
 
         ps.executeUpdate();
         System.out.println("Reclamation added !");
@@ -77,14 +77,12 @@ public class ReclamationService {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int idUser = rs.getInt("idUser");
-                String UserName = rs.getString("userName");
                 String objet = rs.getString("objet");
                 String contenu = rs.getString("contenu");
                 Timestamp date = rs.getTimestamp("date");
-                String image = rs.getString("image");
                 UserCRUD su = new UserCRUD();
                 Utilisateur utilisateur= su.getOneByID(idUser);
-                Reclamation reclamation1 =new Reclamation(UserName,contenu,objet,image,date,idUser);
+                Reclamation reclamation1 =new Reclamation(contenu,objet,date,idUser);
                 return reclamation1 ;
             } else {
                 System.out.println("Reclamation with ID " + id + " not found");
@@ -107,17 +105,17 @@ public class ReclamationService {
             while (res.next()){
                 int id = res.getInt(1);
                 int idUser = res.getInt(2);
-                String user = res.getString("user");
+                //String user = res.getString("user");
                 String contenu = res.getString("contenu");
                 String objet = res.getString("objet");
-                String imgUser = res.getString("imgUser");
+
                 Timestamp date= res.getTimestamp("date");
-                Reclamation p = new Reclamation( user ,  contenu, objet,  imgUser,  date,  id);
+                Reclamation p = new Reclamation(  contenu, objet,  date,  id);
                 reclamations.add(p);
 
-              //  Utilisateur utilisateur = new Utilisateur(4,"feriel ben mamia","f");
-               // utilisateur.setId(idUser);
-            //    Reclamation reclamation = new Reclamation(user, contenu, objet,imgUser,date,id);
+                //  Utilisateur utilisateur = new Utilisateur(4,"feriel ben mamia","f");
+                // utilisateur.setId(idUser);
+                //    Reclamation reclamation = new Reclamation(user, contenu, objet,imgUser,date,id);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -140,14 +138,14 @@ public class ReclamationService {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 int id = rs.getInt("idReclamation");
-                String nom = rs.getString("user");
+              //  String nom = rs.getString("user");
                 String contenu = rs.getString("contenu");
                 String objet = rs.getString("objet");
-                String imgUser = rs.getString("imgUser");
+              //  String imgUser = rs.getString("imgUser");
                 Timestamp date= rs.getTimestamp("date");
                 int idUser = rs.getInt("idUser");
 
-                Reclamation p = new Reclamation(nom, contenu, objet, imgUser, date, id, idUser);
+                Reclamation p = new Reclamation( contenu, objet,  date, id, idUser);
                 reclamations.add(p);
             }
         } catch (SQLException e) {
