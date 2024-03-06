@@ -134,6 +134,6 @@ public class AjouterProduit implements Initializable {
         }}
     @FXML
     void navigatetoAcceuilAction(ActionEvent event) {
-        navigateTo("/AfficherProduitAdmin.fxml");
+        navigateTo("/Fxml/AfficherProduitAdmin.fxml");
     }
 }

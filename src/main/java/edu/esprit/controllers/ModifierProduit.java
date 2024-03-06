@@ -155,7 +155,7 @@ public class ModifierProduit implements Initializable {
 
     @FXML
     void navigatetoAffichageAction(ActionEvent event) {
-        navigateTo("/AfficherProduitAdmin.fxml");
+        navigateTo("/Fxml/AfficherProduitAdmin.fxml");
 
     }
 }

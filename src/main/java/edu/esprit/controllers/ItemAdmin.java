@@ -12,7 +12,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -56,7 +55,7 @@ public class ItemAdmin {
 
             try {
                 // Charger le fichier FXML de la fenêtre de modification du produit
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierProduit.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ModifierProduit.fxml"));
                 Parent root = loader.load();
 
                 // Récupérer le contrôleur associé à la fenêtre de modification

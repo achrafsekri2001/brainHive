@@ -126,7 +126,7 @@ public class NoteEtAvis implements Initializable {
         // Récupération et affichage des réclamations du produit
         List<AvisProduit> reclamations = recupererReclamationsProduit(produit.getId_produit());
         for (AvisProduit reclamation : reclamations) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AvisItem.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AvisItem.fxml"));
             try {
                 AnchorPane item = loader.load();
                 AvisItem avisItem = loader.getController();

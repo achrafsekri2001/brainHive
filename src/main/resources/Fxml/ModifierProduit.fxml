@@ -17,7 +17,7 @@
          <children>
             <ImageView fitHeight="51.0" fitWidth="200.0" layoutY="14.0">
                <image>
-                  <Image url="@../../../../../../Downloads/429636892_968504204789314_101429248215607992_n.png" />
+                  <Image url="@../../../../../../../Downloads/429636892_968504204789314_101429248215607992_n.png" />
                </image>
             </ImageView>
             <Button layoutX="24.0" layoutY="105.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="161.0" style="-fx-background-color: white;" text="Acceuil" textAlignment="CENTER">
@@ -32,12 +32,12 @@
             </Button>
             <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="24.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Downloads/346a1f4363e1b59f6860fdce6abc1082.jpg" />
+                  <Image url="@../../../../../../../Downloads/346a1f4363e1b59f6860fdce6abc1082.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="34.0" fitWidth="30.0" layoutX="32.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Downloads/téléchargement.png" />
+                  <Image url="@../../../../../../../Downloads/téléchargement.png" />
                </image>
             </ImageView>
          </children>

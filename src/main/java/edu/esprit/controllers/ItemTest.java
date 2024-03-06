@@ -2,7 +2,6 @@ package edu.esprit.controllers;
 
 import edu.esprit.entities.Produit;
 import edu.esprit.services.ServiceAvis;
-import edu.esprit.services.ServiceProduit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -67,7 +64,7 @@ public class ItemTest{
 
             try {
                 // Charger le fichier FXML de la fenêtre de modification du produit
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/NoteEtAvis.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/NoteEtAvis.fxml"));
                 Parent root = loader.load();
 
                 // Récupérer le contrôleur associé à la fenêtre de modification

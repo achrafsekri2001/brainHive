@@ -14,7 +14,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -68,7 +67,7 @@ public class AfficherProduitAdmin implements Initializable {
         int column = 0;
         int row = 0;
         for (Produit produit : produits) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ItemAdmin.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ItemAdmin.fxml"));
             try {
                 AnchorPane item = loader.load();
                 ItemAdmin controller = loader.getController();
@@ -103,7 +102,7 @@ public class AfficherProduitAdmin implements Initializable {
         }}
     @FXML
     void navigatetoAjoutAction(ActionEvent event) {
-        navigateTo("/AjouterParascolaire.fxml");
+        navigateTo("/Fxml/AjouterParascolaire.fxml");
 
     }
     @FXML

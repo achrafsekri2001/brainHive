@@ -62,7 +62,7 @@ public class AfficherProduit implements Initializable {
         int column = 0;
         int row = 0;
         for (Produit produit : produits) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Item.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Item.fxml"));
             try {
                 AnchorPane item = loader.load();
                 ItemTest controller = loader.getController();

@@ -5,9 +5,7 @@ import edu.esprit.utils.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,7 +68,7 @@ public class ServiceProduit implements IService<Produit>{
             while(rs.next()){
                 int id = rs.getInt("id_produit");
                 String nom = rs.getString("nom");
-                String image = rs.getString("image");
+                String image = rs.getString("assets");
                 String description = rs.getString("description");
                 String matiere = rs.getString("matiere");
 
@@ -93,7 +91,7 @@ public class ServiceProduit implements IService<Produit>{
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String nom = rs.getString("nom");
-                String image = rs.getString("image");
+                String image = rs.getString("assets");
                 String description = rs.getString("description");
                 String matiere = rs.getString("matiere");
 
@@ -167,7 +165,7 @@ public class ServiceProduit implements IService<Produit>{
             while(rs.next()){
                 int id = rs.getInt("id_produit");
                 String nom = rs.getString("nom");
-                String image = rs.getString("image");
+                String image = rs.getString("assets");
                 String description = rs.getString("description");
                 int note = rs.getInt("note");
                 Produit p = new Produit(id, image, nom, description, matiere);
@@ -189,7 +187,7 @@ public class ServiceProduit implements IService<Produit>{
             while(rs.next()){
                 int id = rs.getInt("id_produit");
                 String nomProduit = rs.getString("nom");
-                String image = rs.getString("image");
+                String image = rs.getString("assets");
                 String description = rs.getString("description");
                 String matiere = rs.getString("matiere");
                 Produit p = new Produit(id, image, nomProduit, description, matiere);
