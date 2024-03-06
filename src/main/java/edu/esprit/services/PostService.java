@@ -50,7 +50,7 @@ public class PostService implements IService<Post> {
 
     @Override
     public void modifier(Post post) {
-        String req = "UPDATE post SET title=?, description=?, matiere=?, userId=?, nbrOfComments=?, createdAt=?, updatedAt=? WHERE id=?";
+        String req = "UPDATE post SET title=?, description=?, matiere=?, userId=?, updatedAt=? WHERE id=?";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setString(1, post.getTitle());
@@ -58,10 +58,8 @@ public class PostService implements IService<Post> {
             pst.setString(3, post.getMatiere());
 
             pst.setInt(4, post.getUserId());
-            pst.setInt(5, post.getNumberOfComments());
-            pst.setTimestamp(6, post.getCreatedAt());
-            pst.setTimestamp(7, post.getUpdatedAt());
-            pst.setInt(8, post.getId());
+            pst.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+            pst.setInt(6, post.getId());
             pst.executeUpdate();
             System.out.println("Post updated !");
         } catch (SQLException e) {

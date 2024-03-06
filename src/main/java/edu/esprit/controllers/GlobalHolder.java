@@ -8,6 +8,15 @@ public class GlobalHolder {
     public static int currentCommentId;
     public static Post currentPost;
     public static String currentMatiere;
+    public static String textSearch;
+
+    public static String getTextSearch() {
+        return textSearch;
+    }
+
+    public static void setTextSearch(String textSearch) {
+        GlobalHolder.textSearch = textSearch;
+    }
 
     public static String getCurrentMatiere() {
         return currentMatiere;

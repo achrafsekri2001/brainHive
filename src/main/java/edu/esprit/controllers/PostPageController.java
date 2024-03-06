@@ -6,11 +6,13 @@ import edu.esprit.entities.Commentaire;
 import edu.esprit.entities.Post;
 import edu.esprit.services.CommentaireService;
 import edu.esprit.services.PostService;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -20,35 +22,12 @@ import org.jpedal.examples.viewer.Viewer;
 import org.jpedal.examples.viewer.ViewerCommands;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
 public class PostPageController {
 
     private final PostService postService = new PostService();
     private final CommentaireService commentaireService = new CommentaireService();
-
-    @FXML
-    private ListView<String> matiereList;
-
-    @FXML
-    private Hyperlink navigateAcceuil = new Hyperlink();
-
-
-    @FXML
-    private Hyperlink navigatePopulaire = new Hyperlink();
-
-    @FXML
-    private Hyperlink navigateSauveguardee = new Hyperlink();
-
-    @FXML
-    private Hyperlink navigateMessagerie = new Hyperlink();
-
-    @FXML
-    private Hyperlink navigateParascolaire = new Hyperlink();
-
-    @FXML
-    private Hyperlink navigateReclamation = new Hyperlink();
 
     @FXML
     private Chip postChip = new Chip();
@@ -71,6 +50,11 @@ public class PostPageController {
     private TextField addCommentField = new TextField();
     @FXML
     private VBox CommentsVBox = new VBox();
+
+    @FXML
+    private Button deleteButton = new Button();
+    @FXML
+    private Button editButton = new Button();
     Post post;
 
     @FXML
@@ -78,27 +62,29 @@ public class PostPageController {
 
         int id = GlobalHolder.getCurrentPost().getId();
         post = postService.getOneByID(id);
-
-
-        List<String> listeMatiere = List.of("Mathématiques", "Physique", "Informatique", "Anglais", "Français", "Histoire", "Géographie", "Philosophie", "SVT", "EPS", "Arts plastiques", "Musique", "Technologie", "Sciences de l'ingénieur", "Langues vivantes", "Latin", "Arabe");
-        matiereList.getItems().addAll(listeMatiere);
-        // when a subject is selected, navigate to a page called "subjects"
-        matiereList.setOnMouseClicked(event -> {
-            System.out.println(matiereList.getSelectionModel().getSelectedItem());
-        });
-        // navigation
-        navigateAcceuil.setOnAction(this::Navigate);
-        navigatePopulaire.setOnAction(this::Navigate);
-        navigateSauveguardee.setOnAction(this::Navigate);
-        navigateMessagerie.setOnAction(this::Navigate);
-        navigateParascolaire.setOnAction(this::Navigate);
-        navigateReclamation.setOnAction(this::Navigate);
-
         postTitle.setText(post.getTitle());
         postDescription.setText(post.getDescription());
         postDate.setText(post.getCreatedAt().toString());
         postNbrOfComments.setText(post.getNumberOfComments() + "");
         postChip.setText(post.getMatiere());
+
+        // when postOptions second button is clicked navigate to edit post page
+        editButton.setOnAction(event -> {
+            navigateTo("/Fxml/editPost.fxml");
+        });
+
+        // when postOptions first button is clicked navigate to delete post page before delete ask for confirmation
+        deleteButton.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Êtes-vous sûr de vouloir supprimer cette poste ?");
+            alert.setContentText("Cette action est irréversible.");
+            alert.showAndWait();
+            if (alert.getResult().getText().equals("OK")) {
+                postService.supprimer(post.getId());
+                navigateTo("/Fxml/pageAcceuil.fxml");
+            }
+        });
 
         if (post.getFichiers().isEmpty()) {
             postFile.setVisible(false);
@@ -165,7 +151,7 @@ public class PostPageController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/PostPage.fxml"));
                 try {
                     Parent root = loader.load();
-                    navigateAcceuil.getScene().setRoot(root);
+                    editButton.getScene().setRoot(root);
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
                 }
@@ -192,34 +178,10 @@ public class PostPageController {
     }
 
 
-    @FXML
-    void Navigate(ActionEvent event) {
-        if (event.getSource() == navigateAcceuil) {
-            navigateTo("/Fxml/pageAcceuil.fxml");
-        }
-        if (event.getSource() == navigatePopulaire) {
-            navigateTo("/Fxml/poppulaire.fxml");
-        }
-        if (event.getSource() == navigateSauveguardee) {
-            navigateTo("/Fxml/pageSauveguardee.fxml");
-        }
-        if (event.getSource() == navigateMessagerie) {
-            navigateTo("/Fxml/pageMessagerie.fxml");
-        }
-        if (event.getSource() == navigateParascolaire) {
-            navigateTo("/Fxml/pageParascolaire.fxml");
-        }
-        if (event.getSource() == navigateReclamation) {
-            navigateTo("/Fxml/pageReclamation.fxml");
-        }
-
-    }
-
-
     private void navigateTo(String fxmlFilePath) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(fxmlFilePath));
-            navigateAcceuil.getScene().setRoot(root);
+            editButton.getScene().setRoot(root);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
