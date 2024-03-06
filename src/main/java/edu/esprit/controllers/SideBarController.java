@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
 
@@ -44,7 +43,7 @@ public class SideBarController {
 
         // when a subject is selected, navigate to a page called "subjects"
         matiereList.setOnMouseClicked(event -> {
-            System.out.println(matiereList.getSelectionModel().getSelectedItem());
+            navigateWithMatiere("/Fxml/postMatiere.fxml", matiereList.getSelectionModel().getSelectedItem());
         });
         // navigation
         navigateAcceuil.setOnAction(this::Navigate);
@@ -87,6 +86,24 @@ public class SideBarController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(fxmlFilePath));
             navigateAcceuil.getScene().setRoot(root);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Navigation Error");
+            alert.setContentText("An error occurred while navigating to the next page.");
+            alert.showAndWait();
+        }
+    }
+
+    private void navigateWithMatiere(String fxmlFilePath, String matiere) {
+        try {
+            // load global holder
+            GlobalHolder globalHolder = (GlobalHolder) matiereList.getScene().getWindow().getUserData();
+            globalHolder.setCurrentMatiere(matiere);
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlFilePath));
+            // get the stage
+            matiereList.getScene().setRoot(root);
+
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");

@@ -7,6 +7,15 @@ public class GlobalHolder {
     public static int currentUserId;
     public static int currentCommentId;
     public static Post currentPost;
+    public static String currentMatiere;
+
+    public static String getCurrentMatiere() {
+        return currentMatiere;
+    }
+
+    public static void setCurrentMatiere(String currentMatiere) {
+        GlobalHolder.currentMatiere = currentMatiere;
+    }
 
     public static int getCurrentPostId() {
         return currentPostId;
