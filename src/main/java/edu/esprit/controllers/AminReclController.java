@@ -54,7 +54,7 @@ public class AminReclController  implements Initializable {
 
             // Load and add ReclamationItemComponent for each Reclamation
             for (Reclamation reclamation : reclamations) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AdminRecVbox.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AdminRecVbox.fxml"));
                 try {
                     boxeReclamation1.getChildren().add(loader.load());
                    VboxAdminController controller = loader.getController();

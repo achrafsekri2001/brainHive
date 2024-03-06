@@ -19,7 +19,7 @@
       </Label>
       <Avatar>
          <image>
-            <Image url="assets/417957442_1478499912738648_2882908279475441643_n.jpg" />
+            <Image url="../assets/417957442_1478499912738648_2882908279475441643_n.jpg" />
          </image>
       </Avatar>
       <Label fx:id="contenuMsg" prefHeight="28.0" prefWidth="232.0" text="Salut cv?">

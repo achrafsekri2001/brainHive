@@ -59,7 +59,7 @@ public class ReclamtionController implements Initializable {
 
             // Load and add ReclamationItemComponent for each Reclamation
             for (Reclamation reclamation : reclamations) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/hboxReclamation.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/hboxReclamation.fxml"));
                 try {
                     boxeReclamation1.getChildren().add(loader.load());
                     HboxReclamationController controller = loader.getController();
@@ -77,12 +77,12 @@ public class ReclamtionController implements Initializable {
     }
     @FXML
     void MessagerieAction(ActionEvent event) {
-        navigateTo("/Message.fxml");
+        navigateTo("/Fxml/Message.fxml");
     }
 
     @FXML
     void MesReclamationAction(ActionEvent event) {
-        navigateTo("/MesReclamations.fxml");
+        navigateTo("/Fxml/MesReclamations.fxml");
 
     }
 
@@ -98,7 +98,7 @@ public class ReclamtionController implements Initializable {
 
             // Charger et ajouter les composants de réclamation pour chaque réclamation trouvée
             for (Reclamation reclamation : reclamationsParNom) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/hboxReclamation.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/hboxReclamation.fxml"));
                 try {
                     boxeReclamation1.getChildren().add(loader.load());
                     HboxReclamationController controller = loader.getController();
@@ -115,7 +115,7 @@ public class ReclamtionController implements Initializable {
 
 
     public void AjouterReclamationAction(ActionEvent actionEvent) {
-        navigateTo("/AjouterReclamation.fxml");
+        navigateTo("/Fxml/AjouterReclamation.fxml");
     }
 
     public void NavigateToFavorisAction(ActionEvent actionEvent) {

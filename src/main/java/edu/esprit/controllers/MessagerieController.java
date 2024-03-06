@@ -69,7 +69,7 @@ public class MessagerieController implements Initializable {
 
     @FXML
     void NavigateToReclamation(ActionEvent event) {
-        navigateTo("/Reclamation.fxml");
+        navigateTo("/Fxml/Reclamation.fxml");
     }
 
 
@@ -91,7 +91,7 @@ public class MessagerieController implements Initializable {
         //      Envoyer le message en utilisant le service approprié
         MessagerieService messagerieService = new MessagerieService();
         messagerieService.ajouter(message);
-        navigateTo("/Message.fxml");
+        navigateTo("/Fxml/Message.fxml");
     }
     private boolean isTextFieldEmpty(TextField textField) {
         return textField.getText().trim().isEmpty();
@@ -103,7 +103,7 @@ public class MessagerieController implements Initializable {
     }
 
     public void NavigateToMessages(ActionEvent actionEvent) {
-        navigateTo("/Message.fxml");
+        navigateTo("/Fxml/Message.fxml");
 
     }
 
@@ -111,7 +111,7 @@ public class MessagerieController implements Initializable {
     }
 
     public void AjouterDiscussionAction(ActionEvent actionEvent) {
-        navigateTo("/AjouterMessage.fxml");
+        navigateTo("/Fxml/AjouterMessage.fxml");
     }
 
     @Override
@@ -122,7 +122,7 @@ public class MessagerieController implements Initializable {
             List<Messagerie> messageries = messagerieService.getAll();
 
             for (Messagerie messagerie : messageries) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/MessageBox.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MessageBox.fxml"));
                 try {
                     vboxMsg1.getChildren().add(loader.load());
                     MessageBoxController controller = loader.getController();
@@ -138,11 +138,11 @@ public class MessagerieController implements Initializable {
     }
 
     public void onDiscussionAction(MouseEvent mouseEvent) {
-        navigateTo("/Message.fxml");
+        navigateTo("/Fxml/Message.fxml");
     }
 
     public void NavigateToMessagerie(ActionEvent actionEvent) {
-        navigateTo("/Messagerie.fxml");
+        navigateTo("/Fxml/Messagerie.fxml");
     }
 
 

@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -54,13 +53,13 @@ public class MesReclamationController implements Initializable  {
     }
     @FXML
     void AjouterReclamationAction(ActionEvent event) {
-        navigateTo("/AjouterReclamation.fxml");
+        navigateTo("/Fxml/AjouterReclamation.fxml");
 
     }
 
     @FXML
     void MessagerieAction(ActionEvent event) {
-        navigateTo("/Message.fxml");
+        navigateTo("/Fxml/Message.fxml");
 
 
     }
@@ -69,14 +68,14 @@ public class MesReclamationController implements Initializable  {
 
     @FXML
     void ReclamationAction(ActionEvent event) {
-        navigateTo("/Reclamation.fxml");
+        navigateTo("/Fxml/Reclamation.fxml");
 
 
     }
 
     @FXML
     void RetourAction(ActionEvent event) {
-        navigateTo("/Reclamation.fxml");
+        navigateTo("/Fxml/Reclamation.fxml");
 
 
     }
@@ -94,7 +93,7 @@ public class MesReclamationController implements Initializable  {
                 List<Reclamation> reclamations = serviceReclamation.afficherReclamationsParUtilisateur(userId);
 
                 for (Reclamation reclamation : reclamations) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/hboxReclamation.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/hboxReclamation.fxml"));
                     boxeReclamation1.getChildren().add(loader.load());
                     HboxReclamationController controller = loader.getController();
                     controller.setReclamationData(reclamation, container);

@@ -58,25 +58,25 @@
                     </font>
                 </Button>
                 <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@assets/favori.png" />
+                    <Image url="@../assets/favori.png" />
 
                 </ImageView>
                 <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
 
-                    <Image url="@assets/accueil.png" />
+                    <Image url="@../assets/accueil.png" />
 
                 </ImageView>
                 <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@assets/conversation.png" />
+                    <Image url="@../assets/conversation.png" />
                 </ImageView>
                 <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
 
-                    <Image url="@assets/livre.png" />
+                    <Image url="@../assets/livre.png" />
 
                 </ImageView>
                 <ImageView fitHeight="71.0" fitWidth="223.0" layoutX="-3.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
 
-                    <Image url="@assets/logooo.png" />
+                    <Image url="@../assets/logooo.png" />
 
                 </ImageView>
                 <Button layoutX="19.0" layoutY="503.0" mnemonicParsing="false" onAction="#NavigateToReclamation" prefHeight="46.0" prefWidth="191.0" style="-fx-background-color: #FFCD38;" text="Réclamation">
@@ -86,7 +86,7 @@
                 </Button>
                 <ImageView fitHeight="56.0" fitWidth="30.0" layoutX="19.0" layoutY="511.0" pickOnBounds="true" preserveRatio="true">
 
-                    <Image url="@assets/fichier.png" />
+                    <Image url="@../assets/fichier.png" />
 
                 </ImageView>
             </children>
@@ -99,7 +99,7 @@
         <Separator layoutX="198.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="708.0" prefWidth="70.0" />
       <ImageView fx:id="imageUser" fitHeight="70.0" fitWidth="84.0" layoutX="818.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@assets/IMG_7004.jpg" />
+            <Image url="@../assets/IMG_7004.jpg" />
          </image>
       </ImageView>
     </children>

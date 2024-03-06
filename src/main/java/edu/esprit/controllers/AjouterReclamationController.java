@@ -43,7 +43,7 @@ public class AjouterReclamationController  implements Initializable {
 
     @FXML
     void NavigateToBackAction(ActionEvent event) {
-        navigateTo("/Reclamation.fxml");
+        navigateTo("/Fxml/Reclamation.fxml");
     }
 
     @FXML
@@ -53,18 +53,18 @@ public class AjouterReclamationController  implements Initializable {
 
     @FXML
     void NavigateToMessages(ActionEvent event) {
-        navigateTo("/Messagerie.fxml");
+        navigateTo("/Fxml/Messagerie.fxml");
     }
 
     @FXML
     void NavigateToProduit(ActionEvent event) {
-        navigateTo("/Produit.fxml");
+        navigateTo("/Fxml/Produit.fxml");
     }
 
 
     @FXML
     void NavigateToReclamation(ActionEvent event) {
-        navigateTo("/Reclamation.fxml");
+        navigateTo("/Fxml/Reclamation.fxml");
     }
 
     private void navigateTo(String fxmlFilePath) {

@@ -42,7 +42,7 @@
                               <Cursor fx:constant="OPEN_HAND" />
                            </cursor>
                            <image>
-                              <Image url="@assets/417957442_1478499912738648_2882908279475441643_n.jpg" />
+                              <Image url="@../assets/417957442_1478499912738648_2882908279475441643_n.jpg" />
                            </image>
                            <VBox.margin>
                               <Insets left="20.0" top="-5.0" />
@@ -69,7 +69,7 @@
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor>
                <image>
-                  <Image url="@assets/417957442_1478499912738648_2882908279475441643_n.jpg" />
+                  <Image url="@../assets/417957442_1478499912738648_2882908279475441643_n.jpg" />
                </image>
             </ImageView>
             <HBox layoutX="330.0" layoutY="489.0" prefHeight="70.0" prefWidth="608.0" spacing="20.0">
@@ -144,27 +144,27 @@
                </cursor></Button>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/favori.png" />
+                  <Image url="@../assets/favori.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/accueil.png" />
+                  <Image url="@../assets/accueil.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/conversation.png" />
+                  <Image url="@../assets/conversation.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/livre.png" />
+                  <Image url="@../assets/livre.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="71.0" fitWidth="218.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/logooo.png" />
+                  <Image url="@../assets/logooo.png" />
                </image>
             </ImageView>
             <Button layoutX="23.0" layoutY="502.0" mnemonicParsing="false" onAction="#NavigateToReclamation" prefHeight="46.0" prefWidth="191.0" style="-fx-background-color: #FFCD38;" text="Réclamation">
@@ -177,7 +177,7 @@
             </Button>
             <ImageView fitHeight="56.0" fitWidth="30.0" layoutX="27.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/fichier.png" />
+                  <Image url="@../assets/fichier.png" />
                </image>
             </ImageView>
          </children>
@@ -207,7 +207,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
          <image>
-            <Image url="@assets/IMG_7004.jpg" />
+            <Image url="@../assets/IMG_7004.jpg" />
          </image>
       </ImageView>
     </children>

@@ -35,22 +35,22 @@
             </Button>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="assets/accueil.png" />
+                  <Image url="../assets/accueil.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="27.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="assets/livre.png" />
+                  <Image url="../assets/livre.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="71.0" fitWidth="223.0" layoutX="8.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="assets/logooo.png" />
+                  <Image url="../assets/logooo.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="56.0" fitWidth="30.0" layoutX="19.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="assets/fichier.png" />
+                  <Image url="../assets/fichier.png" />
                </image>
             </ImageView>
          </children>

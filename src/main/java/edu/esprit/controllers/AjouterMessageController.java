@@ -18,7 +18,6 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AjouterMessageController implements Initializable {
@@ -127,7 +126,7 @@ public void initialize(URL url, ResourceBundle resourceBundle) {
 
     @FXML
     void NavigateToBackAction(ActionEvent event) {
-        navigateTo("/Messagerie.fxml");
+        navigateTo("/Fxml/Messagerie.fxml");
 
     }
 
