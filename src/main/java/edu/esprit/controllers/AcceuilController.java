@@ -34,7 +34,7 @@ public class AcceuilController {
             try {
                 postsVBox.getChildren().add(loader.load());
                 //set spacing between posts
-                postsVBox.setSpacing(10);
+                postsVBox.setSpacing(20);
                 postContainerController controller = loader.getController();
                 controller.setData(post);
             } catch (IOException e) {

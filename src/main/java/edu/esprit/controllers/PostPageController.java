@@ -198,7 +198,7 @@ public class PostPageController {
             navigateTo("/Fxml/pageAcceuil.fxml");
         }
         if (event.getSource() == navigatePopulaire) {
-            navigateTo("/Fxml/test.fxml");
+            navigateTo("/Fxml/poppulaire.fxml");
         }
         if (event.getSource() == navigateSauveguardee) {
             navigateTo("/Fxml/pageSauveguardee.fxml");

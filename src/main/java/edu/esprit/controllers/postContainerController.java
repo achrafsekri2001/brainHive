@@ -35,11 +35,13 @@ public class postContainerController {
     private Button postNbrOfComments = new Button();
     @FXML
     private Button postSaveButton = new Button();
+    @FXML
+    private ImageView savePostIcon = new ImageView();
 
 
     public void setData(Post post) {
-        //set padding to 20
-        postContainer.setStyle("-fx-padding: 20");
+        //set width to full width
+        postContainer.setPrefWidth(600);
         postTitle.setText(post.getTitle());
         postDescription.setText(post.getDescription());
         postDate.setText(post.getCreatedAt().toString());
@@ -50,11 +52,13 @@ public class postContainerController {
             //getFichiers returns a set of files if the first file is not null and is pdf fisplay image link else display the file string link
             if (post.getFichiers().iterator().next().endsWith(".pdf")) {
                 postFile.setImage(new Image("https://play-lh.googleusercontent.com/BkRfMfIRPR9hUnmIYGDgHHKjow-g18-ouP6B2ko__VnyUHSi1spcc78UtZ4sVUtBH4g"));
+                postFile.setFitWidth(150);
             } else {
                 postFile.setImage(new Image("file:" + post.getFichiers().iterator().next()));
+                postFile.setFitWidth(150);
             }
         } else {
-            postFile.setVisible(false);
+            postFile.setVisible(true);
         }
 
         postContainer.setOnMouseClicked(event -> {
@@ -68,7 +72,7 @@ public class postContainerController {
     // initialize method
     public void initialize() {
         postSaveButton.setOnAction(event -> {
-            // save post
+            savePostIcon.setImage(new Image("https://brainhive.s3.eu-west-3.amazonaws.com/material-symbols_bookmark.png"));
         });
 
         // when clicking on post take to post page
