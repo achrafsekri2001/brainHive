@@ -17,8 +17,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
@@ -54,7 +52,7 @@ public class InscrireController implements Initializable {
     }
     @FXML
     void retour_page(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
@@ -169,7 +167,7 @@ try{
 
     @FXML
     private void handleLogin(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         tf_nom.clear();

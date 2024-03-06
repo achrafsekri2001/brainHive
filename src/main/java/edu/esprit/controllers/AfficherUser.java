@@ -278,7 +278,7 @@ public class AfficherUser implements Initializable {
     @FXML
 
     void retour_page(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/CRUD.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/CRUD.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         // Obtenir la scène actuelle

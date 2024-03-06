@@ -60,7 +60,7 @@ public class Crud  implements Initializable {
     @FXML
     void retour_page(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Accueil.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
@@ -132,7 +132,7 @@ public class Crud  implements Initializable {
     @FXML
     void passer_modif_admin(ActionEvent event)  throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierUser.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ModifierUser.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
@@ -142,7 +142,7 @@ public class Crud  implements Initializable {
 
     @FXML
     void Logout(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
@@ -159,7 +159,7 @@ public class Crud  implements Initializable {
 
         @FXML
         private void  afficher(ActionEvent event) throws IOException {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherUser.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AfficherUser.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
 

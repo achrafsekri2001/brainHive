@@ -101,7 +101,7 @@ public class SampleController implements Initializable {
                 if (existingUser.equals(mdp)) {
                     // User authenticated successfully
                     System.out.println("Utilisateur authentifié avec succès !");
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Accueil.fxml"));
                     Parent root = loader.load();
                     Scene scene = new Scene(root);
                     email.clear();
@@ -129,7 +129,7 @@ public class SampleController implements Initializable {
                      if (existingUser.getRoles() == 0)
                      { // Assuming "0" indicates admin role
                     System.out.println("Utilisateur administrateur authentifié avec succès !");
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/CRUD.fxml")); // Load CRUD page
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/CRUD.fxml")); // Load CRUD page
                     Parent root = loader.load();
                     Scene scene = new Scene(root);
                     email.clear();
@@ -202,7 +202,7 @@ public class SampleController implements Initializable {
 
         @FXML
     private void handlebutton_sign_up(ActionEvent event) throws IOException {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Signup.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Signup.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             email.clear();
@@ -218,7 +218,7 @@ public class SampleController implements Initializable {
 
 @FXML
 void handlebutton_forgot(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ForgotPassword.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ForgotPassword.fxml"));
     Parent root = loader.load();
     Scene scene = new Scene(root);
 
