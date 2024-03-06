@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Crud">
+    <children>
+        <AnchorPane layoutX="386.0" layoutY="-1.0" prefHeight="453.0" prefWidth="325.0" style="-fx-background-color: #ffcd38;">
+            <children>
+                <TextField fx:id="TF_Nom" layoutX="194.0" layoutY="32.0" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: white;" />
+                <TextField fx:id="tf_Prenom" layoutX="194.0" layoutY="65.0" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: white;" />
+                <TextField fx:id="tf_email" layoutX="194.0" layoutY="107.0" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: white;" />
+                <Button layoutX="182.0" layoutY="258.0" mnemonicParsing="false" onAction="#addUser" prefHeight="25.0" prefWidth="96.0" style="-fx-cursor: hand7;" text="ADD" />
+                <Label layoutX="122.0" layoutY="36.0" text="Nom" />
+                <Label layoutX="115.0" layoutY="69.0" text="Prenom" />
+                <Label layoutX="130.0" layoutY="111.0" text="email" />
+            <Label layoutX="110.0" layoutY="147.0" text="Password" />
+            <TextField fx:id="tf_passwd" layoutX="194.0" layoutY="143.0" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: white;" />
+            <Label layoutX="122.0" layoutY="199.0" text="roles" />
+            <TextField fx:id="roles" layoutX="193.0" layoutY="195.0" prefHeight="25.0" prefWidth="104.0" />
+                <Button fx:id="button_logout" layoutX="243.0" layoutY="364.0" mnemonicParsing="false" onAction="#Logout" prefHeight="36.0" prefWidth="70.0" style="-fx-background-color: #743cd6; -fx-cursor: hand;" text="LOGOUT">
+                    <font>
+                        <Font name="Arial" size="12.0" />
+                    </font>
+                </Button>
+            <Button fx:id="retour" layoutX="14.0" layoutY="375.0" mnemonicParsing="false" onAction="#retour_page" style="-fx-background-color: #743cd6;" text="Passer a la page ACCUEIL" />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutY="-3.0" prefHeight="453.0" prefWidth="387.0" style="-fx-background-color: silver;">
+         <children>
+                <Button fx:id="button_delete" layoutX="132.0" layoutY="118.0" mnemonicParsing="false" onAction="#Delete" prefHeight="25.0" prefWidth="65.0" style="-fx-cursor: hand;" text="DELETE" />
+            <Label layoutX="45.0" layoutY="72.0" text="id" />
+            <TextField fx:id="id_asuprimer" layoutX="100.0" layoutY="68.0" />
+            <Button fx:id="afficher" layoutX="72.0" layoutY="276.0" mnemonicParsing="false" onAction="#afficher" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #743cd6;" text="Passer Al'Affichage " />
+            <Button fx:id="modif_admin" layoutX="219.0" layoutY="216.0" mnemonicParsing="false" onAction="#passer_modif_admin" text="modifier mo compte" />
+         </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

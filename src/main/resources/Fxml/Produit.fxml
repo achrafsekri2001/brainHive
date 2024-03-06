@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<?import javafx.scene.image.ImageView?><?import javafx.scene.image.Image?><?import javafx.geometry.Insets?><?import javafx.scene.text.Font?>
+
+
+        <?import javafx.geometry.Insets?>
+
+        <?import javafx.scene.text.Font?>
+<AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+    <HBox prefHeight="50.0" prefWidth="784.0" style="-fx-background-color: FFCD38;">
+        <children>
+
+
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="455.0">
+                <children>
+                    <TextField prefHeight="26.0" prefWidth="184.0" promptText="search" />
+
+                </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="175.0">
+                <children>
+                    <Label prefHeight="18.0" prefWidth="110.0" text="Rima Guedria">
+                        <font>
+                            <Font name="Roboto" size="14.0" />
+                        </font>
+                    </Label>
+                </children>
+            </HBox>
+        </children>
+    </HBox>
+    <VBox layoutY="48.0" prefHeight="534.0" prefWidth="132.0" style="-fx-background-color: FFCD38;">
+        <children>
+            <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Acceuil" textAlignment="CENTER">
+                <font>
+                    <Font name="Roboto Bold" size="14.0" />
+                </font>
+                <VBox.margin>
+                    <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
+                </VBox.margin>
+            </Button>
+            <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Favoris" textFill="#ac6d6d">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <VBox.margin>
+                    <Insets bottom="20.0" left="15.0" right="15.0" top="15.0" />
+                </VBox.margin>
+            </Button>
+            <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Messages" textFill="#ac6d6d">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <VBox.margin>
+                    <Insets bottom="20.0" left="15.0" right="15.0" top="15.0" />
+                </VBox.margin>
+            </Button>
+            <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Parascolaires" textFill="#ac6d6d">
+                <VBox.margin>
+                    <Insets bottom="20.0" left="15.0" right="15.0" top="15.0" />
+                </VBox.margin>
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Button>
+        </children>
+    </VBox>
+</children>
+</Pane>
+</AnchorPane>
