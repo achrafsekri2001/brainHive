@@ -14,63 +14,21 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.effect.DropShadow?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.NoteEtAvis">
+   <effect>
+      <DropShadow color="#1b1eeb" />
+   </effect>
    <children>
-      <HBox layoutX="-6.0" prefHeight="87.0" prefWidth="966.0" style="-fx-background-color: FFCD38;">
-         <children>
-            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="494.0">
-               <children>
-                  <TextField prefHeight="38.0" prefWidth="200.0" promptText="rechercher" />
-               </children>
-            </HBox>
-            <Pane prefHeight="60.0" prefWidth="230.0" />
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="175.0">
-               <children>
-                  <Label prefHeight="18.0" prefWidth="110.0" text="Rima Guedria">
-                     <font>
-                        <Font name="System Bold Italic" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-         </children>
-      </HBox>
-      <VBox layoutY="58.0" prefHeight="619.0" prefWidth="142.0" style="-fx-background-color: FFCD38;">
-         <children>
-            <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Acceuil" textAlignment="CENTER">
-               <font>
-                  <Font name="Roboto Bold" size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
-               </VBox.margin>
-            </Button>
-            <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Favoris">
-               <font>
-                  <Font name="SansSerif Bold" size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="15.0" right="15.0" top="15.0" />
-               </VBox.margin>
-            </Button>
-            <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Messages">
-               <font>
-                  <Font name="SansSerif Bold" size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="15.0" right="15.0" top="15.0" />
-               </VBox.margin>
-            </Button>
-            <Button contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: FFFF;" text="Parascolaires">
-               <VBox.margin>
-                  <Insets bottom="20.0" left="15.0" right="15.0" top="15.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="SansSerif Bold" size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
+      <BorderPane prefHeight="576.0" prefWidth="1050.0">
+      <top>
+         <fx:include source="topBar.fxml" />
+      </top>
+      <left>
+         <fx:include source="sideBar.fxml" />
+      </left>
+      <center>
       <VBox layoutX="142.0" layoutY="59.0" prefHeight="610.0" prefWidth="816.0">
          <children>
             <HBox prefHeight="606.0" prefWidth="816.0">
@@ -162,5 +120,7 @@
             </HBox>
          </children>
       </VBox>
+      </center>
+      </BorderPane>
    </children>
 </AnchorPane>

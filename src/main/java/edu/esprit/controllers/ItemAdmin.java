@@ -104,7 +104,31 @@ public class ItemAdmin {
     @FXML
     void avisAction(ActionEvent event) {
 
+        try {
+            // Charger le fichier FXML de la fenêtre de modification du produit
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AvisAdmin.fxml"));
+            Parent root = loader.load();
+
+            // Récupérer le contrôleur associé à la fenêtre de modification
+            AvisAdmin AvisAdmin = loader.getController();
+
+            // Passer les données du produit à évaluer au contrôleur d'avis'
+            AvisAdmin.initDataProduit(produit);
+
+            // Créer une nouvelle scène avec la racine chargée depuis le fichier FXML
+            Scene scene = new Scene(root);
+
+            // Créer une nouvelle fenêtre (stage) pour la scène
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL); // Définir la modalité de la fenêtre
+            stage.showAndWait(); // Afficher la fenêtre et attendre qu'elle soit fermée
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
 
 
 }

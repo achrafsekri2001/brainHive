@@ -4,9 +4,12 @@ import edu.esprit.entities.Produit;
 import edu.esprit.services.ServiceProduit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -93,4 +96,25 @@ public class AfficherProduit implements Initializable {
             afficherTousLesProduits();
         }
     }
+    @FXML
+    void navigatetoMesAvis(ActionEvent event) {
+        navigateTo("/Fxml/MesAvis.fxml");
+
+    }
+    private void navigateTo(String fxmlFilePath) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlFilePath));
+            container.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Ajoutez cette ligne pour afficher les détails de l'exception dans la console
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Navigation Error");
+            alert.setContentText("An error occurred while navigating to the next page.");
+            alert.showAndWait();
+        }
+    }
+
 }

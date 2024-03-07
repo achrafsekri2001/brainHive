@@ -130,11 +130,12 @@ public class NoteEtAvis implements Initializable {
             try {
                 AnchorPane item = loader.load();
                 AvisItem avisItem = loader.getController();
-                avisItem.setAvisData(reclamation, conatinerAvis);
+                avisItem.setAvisData(reclamation, conatinerAvis); // Assurez-vous que le nom de variable est correct ici
                 vcontainer.getChildren().add(item);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
 }

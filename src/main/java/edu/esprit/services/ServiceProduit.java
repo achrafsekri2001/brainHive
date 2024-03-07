@@ -181,6 +181,36 @@ public class ServiceProduit {
 
         return produits;
     }
+    public String getNomProduitById(int idProduit) {
+        String nomProduit = null;
+        try {
+            String req = "SELECT nom FROM produit WHERE id=?";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, idProduit);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                nomProduit = rs.getString("nom");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération du nom du produit : " + e.getMessage());
+        }
+        return nomProduit;
+    }
 
+    public String getCheminImageProduitById(int idProduit) {
+        String cheminImageProduit = null;
+        try {
+            String req = "SELECT image FROM produit WHERE id=?";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, idProduit);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cheminImageProduit = rs.getString("image");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération du chemin de l'image du produit : " + e.getMessage());
+        }
+        return cheminImageProduit;
+    }
 
 }
