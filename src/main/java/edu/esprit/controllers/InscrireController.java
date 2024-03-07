@@ -31,6 +31,7 @@ public class InscrireController implements Initializable {
     @FXML
     private Button button_login;
 
+
     @FXML
     private TextField tf_email;
     @FXML
@@ -88,6 +89,10 @@ try{
             if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || mdp.isEmpty() || roleText.isEmpty())  {
                 throw new IllegalArgumentException("Veuillez remplir tous les champs obligatoires.");
             }
+    // Check for unique email
+    if (serviceUtilisateur.checkEmailExists(email)) {
+        throw new IllegalArgumentException("Cette adresse email existe déjà. Veuillez en choisir une autre.");
+    }
 
 
             // Validate email format
