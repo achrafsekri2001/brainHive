@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -76,53 +77,7 @@ public class Crud  implements Initializable {
 
     }
 
-    @FXML
-    void Delete(ActionEvent event) {
 
-
-
-            try {
-                // Récupérer l'ID de l'utilisateur à supprimer
-                int id = Integer.parseInt(id_asuprimer.getText());  // Assurez-vous que l'ID est saisi dans un TextField
-
-                // Vérifier si l'ID est vide
-                if (id <= 0) {
-                    throw new IllegalArgumentException("Veuillez saisir un ID d'utilisateur valide.");
-                }
-
-                // Créer une instance de ServiceUser
-                ServiceUser serviceUtilisateur = new ServiceUser();
-
-                // Vérifier si l'utilisateur existe
-                User userFound = serviceUtilisateur.getOneByID(id); // Fonction existante
-
-                if (userFound != null) {
-                    // Supprimer l'utilisateur de la base de données
-                    serviceUtilisateur.supprimer(id);  // Fonction existante
-
-                    // Afficher un message de succès
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Succès");
-                    alert.setContentText("Utilisateur supprimé avec succès.");
-                    alert.show();
-
-                    // Effacer les champs de saisie (facultatif)
-                    // ...
-                } else {
-                    // Afficher un message d'erreur
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Erreur");
-                    alert.setContentText("Aucun utilisateur trouvé avec cet ID.");
-                    alert.show();
-                }
-            } catch (NumberFormatException e) {
-                // Gérer les exceptions de format de nombre
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setContentText("Veuillez saisir un ID d'utilisateur valide.");
-                alert.show();
-            }
-    }
 
 
 
@@ -132,11 +87,40 @@ public class Crud  implements Initializable {
     @FXML
     void passer_modif_admin(ActionEvent event)  throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ModifierUser.fxml"));
+
+
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Modifieradmin.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+
+                // Get the current stage
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                // Set the new scene and show it
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                // Handle any errors during loading or display
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setContentText("Échec du chargement de la page 'Modifieradmin'. Veuillez réessayer ou contacter le support.");
+                alert.showAndWait();
+                e.printStackTrace(); // Log the error for debugging
+            }
+        }
+
+
+        /*
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Modifieradmin.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
     }
+
+         */
 
 
 
