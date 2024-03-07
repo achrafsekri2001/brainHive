@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="849.0" style="-fx-background-color: fff6cc;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.MesAvisItem">
+   <children>
+      <ImageView fx:id="imgpara" fitHeight="150.0" fitWidth="131.0" layoutX="29.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+      <Rating fx:id="rate" layoutX="184.0" layoutY="43.0" />
+      <Label fx:id="avis" layoutX="184.0" layoutY="75.0" prefHeight="83.0" prefWidth="495.0" text="Label">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="supprimerButton" layoutX="738.0" layoutY="43.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="94.0" style="-fx-background-color: white;" text="Supprimer" onAction="#supprimerMonAvis">
+         <font>
+            <Font name="Cambria" size="14.0" />
+         </font>
+      </Button>
+      <Label fx:id="nompara" layoutX="184.0" layoutY="6.0" prefHeight="32.0" prefWidth="190.0" text="Label">
+         <font>
+            <Font name="Cambria" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

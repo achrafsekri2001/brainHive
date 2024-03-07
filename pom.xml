@@ -24,11 +24,7 @@
             <groupId>com.idrsolutions</groupId>
             <version>2024.01</version>
         </dependency>
-        <dependency>
-            <version>3.0.1</version>
-            <artifactId>pdfbox</artifactId>
-            <groupId>org.apache.pdfbox</groupId>
-        </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>

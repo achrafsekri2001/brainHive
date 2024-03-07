@@ -2,7 +2,7 @@ package edu.esprit.entities;
 
 import java.util.Objects;
 
-public class AvisProduit {
+public class  AvisProduit {
     private int id; // L'identifiant de l'avis
     private int idProduit; // L'identifiant du produit associé à cet avis
     private User User; // L'identifiant de l'utilisateur qui a laissé cet avis
@@ -31,6 +31,7 @@ public class AvisProduit {
     public AvisProduit() {
 
     }
+
 
     public int getId() {
         return id;

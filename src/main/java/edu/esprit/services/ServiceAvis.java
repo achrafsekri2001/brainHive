@@ -46,11 +46,11 @@ public class ServiceAvis {
         }
     }*/
 
-    public void supprimer(AvisProduit avis) {
+    public void supprimer(int  id) {
         String req = "DELETE FROM avisproduit WHERE id = ?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setInt(1, avis.getId());
+            ps.setInt(1,  id);
             int rowsDeleted = ps.executeUpdate();
             if (rowsDeleted > 0) {
                 System.out.println("Avis supprimé avec succès !");
@@ -145,5 +145,28 @@ public class ServiceAvis {
             }
         }
         return reclamations;
+    }
+    public List<AvisProduit> recupererAvisParUtilisateur(int idUtilisateur) {
+        List<AvisProduit> avisUtilisateur = new ArrayList<>();
+        String req = "SELECT * FROM avisproduit WHERE idUser = ?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, idUtilisateur);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int idAvis = rs.getInt("id");
+                User user = new ServiceUser().getOneByID(rs.getInt("idUser"));
+                int idProduit = rs.getInt("idProduit");
+                String contenu = rs.getString("contenu");
+                int note = rs.getInt("note");
+
+                // Créer un objet AvisProduit pour chaque ligne de résultat
+                AvisProduit avis = new AvisProduit(idAvis, user, contenu, idProduit, note);
+                avisUtilisateur.add(avis);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des avis de l'utilisateur : " + e.getMessage());
+        }
+        return avisUtilisateur;
     }
 }

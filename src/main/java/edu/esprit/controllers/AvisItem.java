@@ -34,7 +34,6 @@ public class AvisItem {
         contenuavis.setText(avisProduit.getContenu());
         rate.setRating(avisProduit.getNote());
 
-
         userimg.setImage(null); // Effacer l'image
         username.setText(avisProduit.getUser().getNom());
         //  }
