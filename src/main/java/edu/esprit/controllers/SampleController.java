@@ -46,8 +46,8 @@ public class SampleController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        email.setText("achraf@achraf.com");
-        password.setText("brainHive123");
+        email.setText("feriel@feriel.com");
+        password.setText("Feriel123");
     }
 
 
@@ -94,7 +94,7 @@ public class SampleController implements Initializable {
                 GlobalHolder.setcurrentUser(existingUser);
                 // User authenticated successfully
                 System.out.println("Utilisateur authentifié avec succès !");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Reclamation.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Accueil.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 email.clear();

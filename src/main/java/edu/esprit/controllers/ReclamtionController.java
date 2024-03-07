@@ -88,10 +88,10 @@ public class ReclamtionController implements Initializable {
 
     @FXML
     private void rechercherParNom() {
-        String texteRecherche = recherche.getText().trim();
-        if (!texteRecherche.isEmpty()) {
+        String non = recherche.getText().trim();
+        if (!non.isEmpty()) {
             // Utiliser le service ReclamationService pour obtenir les réclamations par nom d'utilisateur
-            List<Reclamation> reclamationsParNom = serviceReclamation.getReclamationsByUserName(texteRecherche);
+            List<Reclamation> reclamationsParNom = serviceReclamation.getReclamationsByUserName(non);
 
             // Effacer le contenu actuel de la boîte de réclamations
             boxeReclamation1.getChildren().clear();

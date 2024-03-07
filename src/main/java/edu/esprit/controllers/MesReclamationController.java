@@ -34,7 +34,6 @@ public class MesReclamationController implements Initializable  {
 
     @FXML
     private Label titre;
-    User user= new User();
 
     private final ReclamationService serviceReclamation = new ReclamationService();
 
@@ -87,7 +86,7 @@ public class MesReclamationController implements Initializable  {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-        int userId = user.getId();
+        int userId = GlobalHolder.getcurrentUser().getId();
             try {
 
                 List<Reclamation> reclamations = serviceReclamation.afficherReclamationsParUtilisateur(userId);

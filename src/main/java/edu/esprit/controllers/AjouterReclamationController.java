@@ -38,36 +38,12 @@ public class AjouterReclamationController  implements Initializable {
     private final ServiceUser su=new ServiceUser();
 
 
-    @FXML
-    void NavigateToAcceuil(ActionEvent event) {
-        navigateTo("/Acceuil.fxml");
-    }
 
     @FXML
     void NavigateToBackAction(ActionEvent event) {
         navigateTo("/Fxml/Reclamation.fxml");
     }
 
-    @FXML
-    void NavigateToFavoris(ActionEvent event) {
-        navigateTo("/Favoris.fxml");
-    }
-
-    @FXML
-    void NavigateToMessages(ActionEvent event) {
-        navigateTo("/Fxml/Messagerie.fxml");
-    }
-
-    @FXML
-    void NavigateToProduit(ActionEvent event) {
-        navigateTo("/Fxml/Produit.fxml");
-    }
-
-
-    @FXML
-    void NavigateToReclamation(ActionEvent event) {
-        navigateTo("/Fxml/Reclamation.fxml");
-    }
 
     private void navigateTo(String fxmlFilePath) {
         try {

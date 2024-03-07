@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="133.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.MessageBoxController">
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.MessageBoxController">
    <children>
-      <VBox fx:id="vboxMsg1" layoutX="10.0" layoutY="10.0" prefHeight="120.0" prefWidth="583.0" style="-fx-background-color: #D3D8D3;">
+      <VBox fx:id="vboxMsg11" layoutX="1.0" layoutY="3.0" prefHeight="127.0" prefWidth="495.0" style="-fx-background-color: #D3D8D3;">
          <children>
             <Label fx:id="datetf" prefHeight="24.0" prefWidth="134.0" text="29-02-2024">
                <VBox.margin>
-                  <Insets left="430.0" />
+                  <Insets left="350.0" />
                </VBox.margin>
             </Label>
             <Label fx:id="nonUser1" prefHeight="34.0" prefWidth="327.0" text="3ezdin">
@@ -32,7 +32,7 @@
                   <Image url="@../assets/livre.png" />
                </image>
             </ImageView>
-            <Label fx:id="msgTf1" prefHeight="42.0" prefWidth="468.0" text="helloo kjcdh bq">
+            <Label fx:id="msgTf1" prefHeight="47.0" prefWidth="341.0" text="helloo kjcdh bq">
                <font>
                   <Font name="Roboto Medium" size="17.0" />
                </font>
@@ -48,7 +48,7 @@
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
                <VBox.margin>
-                  <Insets bottom="10.0" left="500.0" />
+                  <Insets bottom="10.0" left="400.0" />
                </VBox.margin>
             </Button>
          </children>
