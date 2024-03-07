@@ -9,37 +9,30 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.Set;
 
-public class PageSauveguardeeController {
-
-
-    @FXML
-    private VBox postsVBox = new VBox();
+public class AdminAccueil {
 
 
     private final PostService postService = new PostService();
 
     @FXML
+    private VBox postsVBox = new VBox();
+
+    @FXML
     public void initialize() {
-
-
-        // load a template
-
-
         // get all posts
-        Set<Post> posts = postService.getSavedPosts(GlobalHolder.getcurrentUser());
+        Set<Post> posts = postService.getAll();
         // all of the nodes are inside the postContainer Pane which is inside the VBOX postsVBox, they are added dynamically to the Pane postContainer and then added to the VBox postsVBox to be displayed.
         for (Post post : posts) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/postContainer.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/adminPostContainer.fxml"));
             try {
                 postsVBox.getChildren().add(loader.load());
                 //set spacing between posts
                 postsVBox.setSpacing(20);
-                postContainerController controller = loader.getController();
+                AdminPostContainerController controller = loader.getController();
                 controller.setData(post);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
-
         }
 
     }

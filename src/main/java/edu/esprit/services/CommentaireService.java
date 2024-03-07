@@ -1,5 +1,6 @@
 package edu.esprit.services;
 
+import edu.esprit.controllers.GlobalHolder;
 import edu.esprit.entities.Commentaire;
 import edu.esprit.entities.Post;
 import edu.esprit.utils.DataSource;
@@ -24,7 +25,7 @@ public class CommentaireService implements IService<Commentaire> {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setString(1, commentaire.getContent());
             pst.setInt(2, commentaire.getPost().getId());
-            pst.setInt(3, commentaire.getUserId());
+            pst.setInt(3, GlobalHolder.getcurrentUser().getId());
             pst.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
             pst.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
             if (commentaire.getParent() != null) {
@@ -45,15 +46,14 @@ public class CommentaireService implements IService<Commentaire> {
     //? add bad words filter
     @Override
     public void modifier(Commentaire commentaire) {
-        String req = "UPDATE commentaire SET content=?, postId=?, userId=?, createdAt=?, updatedAt=? WHERE id=?";
+        String req = "UPDATE commentaire SET content=?, postId=?, createdAt=?, updatedAt=? WHERE id=?";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setString(1, commentaire.getContent());
             pst.setInt(2, commentaire.getPost().getId());
-            pst.setInt(3, commentaire.getUserId());
-            pst.setTimestamp(4, commentaire.getCreatedAt());
-            pst.setTimestamp(5, commentaire.getUpdatedAt());
-            pst.setInt(6, commentaire.getId());
+            pst.setTimestamp(3, commentaire.getCreatedAt());
+            pst.setTimestamp(4, commentaire.getUpdatedAt());
+            pst.setInt(5, commentaire.getId());
             pst.executeUpdate();
             System.out.println("Comment updated !");
         } catch (SQLException e) {
@@ -129,7 +129,7 @@ public class CommentaireService implements IService<Commentaire> {
                 Post post = new Post();
                 post.setId(pst.getResultSet().getInt("postId"));
                 commentaire.setPost(post);
-                commentaire.setUserId(pst.getResultSet().getInt("userId"));
+                commentaire.setUser(new ServiceUser().getOneByID(pst.getResultSet().getInt("userId")));
                 commentaire.setNbreVotes(pst.getResultSet().getInt("upVotes") - pst.getResultSet().getInt("downVotes"));
                 commentaire.setNbreUpVotes(pst.getResultSet().getInt("upVotes"));
                 commentaire.setNbreDownVotes(pst.getResultSet().getInt("downVotes"));
@@ -187,7 +187,7 @@ public class CommentaireService implements IService<Commentaire> {
                 System.out.println("Post not found");
                 commentaire.setPost(null);
             }
-            commentaire.setUserId(pst.getResultSet().getInt("userId"));
+            commentaire.setUser(new ServiceUser().getOneByID(pst.getResultSet().getInt("userId")));
             commentaire.setNbreVotes(pst.getResultSet().getInt("upVotes") - pst.getResultSet().getInt("downVotes"));
             commentaire.setNbreUpVotes(pst.getResultSet().getInt("upVotes"));
             commentaire.setNbreDownVotes(pst.getResultSet().getInt("downVotes"));
@@ -233,7 +233,7 @@ public class CommentaireService implements IService<Commentaire> {
                 commentaire.setId(pst.getResultSet().getInt("id"));
                 commentaire.setContent(pst.getResultSet().getString("content"));
                 commentaire.setPost(post);
-                commentaire.setUserId(pst.getResultSet().getInt("userId"));
+                commentaire.setUser(new ServiceUser().getOneByID(pst.getResultSet().getInt("userId")));
                 commentaire.setNbreVotes(pst.getResultSet().getInt("upVotes") - pst.getResultSet().getInt("downVotes"));
                 commentaire.setNbreUpVotes(pst.getResultSet().getInt("upVotes"));
                 commentaire.setNbreDownVotes(pst.getResultSet().getInt("downVotes"));
@@ -304,5 +304,90 @@ public class CommentaireService implements IService<Commentaire> {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void signaler(int id) {
+        String req = "insert into validation (commentId,teacherId,type,postId) VALUES (?,?,0,?)";
+        String req2 = "UPDATE commentaire SET intOfreports=intOfreports+1 WHERE id=?";
+        String req3 = "select * FROM commentaire WHERE id=?";
+        String deleteComment = "DELETE FROM commentaire WHERE id=?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, id);
+            pst.setInt(2, GlobalHolder.getcurrentUser().getId());
+            pst.setInt(3, getOneByID(id).getPost().getId());
+            pst.executeUpdate();
+            PreparedStatement pst2 = cnx.prepareStatement(req2);
+            pst2.setInt(1, id);
+            pst2.executeUpdate();
+            PreparedStatement pst3 = cnx.prepareStatement(req3);
+            pst3.setInt(1, id);
+            pst3.executeQuery();
+            pst3.getResultSet().next();
+            if (pst3.getResultSet().getInt("intOfreports") > 4) {
+                PreparedStatement pst4 = cnx.prepareStatement(deleteComment);
+                pst4.setInt(1, id);
+                pst4.executeUpdate();
+                System.out.println("Comment deleted !");
+            }
+            System.out.println("Comment reported !");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void verifier(int id) {
+        String req = "INSERT INTO validation (commentId,teacherId,type,postId) VALUES (?,?,1,?)";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, id);
+            pst.setInt(2, GlobalHolder.getcurrentUser().getId());
+            pst.setInt(3, getOneByID(id).getPost().getId());
+            pst.executeUpdate();
+            System.out.println("Comment verified !");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public boolean isVerified(int id) {
+        String req = "SELECT * FROM validation WHERE commentId=? AND type=1";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, id);
+            pst.executeQuery();
+            return pst.getResultSet().next();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean thisUserReported(int id) {
+        String req = "SELECT * FROM validation WHERE commentId=? AND teacherId=? AND type=0";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, id);
+            pst.setInt(2, GlobalHolder.getcurrentUser().getId());
+            pst.executeQuery();
+            return pst.getResultSet().next();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean thisUserVerified(int id) {
+        String req = "SELECT * FROM validation WHERE commentId=? AND teacherId=? AND type=1";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, id);
+            pst.setInt(2, GlobalHolder.getcurrentUser().getId());
+            pst.executeQuery();
+            return pst.getResultSet().next();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }

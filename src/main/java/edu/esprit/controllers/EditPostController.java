@@ -113,7 +113,7 @@ public class EditPostController {
             post.setDescription(descriptionInput.getText());
             post.setMatiere(matiere.getSelectionModel().getSelectedItem().toString());
             // change user id to the current user id
-            post.setUserId(1);
+            post.setUser(GlobalHolder.getcurrentUser());
             post.setFichiers(files);
             postService.modifier(post);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

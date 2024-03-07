@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -31,6 +32,15 @@ public class CommentaireController {
     private Button deleteComment = new Button();
     @FXML
     private Button editComment = new Button();
+    @FXML
+    private ImageView CommentCreatorAvatar = new ImageView();
+    @FXML
+    private Button verifyComment = new Button();
+
+    @FXML
+    private Button reportComment = new Button();
+    @FXML
+    private Label VerifiedLabel = new Label();
 
 
     public Commentaire commentaire;
@@ -41,7 +51,35 @@ public class CommentaireController {
     }
 
     public void initialize() {
-        System.out.println("comment" + commentaire);
+        if (commentaireService.isVerified(commentaire.getId())) {
+            VerifiedLabel.setVisible(true);
+        } else {
+            VerifiedLabel.setVisible(false);
+        }
+
+        if (GlobalHolder.getcurrentUser().getRoles() == 1) {
+            verifyComment.setVisible(true);
+            reportComment.setVisible(true);
+
+            if (commentaireService.thisUserReported(commentaire.getId())) {
+                reportComment.setDisable(true);
+            }
+            if (commentaireService.thisUserVerified(commentaire.getId())) {
+                verifyComment.setDisable(true);
+            }
+        } else {
+            verifyComment.setVisible(false);
+            reportComment.setVisible(false);
+        }
+        System.out.println("comment user id: " + commentaire.getUser().getId());
+        System.out.println("current user id: " + GlobalHolder.getcurrentUser().getId());
+        if (commentaire.getUser().getId() == GlobalHolder.getcurrentUser().getId()) {
+            deleteComment.setVisible(true);
+            editComment.setVisible(true);
+        } else {
+            deleteComment.setVisible(false);
+            editComment.setVisible(false);
+        }
         CommentCreator.setText("Achraf Sekri");
         commentContent.getChildren().add(new Text(commentaire.getContent()));
         CommentDate.setText(commentaire.getCreatedAt().toString());
@@ -54,7 +92,9 @@ public class CommentaireController {
             downVote.setStyle("-fx-background-color: #ff0000");
         }
 
-        upVote.setOnAction(event -> {
+        upVote.setOnAction(event ->
+
+        {
             if (commentaire.getVoted() == 1) {
                 commentaireService.cancelVote(commentaire);
                 commentaire.setVoted(0);
@@ -69,7 +109,9 @@ public class CommentaireController {
             refreshState();
         });
 
-        downVote.setOnAction(event -> {
+        downVote.setOnAction(event ->
+
+        {
             if (commentaire.getVoted() == 2) {
                 commentaireService.cancelVote(commentaire);
                 commentaire.setVoted(0);
@@ -84,12 +126,16 @@ public class CommentaireController {
             refreshState();
         });
 
-        deleteComment.setOnAction(event -> {
+        deleteComment.setOnAction(event ->
+
+        {
             commentaireService.supprimer(commentaire.getId());
             navigateTo("/Fxml/postPage.fxml");
         });
 
-        editComment.setOnAction(event -> {
+        editComment.setOnAction(event ->
+
+        {
             EditCommentaireController controller = new EditCommentaireController();
             controller.setData(commentaire);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/EditCommentaire.fxml"));
@@ -104,6 +150,17 @@ public class CommentaireController {
                 alert.setContentText("An error occurred while navigating to the next page.");
                 alert.showAndWait();
             }
+        });
+
+        verifyComment.setOnAction(event ->
+        {
+            commentaireService.verifier(commentaire.getId());
+            VerifiedLabel.setVisible(true);
+        });
+
+        reportComment.setOnAction(event ->
+        {
+            commentaireService.signaler(commentaire.getId());
         });
 
     }

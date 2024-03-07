@@ -1,5 +1,6 @@
 package edu.esprit.controllers;
 
+import com.google.protobuf.compiler.PluginProtos;
 import edu.esprit.entities.User;
 import edu.esprit.services.ServiceUser;
 import javafx.event.ActionEvent;
@@ -9,11 +10,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -29,6 +33,8 @@ public class SampleController implements Initializable {
     private Button mdp_oublié;
     @FXML
     private Button retou;
+    @FXML
+    private Button ajout_img;
 
 
     @FXML
@@ -46,16 +52,20 @@ public class SampleController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        email.setText("feriel@feriel.com");
-        password.setText("Feriel123");
+        email.setText("achraf@achraf.comm");
+        password.setText("brainHive123");
     }
 
 
     @FXML
     private void handleLogin(ActionEvent event) throws SQLException, IOException {
+
+
         ServiceUser serviceUtilisateur = new ServiceUser();
-        String Email = email.getText();
-        String mdp = password.getText();
+        String Email = email.getText(); // Assuming 'email' is a TextField object
+        String mdp = password.getText(); // Assuming 'password' is a PasswordField object
+
+        // Check for empty fields
         if (Email.isEmpty() || mdp.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
@@ -64,73 +74,33 @@ public class SampleController implements Initializable {
             return;
         }
 
-// Check for specific email and password
-
-        /*(Email.equals("raytn") && mdp.equals("rayn")) {
-            // Navigate to Accueil.fxml directly for specific credentials
-            System.out.println("Utilisateur rayen@rayen.tn authentifié avec succès !");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CRUD.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            email.clear();
-
-            // Obtenir la scène actuelle
-            Stage currentStage = (Stage) button_login.getScene().getWindow();
-
-            // Afficher la nouvelle scène
-            currentStage.setScene(scene);
-            currentStage.show();
-
-         */
-
-
-        // Check if user exists in the database
+        // Check user existence and authenticate
         User existingUser = serviceUtilisateur.findByEmail(Email);
-        System.out.println("existingUser" + existingUser.equals(mdp));
 
-        // If user exists, authenticate
         if (existingUser != null) {
             if (existingUser.getPassword().equals(mdp)) {
                 GlobalHolder.setcurrentUser(existingUser);
-                // User authenticated successfully
                 System.out.println("Utilisateur authentifié avec succès !");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Accueil.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                email.clear();
 
-                // Obtenir la scène actuelle
-                Stage currentStage = (Stage) button_login.getScene().getWindow();
-
-                // Afficher la nouvelle scène
-                currentStage.setScene(scene);
-                currentStage.show();
-
-            } else {
-                // Incorrect password
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setContentText("Mot de passe incorrect.");
-                alert.show();
-            }
-
-
-            if (existingUser.getPassword().equals(mdp)) {
-                GlobalHolder.setcurrentUser(existingUser);
+                // Determine and navigate based on user role
                 if (existingUser.getRoles() == 0) { // Assuming "0" indicates admin role
                     System.out.println("Utilisateur administrateur authentifié avec succès !");
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/CRUD.fxml")); // Load CRUD page
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AdminAccueil.fxml"));
                     Parent root = loader.load();
                     Scene scene = new Scene(root);
                     email.clear();
-
-                    // Obtenir la scène actuelle
                     Stage currentStage = (Stage) button_login.getScene().getWindow();
-
-                    // Afficher la nouvelle scène
                     currentStage.setScene(scene);
                     currentStage.show();
-
+                } else {
+                    // User is not admin, navigate to a different view (e.g., Accueil.fxml)
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/pageAcceuil.fxml")); // Replace with your desired user view
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    email.clear();
+                    Stage currentStage = (Stage) button_login.getScene().getWindow();
+                    currentStage.setScene(scene);
+                    currentStage.show();
                 }
             } else {
                 // Incorrect password
@@ -145,48 +115,12 @@ public class SampleController implements Initializable {
             alert.setTitle("Information");
             alert.setContentText("Aucun utilisateur avec cet email n'existe. Veuillez créer un compte.");
             alert.show();
-
-
-        }
-    }/*
-
-        // If user exists, authenticate and check role
-        if (existingUser != null) {
-            if (existingUser.equals(mdp)) {
-                // User authenticated successfully
-                if (existingUser.getRoles() == 0) { // Assuming "0" indicates admin role
-                    System.out.println("Utilisateur administrateur authentifié avec succès !");
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/CRUD.fxml")); // Load CRUD page
-                    Parent root = loader.load();
-                    Scene scene = new Scene(root);
-                    email.clear();
-
-                    // Obtenir la scène actuelle
-                    Stage currentStage = (Stage) button_login.getScene().getWindow();
-
-                    // Afficher la nouvelle scène
-                    currentStage.setScene(scene);
-                    currentStage.show();
-                } else {
-                    System.out.println("Utilisateur authentifié avec succès, mais n'a pas le rôle administrateur.");
-                    // Handle non-administrator login here (e.g., navigate to a different page)
-                }
-            } else {
-                // Incorrect password
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setContentText("Mot de passe incorrect.");
-                alert.show();
-            }
-        } else {
-            // User not found
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Utilisateur non trouvé.");
-            alert.show();
         }
     }
-    */
+
+
+
+
 
 
     @FXML
@@ -203,6 +137,13 @@ public class SampleController implements Initializable {
         currentStage.setScene(scene);
         currentStage.show();
     }
+    @FXML
+    void ajouter_images(ActionEvent event) {
+
+
+
+    }
+
 
 
     @FXML
@@ -220,6 +161,3 @@ public class SampleController implements Initializable {
         currentStage.show();
     }
 }
-
-
-

@@ -74,6 +74,19 @@ public class CreatePostController {
                 return;
             }
             //form validation
+            // if description or title contains bad words or is empty show an error message
+            // create a list of bad words "putin", "merde", "con", "connard", "connasse", "salope", "enculé", "enculée", "enculer", "enculée", "bite", "bordel", "nique", "niquer", "niquez", "niqueur", "niqueuse", "niqueurs", "niqueuses"
+            List<String> badWords = List.of("putin", "merde", "con", "connard", "connasse", "salope", "enculé", "enculée", "enculer", "enculée", "bite", "bordel", "nique", "niquer", "niquez", "niqueur", "niqueuse", "niqueurs", "niqueuses");
+            for (String badWord : badWords) {
+                if (titleInput.getText().toLowerCase().contains(badWord) || descriptionInput.getText().toLowerCase().contains(badWord)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Contenu inapproprié");
+                    alert.setContentText("Veuillez ne pas utiliser de langage inapproprié.");
+                    alert.showAndWait();
+                    return;
+                }
+            }
             if (titleInput.getText().isEmpty() || descriptionInput.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -87,7 +100,7 @@ public class CreatePostController {
             post.setTitle(titleInput.getText());
             post.setDescription(descriptionInput.getText());
             post.setMatiere(matiere.getSelectionModel().getSelectedItem().toString());
-            post.setUserId(1);
+            post.setUser(GlobalHolder.getcurrentUser());
             post.setFichiers(files);
             postService.ajouter(post);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

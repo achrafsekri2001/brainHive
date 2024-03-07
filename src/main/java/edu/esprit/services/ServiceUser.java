@@ -1,5 +1,6 @@
 package edu.esprit.services;
 
+import edu.esprit.entities.Post;
 import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 import javafx.scene.control.TextField;
@@ -51,8 +52,6 @@ public class ServiceUser implements IService<User> {
 
     @Override
     public void modifier(User t) {
-
-
         String req = "UPDATE `utilisateur` SET `email` = ?, `nom` = ?, `prenom` = ?, `password` = ? WHERE `id` = ?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
@@ -156,8 +155,7 @@ public class ServiceUser implements IService<User> {
 
     @Override
     public Set<User> getAll() {
-
-
+        PostService postService = new PostService();
         Set<User> utilisateurs = new HashSet<>();
         List<User> test = new ArrayList<>();
         String req = "SELECT * FROM `utilisateur`";
@@ -171,9 +169,10 @@ public class ServiceUser implements IService<User> {
                 String prenom = rs.getString("prenom");
                 String password = rs.getString("password");
                 int role = rs.getInt("role");
+                Set<Post> postSauvegardes = postService.getSavedPosts(getOneByID(id));
 
                 // Créer un nouvel utilisateur avec les données récupérées
-                User utilisateur = new User(id, email, nom, prenom, password, role);
+                User utilisateur = new User(id, email, nom, prenom, password, role, postSauvegardes);
 
                 // Ajouter l'utilisateur à l'ensemble
                 utilisateurs.add(utilisateur);
@@ -190,7 +189,7 @@ public class ServiceUser implements IService<User> {
 
     @Override
     public User getOneByID(int id) {
-
+        PostService postService = new PostService();
         User utilisateur = null;
         String req = "SELECT * FROM `utilisateur` WHERE `id`=?";
         try {
@@ -206,6 +205,7 @@ public class ServiceUser implements IService<User> {
                 utilisateur.setPrenom(rs.getString("prenom"));
                 utilisateur.setPassword(rs.getString("password"));
                 utilisateur.setRoles(rs.getInt("role"));
+                utilisateur.setPostSauvegardes(postService.getSavedPosts(utilisateur));
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération de l'utilisateur : " + e.getMessage());

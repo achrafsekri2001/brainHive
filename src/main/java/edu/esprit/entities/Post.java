@@ -10,8 +10,7 @@ public class Post {
     private String title;
     private String description;
     private String matiere;
-    private int userId;
-    // will become User object
+    private User user;
     private int numberOfComments;
     public Set<Commentaire> commentaires = new HashSet<>();
     private Timestamp createdAt;
@@ -22,22 +21,22 @@ public class Post {
 
     }
 
-    public Post(String title, String description, String matiere, int groupId, int userId, int numberOfComments, Timestamp createdAt, Timestamp updatedAt) {
+    public Post(String title, String description, String matiere, int groupId, User user, int numberOfComments, Timestamp createdAt, Timestamp updatedAt) {
         this.title = title;
         this.description = description;
         this.matiere = matiere;
-        this.userId = userId;
+        this.user = user;
         this.numberOfComments = numberOfComments;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public Post(int id, String title, String description, String matiere, int groupId, int userId, int numberOfComments, Timestamp createdAt, Timestamp updatedAt) {
+    public Post(int id, String title, String description, String matiere, int groupId, User user, int numberOfComments, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.matiere = matiere;
-        this.userId = userId;
+        this.user = user;
         this.numberOfComments = numberOfComments;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -84,12 +83,12 @@ public class Post {
         this.matiere = matiere;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getuser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getNumberOfComments() {
@@ -131,7 +130,7 @@ public class Post {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", matiere='" + matiere + '\'' +
-                ", userId=" + userId +
+                ", user=" + user +
                 ", numberOfComments=" + numberOfComments +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

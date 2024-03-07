@@ -1,7 +1,6 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Post;
-import edu.esprit.services.CommentaireService;
 import edu.esprit.services.PostService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +19,7 @@ public class AcceuilController {
     private final PostService postService = new PostService();
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
 
 
         // load a template
@@ -42,6 +41,7 @@ public class AcceuilController {
             }
 
         }
+
 
     }
 }

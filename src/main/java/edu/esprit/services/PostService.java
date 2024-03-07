@@ -1,6 +1,8 @@
 package edu.esprit.services;
 
+import edu.esprit.controllers.GlobalHolder;
 import edu.esprit.entities.Post;
+import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
@@ -20,7 +22,7 @@ public class PostService implements IService<Post> {
             pst.setString(1, post.getTitle());
             pst.setString(2, post.getDescription());
             pst.setString(3, post.getMatiere());
-            pst.setInt(4, post.getUserId());
+            pst.setInt(4, GlobalHolder.getcurrentUser().getId());
             pst.setInt(5, post.getNumberOfComments());
             pst.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
             pst.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
@@ -44,22 +46,92 @@ public class PostService implements IService<Post> {
     }
 
     public void save(Post post) {
-        System.out.println("Post saved !");
+        String req = "INSERT INTO postsauveguardee (idUser, idPost) VALUES (?,?)";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, GlobalHolder.getcurrentUser().getId());
+            pst.setInt(2, post.getId());
+            pst.executeUpdate();
+            System.out.println("Post saved !");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
+    public void unSave(Post post) {
+        String req = "DELETE FROM postsauveguardee WHERE idUser=? AND idPost=?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, GlobalHolder.getcurrentUser().getId());
+            pst.setInt(2, post.getId());
+            pst.executeUpdate();
+            System.out.println("Post unsaved !");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public Set<Post> getSavedPosts(User user) {
+        Set<Post> posts = new HashSet<>();
+        String req = "SELECT p.* from post p join postsauveguardee ps on p.id = ps.idPost where ps.idUser = ?";
+        String req2 = "SELECT * FROM fichierpost WHERE postId=?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, user.getId());
+            pst.executeQuery();
+            while (pst.getResultSet().next()) {
+                Post post = new Post();
+                post.setId(pst.getResultSet().getInt("id"));
+                post.setTitle(pst.getResultSet().getString("title"));
+                post.setDescription(pst.getResultSet().getString("description"));
+                post.setMatiere(pst.getResultSet().getString("matiere"));
+                post.setUser(new ServiceUser().getOneByID(pst.getResultSet().getInt("userId")));
+                post.setNumberOfComments(pst.getResultSet().getInt("nbrOfComments"));
+                post.setCreatedAt(pst.getResultSet().getTimestamp("createdAt"));
+                post.setUpdatedAt(pst.getResultSet().getTimestamp("updatedAt"));
+                PreparedStatement pst2 = cnx.prepareStatement(req2);
+                pst2.setInt(1, post.getId());
+                pst2.executeQuery();
+                Set<String> fichiers = new HashSet<>();
+                while (pst2.getResultSet().next()) {
+                    fichiers.add(pst2.getResultSet().getString("fileLink"));
+                }
+                post.setFichiers(fichiers);
+                posts.add(post);
+            }
+            System.out.println("Posts selected !");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return posts;
+    }
+
+    public boolean isSaved(Post post) {
+        String req = "SELECT * from postsauveguardee where idUser = ? and idPost = ?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, GlobalHolder.getcurrentUser().getId());
+            pst.setInt(2, post.getId());
+            pst.executeQuery();
+            if (pst.getResultSet().next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
 
     @Override
     public void modifier(Post post) {
-        String req = "UPDATE post SET title=?, description=?, matiere=?, userId=?, updatedAt=? WHERE id=?";
+        String req = "UPDATE post SET title=?, description=?, matiere=?,  updatedAt=? WHERE id=?";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setString(1, post.getTitle());
             pst.setString(2, post.getDescription());
             pst.setString(3, post.getMatiere());
-
-            pst.setInt(4, post.getUserId());
-            pst.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
-            pst.setInt(6, post.getId());
+            pst.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+            pst.setInt(5, post.getId());
             pst.executeUpdate();
             System.out.println("Post updated !");
         } catch (SQLException e) {
@@ -148,7 +220,7 @@ public class PostService implements IService<Post> {
                 post.setTitle(pst.getResultSet().getString("title"));
                 post.setDescription(pst.getResultSet().getString("description"));
                 post.setMatiere(pst.getResultSet().getString("matiere"));
-                post.setUserId(pst.getResultSet().getInt("userId"));
+                post.setUser(new ServiceUser().getOneByID(pst.getResultSet().getInt("userId")));
                 post.setNumberOfComments(pst.getResultSet().getInt("nbComments"));
                 post.setCreatedAt(pst.getResultSet().getTimestamp("createdAt"));
                 post.setUpdatedAt(pst.getResultSet().getTimestamp("updatedAt"));
@@ -183,7 +255,7 @@ public class PostService implements IService<Post> {
             post.setTitle(pst.getResultSet().getString("title"));
             post.setDescription(pst.getResultSet().getString("description"));
             post.setMatiere(pst.getResultSet().getString("matiere"));
-            post.setUserId(pst.getResultSet().getInt("userId"));
+            post.setUser(new ServiceUser().getOneByID(pst.getResultSet().getInt("userId")));
             post.setNumberOfComments(pst.getResultSet().getInt("nbComments"));
             post.setCreatedAt(pst.getResultSet().getTimestamp("createdAt"));
             post.setUpdatedAt(pst.getResultSet().getTimestamp("updatedAt"));
@@ -216,7 +288,7 @@ public class PostService implements IService<Post> {
                 post.setTitle(pst.getResultSet().getString("title"));
                 post.setDescription(pst.getResultSet().getString("description"));
                 post.setMatiere(pst.getResultSet().getString("matiere"));
-                post.setUserId(pst.getResultSet().getInt("userId"));
+                post.setUser(new ServiceUser().getOneByID(pst.getResultSet().getInt("userId")));
                 post.setNumberOfComments(pst.getResultSet().getInt("nbComments"));
                 post.setCreatedAt(pst.getResultSet().getTimestamp("createdAt"));
                 post.setUpdatedAt(pst.getResultSet().getTimestamp("updatedAt"));
@@ -251,7 +323,7 @@ public class PostService implements IService<Post> {
                 post.setTitle(pst.getResultSet().getString("title"));
                 post.setDescription(pst.getResultSet().getString("description"));
                 post.setMatiere(pst.getResultSet().getString("matiere"));
-                post.setUserId(pst.getResultSet().getInt("userId"));
+                post.setUser(new ServiceUser().getOneByID(pst.getResultSet().getInt("userId")));
                 post.setNumberOfComments(pst.getResultSet().getInt("nbComments"));
                 post.setCreatedAt(pst.getResultSet().getTimestamp("createdAt"));
                 post.setUpdatedAt(pst.getResultSet().getTimestamp("updatedAt"));

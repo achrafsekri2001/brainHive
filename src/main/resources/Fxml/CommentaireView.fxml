@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.Avatar?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -40,13 +39,24 @@
                         </Button>
                     </children>
                 </VBox>
-                <Avatar fx:id="CommentCreatorAvatar" style="-fx-background-color: ebebebeb;">
+                <ImageView fx:id="CommentCreatorAvatar" fitWidth="20.0" preserveRatio="true" style="-fx-background-color: ebebebeb;">
                     <HBox.margin>
                         <Insets right="8.0" />
                     </HBox.margin>
-                </Avatar>
-                <VBox prefHeight="100.0" prefWidth="164.0">
+               <image>
+                  <Image url="https://brainhive.s3.eu-west-3.amazonaws.com/IMG_5881.jpeg" />
+               </image>
+                </ImageView>
+                <VBox prefHeight="100.0" prefWidth="164.0" spacing="5.0">
                     <children>
+                  <Label fx:id="VerifiedLabel" style="-fx-background-color: green; -fx-background-radius: 100;" text="Verifiée" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="10.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="2.0" left="3.0" right="3.0" top="2.0" />
+                     </padding>
+                  </Label>
                         <Text fx:id="CommentCreator" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                         <TextFlow fx:id="commentContent" prefHeight="200.0" prefWidth="200.0" />
                         <Label fx:id="CommentDate" text="15/02/2024">
@@ -56,28 +66,49 @@
                         </Label>
                     </children>
                 </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Button fx:id="editComment" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                  <Button fx:id="verifyComment" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font name="Arial" size="8.0" />
+                     </font>
                      <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="https://brainhive.s3.eu-west-3.amazonaws.com/edit.png" />
+                              <Image url="@../assets/check.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="deleteComment" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                  <Button fx:id="reportComment" layoutX="10.0" layoutY="55.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
                      <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="https://brainhive.s3.eu-west-3.amazonaws.com/delete.png" />
+                              <Image url="@../assets/dislike.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-               </children>
-            </VBox>
+                        <Button fx:id="editComment" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="https://brainhive.s3.eu-west-3.amazonaws.com/edit.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="deleteComment" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="https://brainhive.s3.eu-west-3.amazonaws.com/delete.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
             </children>
         </HBox>
     </children>

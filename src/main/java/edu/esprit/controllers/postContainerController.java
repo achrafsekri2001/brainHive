@@ -1,7 +1,7 @@
 package edu.esprit.controllers;
 
-import com.gluonhq.charm.glisten.control.Chip;
 import edu.esprit.entities.Post;
+import edu.esprit.services.PostService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,7 +25,7 @@ public class postContainerController {
     @FXML
     private Label postDate = new Label();
     @FXML
-    private AnchorPane postContainer = new AnchorPane();
+    private AnchorPane postContainer;
     @FXML
     private ImageView postAvatar = new ImageView();
     @FXML
@@ -37,8 +37,13 @@ public class postContainerController {
     @FXML
     private ImageView savePostIcon = new ImageView();
 
+    private final PostService postService = new PostService();
+
 
     public void setData(Post post) {
+        // make postAvatar image view rounded
+        postAvatar.setClip(new ImageView(new Image("https://brainhive.s3.eu-west-3.amazonaws.com/blank-profile-picture-973460_1280.png")));
+
         //set width to full width
         postContainer.setPrefWidth(600);
         postTitle.setText(post.getTitle());
@@ -46,15 +51,20 @@ public class postContainerController {
         postDate.setText(post.getCreatedAt().toString());
         postNbrOfComments.setText(post.getNumberOfComments() + "");
         postChip.setText(post.getMatiere());
+        if (postService.isSaved(post)) {
+            savePostIcon.setImage(new Image("https://brainhive.s3.eu-west-3.amazonaws.com/material-symbols_bookmark.png"));
+        } else {
+            savePostIcon.setImage(new Image("https://brainhive.s3.eu-west-3.amazonaws.com/save.png"));
+        }
 //        postAvatar.setImage(post.getUser().getAvatar());
         if (post.getFichiers() != null && !post.getFichiers().isEmpty()) {
             //getFichiers returns a set of files if the first file is not null and is pdf fisplay image link else display the file string link
             if (post.getFichiers().iterator().next().endsWith(".pdf")) {
-                postFile.setImage(new Image("https://play-lh.googleusercontent.com/BkRfMfIRPR9hUnmIYGDgHHKjow-g18-ouP6B2ko__VnyUHSi1spcc78UtZ4sVUtBH4g"));
-                postFile.setFitWidth(150);
+                postFile.setImage(new Image("https://brainhive.s3.eu-west-3.amazonaws.com/pdf-file.png"));
+                postFile.setFitWidth(100);
             } else {
                 postFile.setImage(new Image("file:" + post.getFichiers().iterator().next()));
-                postFile.setFitWidth(150);
+                postFile.setFitWidth(200);
             }
         } else {
             postFile.setVisible(true);
@@ -66,13 +76,21 @@ public class postContainerController {
             // pass the post to the post page
 
         });
+
+        postSaveButton.setOnAction(event -> {
+            if (postService.isSaved(post)) {
+                postService.unSave(post);
+                savePostIcon.setImage(new Image("https://brainhive.s3.eu-west-3.amazonaws.com/save.png"));
+            } else {
+                postService.save(post);
+                savePostIcon.setImage(new Image("https://brainhive.s3.eu-west-3.amazonaws.com/material-symbols_bookmark.png"));
+            }
+        });
     }
 
     // initialize method
     public void initialize() {
-        postSaveButton.setOnAction(event -> {
-            savePostIcon.setImage(new Image("https://brainhive.s3.eu-west-3.amazonaws.com/material-symbols_bookmark.png"));
-        });
+
 
         // when clicking on post take to post page
 
@@ -80,9 +98,9 @@ public class postContainerController {
 
     private void navigateTo(String fxmlFilePath, Post post) {
         try {
-            // load global holder
-            GlobalHolder globalHolder = (GlobalHolder) postContainer.getScene().getWindow().getUserData();
-            globalHolder.setCurrentPost(post);
+
+            GlobalHolder currentPost = new GlobalHolder();
+            currentPost.setCurrentPost(post);
             Parent root = FXMLLoader.load(getClass().getResource(fxmlFilePath));
             // get the stage
             postContainer.getScene().setRoot(root);

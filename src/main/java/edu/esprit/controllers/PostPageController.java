@@ -1,7 +1,5 @@
 package edu.esprit.controllers;
 
-import com.gluonhq.charm.glisten.control.Avatar;
-import com.gluonhq.charm.glisten.control.Chip;
 import edu.esprit.entities.Commentaire;
 import edu.esprit.entities.Post;
 import edu.esprit.services.CommentaireService;
@@ -30,7 +28,7 @@ public class PostPageController {
     private final CommentaireService commentaireService = new CommentaireService();
 
     @FXML
-    private Chip postChip = new Chip();
+    private Label postChip = new Label();
     @FXML
     private Text postTitle = new Text();
     @FXML
@@ -39,13 +37,15 @@ public class PostPageController {
     private Label postDate = new Label();
 
     @FXML
-    private Avatar postAvatar = new Avatar();
+    private ImageView postAvatar = new ImageView();
     @FXML
     private HBox postFile = new HBox();
     @FXML
     private Button postNbrOfComments = new Button();
     @FXML
     private Button postSaveButton = new Button();
+    @FXML
+    private ImageView savePostIcon = new ImageView();
     @FXML
     private TextField addCommentField = new TextField();
     @FXML
@@ -67,6 +67,28 @@ public class PostPageController {
         postDate.setText(post.getCreatedAt().toString());
         postNbrOfComments.setText(post.getNumberOfComments() + "");
         postChip.setText(post.getMatiere());
+        if (postService.isSaved(post)) {
+            savePostIcon.setImage(new Image("https://brainhive.s3.eu-west-3.amazonaws.com/material-symbols_bookmark.png"));
+        } else {
+            savePostIcon.setImage(new Image("https://brainhive.s3.eu-west-3.amazonaws.com/save.png"));
+        }
+        if (post.getuser().getId() == GlobalHolder.getcurrentUser().getId()) {
+            deleteButton.setVisible(true);
+            editButton.setVisible(true);
+        } else {
+            deleteButton.setVisible(false);
+            editButton.setVisible(false);
+        }
+
+        postSaveButton.setOnAction(event -> {
+            if (postService.isSaved(post)) {
+                postService.unSave(post);
+                savePostIcon.setImage(new Image("https://brainhive.s3.eu-west-3.amazonaws.com/save.png"));
+            } else {
+                postService.save(post);
+                savePostIcon.setImage(new Image("https://brainhive.s3.eu-west-3.amazonaws.com/material-symbols_bookmark.png"));
+            }
+        });
 
         // when postOptions second button is clicked navigate to edit post page
         editButton.setOnAction(event -> {
@@ -96,9 +118,13 @@ public class PostPageController {
                         // add button to open pdf
                         Button openPdfButton = new Button("Open PDF");
                         openPdfButton.setOnAction(event -> {
-                            Viewer viewer = new Viewer();
-                            viewer.setupViewer();
-                            viewer.executeCommand(ViewerCommands.OPENFILE, new Object[]{file});
+                            try {
+                                Viewer viewer = new Viewer();
+                                viewer.setupViewer();
+                                viewer.executeCommand(ViewerCommands.OPENFILE, new Object[]{file});
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
                         });
                         postFile.getChildren().add(openPdfButton);
 
@@ -114,8 +140,6 @@ public class PostPageController {
                     }
                 }
                 postFile.setSpacing(10);
-                // add a border in between the files
-                postFile.setStyle("-fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 5px;");
 
 
             } catch (Exception e) {
@@ -137,7 +161,7 @@ public class PostPageController {
             Commentaire commentaire = new Commentaire();
             commentaire.setContent(addCommentField.getText());
             commentaire.setPost(post);
-            commentaire.setUserId(1);
+            commentaire.setUser(GlobalHolder.getcurrentUser());
             commentaire.setNbreVotes(0);
             commentaire.setNbreUpVotes(0);
             commentaire.setNbreDownVotes(0);

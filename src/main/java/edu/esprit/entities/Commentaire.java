@@ -9,7 +9,7 @@ public class Commentaire {
     private int id;
     private String content;
     private Post post;
-    private int userId;
+    private User user;
     public int nbreVotes;
     public int nbreUpVotes;
     public int nbreDownVotes;
@@ -19,10 +19,10 @@ public class Commentaire {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    public Commentaire(String content, Post post, int userId, int nbreVotes, int voted, int nbreUpVotes, int nbreDownVotes, Set<Object> fichier, Commentaire parent, Timestamp createdAt, Timestamp updatedAt) {
+    public Commentaire(String content, Post post, User user, int nbreVotes, int voted, int nbreUpVotes, int nbreDownVotes, Set<Object> fichier, Commentaire parent, Timestamp createdAt, Timestamp updatedAt) {
         this.content = content;
         this.post = post;
-        this.userId = userId;
+        this.user = user;
         this.nbreVotes = nbreVotes;
         this.nbreUpVotes = nbreUpVotes;
         this.nbreDownVotes = nbreDownVotes;
@@ -33,11 +33,11 @@ public class Commentaire {
         this.updatedAt = updatedAt;
     }
 
-    public Commentaire(int id, String content, Post post, int userId, int nbreVotes, int nbreUpVotes, int nbreDownVotes,int voted, Set<Object> fichier, Commentaire parent, Timestamp createdAt, Timestamp updatedAt) {
+    public Commentaire(int id, String content, Post post, User user, int nbreVotes, int nbreUpVotes, int nbreDownVotes, int voted, Set<Object> fichier, Commentaire parent, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.content = content;
         this.post = post;
-        this.userId = userId;
+        this.user = user;
         this.nbreVotes = nbreVotes;
         this.nbreUpVotes = nbreUpVotes;
         this.nbreDownVotes = nbreDownVotes;
@@ -83,12 +83,12 @@ public class Commentaire {
         this.post = post;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getNbreVotes() {
@@ -165,7 +165,7 @@ public class Commentaire {
         return "Commentaire{" +
                 "content='" + content + '\'' +
                 ", post=" + post +
-                ", userId=" + userId +
+                ", user=" + user +
                 ", nbreVotes=" + nbreVotes +
                 ", nbreUpVotes=" + nbreUpVotes +
                 ", nbreDownVotes=" + nbreDownVotes +
