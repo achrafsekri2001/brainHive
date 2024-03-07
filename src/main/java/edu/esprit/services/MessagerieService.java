@@ -1,5 +1,6 @@
 package edu.esprit.services;
 
+import edu.esprit.controllers.GlobalHolder;
 import edu.esprit.entities.Messagerie;
 import edu.esprit.utils.DataSource;
 
@@ -15,8 +16,8 @@ public class MessagerieService {
     public void ajouter(Messagerie messagerie) {
         try {
             PreparedStatement pre = connection.prepareStatement("INSERT INTO message (`idEmetteur`,`idRecepteur`,`date`,`contenu`) VALUES (?,?,?,?)");
-            pre.setInt(1, 1);
-            pre.setInt(2, 2);
+            pre.setInt(1,  GlobalHolder.getcurrentUser().getId());
+            pre.setInt(2, 2/*messagerie.getReceiver_message().getId()*/);
 //            pre.setInt(1, messagerie.getSender_message().getId());
 //            pre.setInt(2, messagerie.getReceiver_message().getId());
             pre.setString(4, messagerie.getContenu());
@@ -77,15 +78,18 @@ public class MessagerieService {
     // Méthode pour récupérer tous les messages de la base de données
     public List<Messagerie> getAll() {
         List<Messagerie> listOfMsgs = new ArrayList<>();
+        String req = "Select * from message";
         try {
-            Statement ste = connection.createStatement();
-            ResultSet rs = ste.executeQuery("SELECT * FROM message");
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
                 Messagerie mess = new Messagerie();
                 mess.setIdMessage(rs.getInt("id"));
                 mess.setContenu(rs.getString("contenu"));
-
                 mess.setDate(rs.getTimestamp("date"));
+                mess.setSender_message(GlobalHolder.getcurrentUser());
+
+
                 // Utilisez ServiceUtilisateur pour obtenir l'Utilisateur par ID
 //                Utilisateur sender = new UserCRUD().getOneByID(rs.getInt("idEmetteur"));
 //                Utilisateur receiver = new UserCRUD().getOneByID(rs.getInt("idRecepteur"));

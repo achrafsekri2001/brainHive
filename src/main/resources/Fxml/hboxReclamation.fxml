@@ -11,14 +11,14 @@
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.HboxReclamationController">
    <children>
-      <VBox fx:id="boxeReclamation1" layoutY="4.0" prefHeight="126.0" prefWidth="690.0" style="-fx-background-color: #D3D8D3;">
+      <VBox fx:id="boxeReclamation1" layoutY="4.0" prefHeight="126.0" prefWidth="690.0" style="-fx-background-color: white;">
          <children>
             <Label fx:id="dateRec" prefHeight="15.0" prefWidth="274.0" text="20:20">
                <VBox.margin>
                   <Insets left="500.0" top="15.0" />
                </VBox.margin>
                <font>
-                  <Font name="Roboto Bold" size="13.0" />
+                  <Font name="System Bold" size="13.0" />
                </font>
             </Label>
             <Label fx:id="username" prefHeight="19.0" prefWidth="353.0" text="RimaGuedria">
@@ -26,15 +26,15 @@
                   <Insets left="120.0" />
                </VBox.margin>
                <font>
-                  <Font name="Roboto Bold" size="15.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="objet1" prefHeight="52.0" prefWidth="579.0" style="-fx-background-color: #D3D8D3;" text="Objet">
+            <Label fx:id="objet1" prefHeight="52.0" prefWidth="579.0" text="Objet">
                <VBox.margin>
                   <Insets left="150.0" top="2.0" />
                </VBox.margin>
                <font>
-                  <Font name="Roboto Bold" size="21.0" />
+                  <Font name="System Bold" size="21.0" />
                </font>
             </Label>
             <ImageView fx:id="imageuser1" fitHeight="56.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
@@ -53,7 +53,7 @@
                   <Insets left="150.0" top="-2.0" />
                </VBox.margin>
                <font>
-                  <Font name="Roboto Bold" size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
          </children>

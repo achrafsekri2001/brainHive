@@ -2,6 +2,7 @@ package edu.esprit.services;
 
 import edu.esprit.controllers.GlobalHolder;
 import edu.esprit.entities.Reclamation;
+import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
@@ -23,17 +24,15 @@ public class ReclamationService {
             ps.setInt(1, idUser);
             ResultSet res = ps.executeQuery();
             while (res.next()) {
-                // Récupérer les détails de la réclamation depuis le ResultSet
-                int id = res.getInt(2);
-                String user = res.getString("user");
-                String contenu = res.getString("contenu");
-                String objet = res.getString("objet");
-                //  String imgUser = res.getString("imgUser");
-                Timestamp date = res.getTimestamp("date");
-
-                // Créer un objet Reclamation et l'ajouter à la liste
-                Reclamation reclamation = new Reclamation(contenu, objet, date, id);
-                reclamations.add(reclamation);
+                Reclamation rec = new Reclamation();
+                rec.setIdReclamation(res.getInt("id"));
+                rec.setContenu(res.getString("contenu"));
+                rec.setObjet(res.getString("objet"));
+                rec.setDate(res.getTimestamp("date"));
+                rec.setIdUser(res.getInt("idUser"));
+                rec.setUtilisateur(new ServiceUser().getOneByID(res.getInt("idUser")));
+                reclamations.add(rec);
+       ;
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération des réclamations par utilisateur : " + e.getMessage());
@@ -86,8 +85,8 @@ public class ReclamationService {
                 String objet = rs.getString("objet");
                 String contenu = rs.getString("contenu");
                 Timestamp date = rs.getTimestamp("date");
-//                UserCRUD su = new UserCRUD();
-//                Utilisateur utilisateur= su.getOneByID(idUser);
+//                ServiceUser su = new ServiceUser();
+//                User utilisateur= su.getOneByID(idUser);
                 Reclamation reclamation1 = new Reclamation(contenu, objet, date, idUser);
                 return reclamation1;
             } else {
@@ -130,22 +129,24 @@ public class ReclamationService {
     public List<Reclamation> getReclamationsByUserName(String texteRecherche) {
         List<Reclamation> reclamations = new ArrayList<>();
 
-        String req = "SELECT * FROM reclamation WHERE reclamation.idUser LIKE ?";
+
+        String req = "SELECT * FROM reclamation r "
+                + "INNER JOIN utilisateur u ON r.idUser = u.id "
+                + "WHERE u.nom = ?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, "%" + texteRecherche + "%"); // Utilisation de LIKE pour rechercher les réclamations par nom d'utilisateur partiel
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("idReclamation");
-                //  String nom = rs.getString("user");
-                String contenu = rs.getString("contenu");
-                String objet = rs.getString("objet");
-                //  String imgUser = rs.getString("imgUser");
-                Timestamp date = rs.getTimestamp("date");
-                int idUser = rs.getInt("idUser");
-
-                Reclamation p = new Reclamation(contenu, objet, date, id, idUser);
-                reclamations.add(p);
+                Reclamation rec = new Reclamation();
+//                commentaire.setId(pst.getResultSet().getInt("id"));
+                rec.setIdReclamation(rs.getInt("id"));
+                rec.setContenu(rs.getString("contenu"));
+                rec.setObjet(rs.getString("objet"));
+                rec.setDate(rs.getTimestamp("date"));
+                rec.setIdUser(rs.getInt("idUser"));
+                rec.setUtilisateur(new ServiceUser().getOneByID(rs.getInt("idUser")));
+                reclamations.add(rec);
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération des reclamations par nom : " + e.getMessage());
@@ -154,4 +155,7 @@ public class ReclamationService {
         return reclamations;
     }
 
-}
+
+    }
+
+
