@@ -63,7 +63,7 @@
                   <Font size="22.0" />
                </font>
             </Button>
-            <Button layoutX="45.0" layoutY="322.0" mnemonicParsing="false" onAction="#navigatetoAfficherQuizActino" text="Afficher">
+            <Button fx:id="TFAfficher" layoutX="45.0" layoutY="322.0" mnemonicParsing="false" onAction="#navigatetoAfficherQuizActino" text="Afficher">
                <font>
                   <Font size="22.0" />
                </font>

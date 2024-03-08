@@ -46,8 +46,8 @@ public class SampleController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        email.setText("achraf@achraf.com");
-        password.setText("brainHive123");
+        email.setText("rayen@gmail.com");
+        password.setText("Rayen159");
     }
 
 

@@ -66,6 +66,7 @@ public class ModifierQuestionController {
 
             ServiceQuiz qs1 = new ServiceQuiz();
             int idQuiz = qs1.getIdQuizByCode(codeQuiz);
+            System.out.println("id="+idQuiz);
 
             // Vérification de la question et des choix non vides
             String modifiedQuestion = TFquestionModify.getText();
@@ -113,6 +114,7 @@ public class ModifierQuestionController {
                 question.setQuiz(qs1.getOneByID(idQuiz));
                 question.getQuiz().setCode(selectedCodeQuiz);
                 question.setReponse_correcte(modifiedReponseCorrecte);
+
 
                 qs.modifier(question);
 

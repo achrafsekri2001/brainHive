@@ -7,8 +7,7 @@ import edu.esprit.entities.Quiz;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 public class ServiceQuestion implements IService<Question> {
@@ -17,7 +16,7 @@ public class ServiceQuestion implements IService<Question> {
     @Override
     public void ajouter(Question question) throws SQLException {
         try{
-            String query = "INSERT INTO question (question, choix, id,reponse_correcte) VALUES (?, ?, ?,?)";
+            String query = "INSERT INTO question (question, choix, quiz,reponse_correcte) VALUES (?, ?, ?,?)";
             try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
                 preparedStatement.setString(1, question.getQuestion());
                 preparedStatement.setString(2, question.getChoix());
@@ -118,7 +117,58 @@ public class ServiceQuestion implements IService<Question> {
     }
         return null;
     }
+    public List<Map<String, Object>> getQuestionsForQuiz(int code) throws SQLException {
+        List<Map<String, Object>> questions = new ArrayList<>();
+        ServiceQuiz qs=new ServiceQuiz();
+        int id= qs.getIdQuizByCode(code);
 
+
+
+
+        try  {
+            String query = "SELECT question, choix, reponse_correcte FROM question WHERE id =?";
+            try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
+                preparedStatement.setInt(1, id);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        String questionText = resultSet.getString("question");
+                        String choix = resultSet.getString("choix");
+                        int reponseCorrecte = resultSet.getInt("reponse_correcte");
+
+                        // Créer une map pour stocker les données de la question
+                        Map<String, Object> questionMap = new HashMap<>();
+                        questionMap.put("question", questionText);
+                        questionMap.put("choix", choix);
+                        questionMap.put("reponse_correcte", reponseCorrecte);
+
+                        questions.add(questionMap);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return questions;
+    }
+
+    public int getidByCode(Integer code) throws SQLException {
+        try {
+            String sql = "SELECT id FROM quiz WHERE code = ?";
+            try (PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setInt(1, code);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getInt("id");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return -1;
+    }
 
 
 
