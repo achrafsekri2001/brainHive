@@ -1,6 +1,7 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Question;
+import edu.esprit.entities.Quiz;
 import edu.esprit.services.ServiceQuestion;
 import java.io.IOException;
 import java.sql.Connection;
@@ -28,7 +29,7 @@ public class AjouterQuestionController {
 
 
     @FXML
-    private ComboBox<Integer> TFcode_quiz;
+    private ComboBox<Integer> TFcode;
 
     @FXML
     private TextField TFchoix;
@@ -39,13 +40,14 @@ public class AjouterQuestionController {
     private TextField TFreponse_correcte;
 
     private final ServiceQuestion qs = new ServiceQuestion();
+
     private final ServiceQuiz ServiceQuiz = new ServiceQuiz();
 
     @FXML
     public void initialize() {
         List<Integer> codesQuiz = ServiceQuiz.getQuizcodes();
         ObservableList<Integer> observableCodesQuiz = FXCollections.observableArrayList(codesQuiz);
-        TFcode_quiz.setItems(observableCodesQuiz);
+        TFcode.setItems(observableCodesQuiz);
     }
 
 
@@ -62,62 +64,57 @@ public class AjouterQuestionController {
             String question = TFquestion.getText();
             String choix = TFchoix.getText();
 
-            if (question.isEmpty()) /*|| choix.isEmpty()||!isValidChoiceFormat(choix))*/  {
-                // Afficher un message d'erreur
+            if (question.isEmpty()) {
                 setTextFieldErrorStyle(TFquestion);
-
-                showAlert("Erreur de saisie", "Veuillez saisir une question .");
+                showAlert("Erreur de saisie", "Veuillez saisir une question.");
                 return;
             }
-            if (choix.isEmpty()) /*|| choix.isEmpty()||!isValidChoiceFormat(choix))*/  {
-                // Afficher un message d'erreur
-
-                setTextFieldErrorStyle(TFchoix);
-                showAlert("Erreur de saisie", "Veuillez saisir des choix.");
-                return;
-            }
-            if (!isValidChoiceFormat(choix)) /*|| choix.isEmpty()||!isValidChoiceFormat(choix))*/  {
-                // Afficher un message d'erreur
-
+            if (choix.isEmpty() || !isValidChoiceFormat(choix)) {
                 setTextFieldErrorStyle(TFchoix);
                 showAlert("Erreur de saisie", "Veuillez saisir des choix sous la forme 1)...2)...3)...");
                 return;
             }
-
 
             // Vérification de la réponse correcte
             try {
                 int reponseCorrecte = Integer.parseInt(TFreponse_correcte.getText());
 
                 if (reponseCorrecte < 1 || reponseCorrecte > 3) {
-                    // Afficher un message d'erreur
                     setTextFieldErrorStyle(TFreponse_correcte);
                     showAlert("Erreur de saisie", "La réponse correcte doit être entre 1 et 3.");
                     return;
                 }
 
-                ServiceQuiz qs1 = new ServiceQuiz();
-                int id = getidByCode(TFcode_quiz.getValue());
+                // Récupérer l'identifiant du quiz
+                int id_quiz = qs.getidByCode(TFcode.getValue());
+                System.out.println(TFcode.getValue());
+                System.out.println(id_quiz);
+                if (id_quiz != -1) {
+                    // Récupérer le quiz
 
-                if (id != -1) {
-                    qs.ajouter(new Question(question, choix, qs1.getOneByID(id), reponseCorrecte));
-                    showAlert("Success", "GG");
+                    if (ServiceQuiz.getOneByID(id_quiz) != null) {
+                        // Ajouter la question au quiz
+                        ServiceQuestion serviceQuestion = new ServiceQuestion();
+                        serviceQuestion.ajouter(new Question(question, choix, ServiceQuiz.getOneByID(id_quiz), reponseCorrecte));
+                        showAlert("Succès", "La question a été ajoutée avec succès.");
+                    } else {
+                        showAlert("Avertissement", "Impossible de trouver le quiz pour le code sélectionné.");
+                    }
                 } else {
-                    showAlert("Warning", "Impossible de trouver l'id_quiz pour le code_quiz sélectionné.");
+                    showAlert("Avertissement", "Impossible de trouver l'identifiant du quiz pour le code sélectionné.");
                 }
 
             } catch (NumberFormatException e) {
-                // Afficher un message d'erreur
                 setTextFieldErrorStyle(TFreponse_correcte);
                 showAlert("Erreur de saisie", "Veuillez saisir une réponse correcte valide (nombre entier).");
             }
 
         } catch (Exception e) {
-            // Gérer les autres exceptions
             e.printStackTrace();
-            showAlert("SQL Exception", e.getMessage());
+            showAlert("GHALTA", e.getMessage());
         }
     }
+
 
     private boolean isValidChoiceFormat(String choix) {
         // Le format attendu est "1)..... 2)...... 3)......"
@@ -132,7 +129,7 @@ public class AjouterQuestionController {
     private void resetTextFieldStyles() {
         TFquestion.setStyle(null);
         TFchoix.setStyle(null);
-        TFcode_quiz.setStyle(null);
+        TFcode.setStyle(null);
         TFreponse_correcte.setStyle(null);
     }
 
@@ -154,34 +151,15 @@ public class AjouterQuestionController {
 
 
 
-    public int getidByCode(Integer codeQuiz) throws SQLException {
-
-        Connection connection = DataSource.getInstance().getCnx();
-
-        try {
-            String sql = "SELECT id FROM quiz WHERE code_quiz = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setInt(1, codeQuiz);
-
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    if (resultSet.next()) {
-                        return resultSet.getInt("id");
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
 
 
-        return -1;
-    }
+
     public void navigateToAfficher(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AfficherQuestion.fxml"));
             Parent root = loader.load();
 
-            Stage stage = (Stage) TFcode_quiz.getScene().getWindow(); // Utilisez la même fenêtre (Stage) actuelle
+            Stage stage = (Stage) TFchoix.getScene().getWindow(); // Utilisez la même fenêtre (Stage) actuelle
             Scene scene = new Scene(root);
 
             stage.setScene(scene);

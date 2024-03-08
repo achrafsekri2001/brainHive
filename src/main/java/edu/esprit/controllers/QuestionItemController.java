@@ -39,7 +39,9 @@ public class QuestionItemController {
         this.question = question;
         labelQuestion.setText(question.getQuestion());
         LabelChoix.setText(question.getChoix());
-        labelCodeQuiz.setText(String.valueOf(question.getQuiz().getCode()));
+
+       if (question.getQuiz()!=null)
+       { labelCodeQuiz.setText(String.valueOf(question.getQuiz().getCode()));}
         LabelReponseCorrecte.setText(String.valueOf(question.getReponse_correcte()));
 
 

@@ -25,11 +25,7 @@
                   <HBox alignment="CENTER" prefHeight="110.0" prefWidth="200.0" />
                   <Pane prefHeight="904.0" prefWidth="435.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="195.0" fitWidth="211.0" layoutX="98.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../Downloads/a3.jpg" />
-                           </image>
-                        </ImageView>
+
                         <Button layoutX="140.0" layoutY="463.0" mnemonicParsing="false" onAction="#navigateToAjouter" prefHeight="25.0" prefWidth="137.0" text="AJOUTER QUESTION">
                            <style>
                               -fx-background-color: #3498db; /* Couleur de fond */

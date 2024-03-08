@@ -44,7 +44,7 @@ public class QuizItemController {
     @FXML
     private Text labelDatedecreation;
     private Quiz quiz;
-    private ServiceQuiz qs;
+    private ServiceQuiz qs = new ServiceQuiz();
     public void setData(Quiz quiz) {
         this.quiz = quiz;
         LabelDispo.setText(String.valueOf(quiz.isDisponibilitee()));
@@ -53,7 +53,7 @@ public class QuizItemController {
         LabelScore.setText(String.valueOf(quiz.getScore()));
         LabelMatiere.setText(quiz.getMatiere());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String dateString = formatter.format(quiz.getDateDeCreation());
+        String dateString = formatter.format(quiz.getDateCreation());
         labelDatedecreation.setText(dateString);
     }
     public void actualiserVueQuiz() {
@@ -70,7 +70,9 @@ public class QuizItemController {
         }
     }
     @FXML
-    void modifierQuizOnClick(ActionEvent event) throws SQLException {
+    void supprimerQuizOnClick(ActionEvent event) throws SQLException {
+        System.out.println("quiz"+quiz.getId());
+
         if (quiz != null) {
             Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
             confirmationAlert.setTitle("Confirmation de suppression");
@@ -79,9 +81,7 @@ public class QuizItemController {
 
             Optional<ButtonType> result = confirmationAlert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                if (qs == null) {
-                    qs = new ServiceQuiz();
-                }
+
                 qs.supprimer(quiz.getId());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("Quiz a été supprimé avec succès.");
@@ -99,7 +99,7 @@ public class QuizItemController {
     }
 
     @FXML
-    void supprimerQuizOnClick(ActionEvent event) {
+    void modifierQuizOnClick(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ModifierQuiz.fxml"));
             Parent root = loader.load();
@@ -115,5 +115,6 @@ public class QuizItemController {
         }
 
     }
+
 
 }

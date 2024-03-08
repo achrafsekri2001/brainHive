@@ -25,7 +25,7 @@ public class ServiceQuiz implements IService<Quiz> {
             PreparedStatement st = cnx.prepareStatement(req);
             st.setInt(1, quiz.getCode());
             st.setString(2, quiz.getMatiere());
-            java.util.Date utilDate = quiz.getDateDeCreation();
+            java.util.Date utilDate = quiz.getDateCreation();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             st.setDate(3, sqlDate);
             st.setInt(4, quiz.getScore());
@@ -46,7 +46,7 @@ public class ServiceQuiz implements IService<Quiz> {
         try (PreparedStatement ps = cnx.prepareStatement(req)) {
             ps.setInt(1, quiz.getCode());
             ps.setString(2, quiz.getMatiere());
-            java.util.Date utilDate = quiz.getDateDeCreation();
+            java.util.Date utilDate = quiz.getDateCreation();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             ps.setDate(3, sqlDate);
             ps.setInt(4, quiz.getScore());
@@ -63,44 +63,51 @@ public class ServiceQuiz implements IService<Quiz> {
 
     @Override
     public void supprimer(int id) {
+        System.out.println("quiz to delete"+id);
         try {
             String query = "DELETE FROM quiz WHERE id = ?";
-            try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
+            PreparedStatement preparedStatement = cnx.prepareStatement(query);
                 preparedStatement.setInt(1, id);
                 preparedStatement.executeUpdate();
-            }
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }
 
-    @Override
-    public Set<Quiz> getAll() {
+
+    public Set<Quiz> getAll() throws SQLException {
         Set<Quiz> quizSet = new HashSet<>();
 
         try {
-            String query = "SELECT * FROM quiz where userId = ?";
-            PreparedStatement preparedStatement = cnx.prepareStatement(query);
-            preparedStatement.setInt(1, GlobalHolder.getcurrentUser().getId());
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    Quiz quiz = new Quiz();
-                    quiz.setId(resultSet.getInt("id"));
-                    quiz.setCode(resultSet.getInt("code"));
-                    quiz.setMatiere(resultSet.getString("matiere"));
-                    quiz.setDateDeCreation(resultSet.getDate("dateDeCreation"));
-                    quiz.setScore(resultSet.getInt("score"));
-                    quiz.setDureeEnMinutes(resultSet.getInt("dureeEnMinutes"));
-                    quiz.setDisponibilitee(resultSet.getBoolean("disponibilitee"));
-                    quizSet.add(quiz);
+            String query = "SELECT * FROM quiz ";
+            try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
+                ;
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Quiz quiz = new Quiz();
+                        quiz.setId(resultSet.getInt("id"));
+                        quiz.setCode(resultSet.getInt("code"));
+                        quiz.setMatiere(resultSet.getString("matiere"));
+                        quiz.setDateCreation(resultSet.getDate("dateCreation"));
+                        quiz.setScore(resultSet.getInt("score"));
+                        quiz.setDureeEnMinutes(resultSet.getInt("dureeEnMinutes"));
+                        quiz.setDisponibilitee(resultSet.getBoolean("disponibilitee"));
+                        quizSet.add(quiz);
+                    }
                 }
+            } catch (SQLException ex) {
+                System.out.print(ex.getMessage());
             }
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            return quizSet;
+        } catch (RuntimeException e) {
+            System.out.print(e.getMessage());
+            throw new RuntimeException(e);
         }
-        return quizSet;
+
     }
+
 
     @Override
     public Quiz getOneByID(int id) {
@@ -115,7 +122,7 @@ public class ServiceQuiz implements IService<Quiz> {
                         quiz.setId(resultSet.getInt("id"));
                         quiz.setCode(resultSet.getInt("code"));
                         quiz.setMatiere(resultSet.getString("matiere"));
-                        quiz.setDateDeCreation(resultSet.getDate("dateDeCreation"));
+                        quiz.setDateCreation(resultSet.getDate("dateCreation"));
                         quiz.setScore(resultSet.getInt("score"));
                         quiz.setDureeEnMinutes(resultSet.getInt("dureeEnMinutes"));
                         quiz.setDisponibilitee(resultSet.getBoolean("disponibilitee"));
@@ -173,11 +180,11 @@ public class ServiceQuiz implements IService<Quiz> {
         return questions;
     }
 
-    public int getIdQuizByCode(Integer codeQuiz) {
+    public int getIdQuizByCode(Integer code) {
         try {
             String sql = "SELECT id FROM quiz WHERE code = ?";
             try (PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
-                preparedStatement.setInt(1, codeQuiz);
+                preparedStatement.setInt(1, code);
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
                         return resultSet.getInt("id");
@@ -202,7 +209,7 @@ public class ServiceQuiz implements IService<Quiz> {
                         quiz.setId(resultSet.getInt("id"));
                         quiz.setCode(resultSet.getInt("code"));
                         quiz.setMatiere(resultSet.getString("matiere"));
-                        quiz.setDateDeCreation(resultSet.getDate("dateCreation"));
+                        quiz.setDateCreation(resultSet.getDate("dateCreation"));
                         quiz.setScore(resultSet.getInt("score"));
                         quiz.setDureeEnMinutes(resultSet.getInt("dureeEnMinutes"));
                         quiz.setDisponibilitee(resultSet.getBoolean("disponibilitee"));
@@ -215,4 +222,22 @@ public class ServiceQuiz implements IService<Quiz> {
         }
         return quizSet;
     }
+
+    public int getCodeById(int id) {
+        try {
+            String sql = "SELECT code FROM quiz WHERE id = ?";
+            try (PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setInt(1, id);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getInt("code");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; // ou une autre valeur de retour pour indiquer l'absence de correspondance
+    }
+
 }

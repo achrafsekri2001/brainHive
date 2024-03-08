@@ -45,38 +45,42 @@ public class ModifierQuizController implements Initializable {
     private ServiceQuiz serviceQuiz = new ServiceQuiz();
     private String[] matiere = {"Arabe","Anglais","Allemand","Economie","Espagnole","Français","Gestion","Histoire et géographie","Informatique","Italien","Mathématique","Philosophie","Physique et chimie","Sciences de la vie et de la terre","Technique"};
     private Quiz quiz;
+    public void setData(Quiz quiz) {
+        this.quiz = quiz;
+        TFCode1.setText(String.valueOf(quiz.getCode()));
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(quiz.getDateCreation());
+        TFDate1.setText(dateString);
+        TFScore1.setText(String.valueOf(quiz.getScore()));
+        TFDuree1.setText(String.valueOf(quiz.getDureeEnMinutes()));
+        TFMatiere1.getSelectionModel().select(quiz.getMatiere());
+    }
+
 
 
     @FXML
     void ModifierQuizAction(ActionEvent event) throws SQLException {
-        String matiere = TFMatiere1.getValue();
-        Integer Code_quiz = Integer.valueOf(TFCode1.getText());
-        String dateString = TFDate1.getText();
-        String dureeEnMinutesStr = TFDuree1.getText();
-        String score = TFScore1.getText();
-        // Vérifier si la matière est sélectionnée et si tous les champs sont remplis
-        if (matiere == null || matiere.isEmpty() || Code_quiz == null || dateString.isEmpty() || dureeEnMinutesStr.isEmpty() ||
-                score.isEmpty() ) {
-            // Afficher une alerte si au moins un champ est vide
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Champs vides");
+        if (quiz == null) {
+            // Handle the case where quiz is null, perhaps by showing an error message
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
             alert.setHeaderText(null);
-            alert.setContentText("Veuillez remplir tous les champs.");
+            alert.setContentText("L'objet Quiz n'a pas été initialisé.");
             alert.showAndWait();
-             return;
+            return;
         }
-        Quiz nouveauQuiz = new Quiz(quiz.getCode(),quiz.getMatiere(),quiz.getDateDeCreation(),quiz.getScore(), quiz.getDureeEnMinutes(), quiz.isDisponibilitee());
+        Quiz nouveauQuiz = new Quiz(quiz.getCode(),quiz.getMatiere(),quiz.getDateCreation(),quiz.getScore(), quiz.getDureeEnMinutes(), quiz.isDisponibilitee());
 
 
-            serviceQuiz.modifier(nouveauQuiz);
-            // Afficher un message de succès
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Succès");
-            alert.setHeaderText(null);
-            alert.setContentText("Le parascolaire a été modifié avec succès.");
-            alert.showAndWait();
+        serviceQuiz.modifier(nouveauQuiz);
+        // Afficher un message de succès
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Succès");
+        alert.setHeaderText(null);
+        alert.setContentText("Le parascolaire a été modifié avec succès.");
+        alert.showAndWait();
 
-        }
+    }
 
     @FXML
     void navigateToAfficher(ActionEvent event) {
@@ -107,15 +111,6 @@ public class ModifierQuizController implements Initializable {
     private void getmatiere(ActionEvent event) {
         String maMatiere =  TFMatiere1.getValue();
     }
-    public void initData(Quiz quiz) {
-        this.quiz = quiz;
-        TFCode1.setText(String.valueOf(quiz.getCode()));
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String dateString = formatter.format(quiz.getDateDeCreation());
-        TFDate1.setText(dateString);
-        TFScore1.setText(String.valueOf(quiz.getScore()));
-        TFDuree1.setText(String.valueOf(quiz.getDureeEnMinutes()));
-        TFMatiere1.getSelectionModel().select(quiz.getMatiere());
-}
+
 
 }

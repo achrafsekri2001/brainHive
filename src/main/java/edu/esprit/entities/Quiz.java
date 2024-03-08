@@ -8,7 +8,7 @@ public class Quiz {
       private int id;
       private int code;
       private String matiere;
-      private Date dateDeCreation;
+      private Date dateCreation;
       private int score;
       private int dureeEnMinutes;
       private boolean disponibilitee;
@@ -18,20 +18,20 @@ public class Quiz {
 
     }
 
-    public Quiz(int id, int code, String matiere, Date dateDeCreation, int score, int dureeEnMinutes, boolean disponibilitee) {
+    public Quiz(int id, int code, String matiere, Date dateCreation, int score, int dureeEnMinutes, boolean disponibilitee) {
         this.id = id;
         this.code = code;
         this.matiere = matiere;
-        this.dateDeCreation = dateDeCreation;
+        this.dateCreation = dateCreation;
         this.score = score;
         this.dureeEnMinutes = dureeEnMinutes;
         this.disponibilitee = disponibilitee;
     }
 
-    public Quiz(int code, String matiere, Date dateDeCreation, int score, int dureeEnMinutes, boolean disponibilitee) {
+    public Quiz(int code, String matiere, Date dateCreation, int score, int dureeEnMinutes, boolean disponibilitee) {
         this.code = code;
         this.matiere = matiere;
-        this.dateDeCreation = dateDeCreation;
+        this.dateCreation = dateCreation;
         this.score = score;
         this.dureeEnMinutes = dureeEnMinutes;
         this.disponibilitee = disponibilitee;
@@ -61,12 +61,12 @@ public class Quiz {
         this.matiere = matiere;
     }
 
-    public Date getDateDeCreation() {
-        return dateDeCreation;
+    public Date getDateCreation() {
+        return dateCreation;
     }
 
-    public void setDateDeCreation(Date dateDeCreation) {
-        this.dateDeCreation = dateDeCreation;
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
     public int getScore() {
@@ -108,7 +108,7 @@ public class Quiz {
         return "Quiz{" +
                 "code=" + code +
                 ", matiere='" + matiere + '\'' +
-                ", dateDeCreation=" + dateDeCreation +
+                ", dateCreation=" + dateCreation +
                 ", score=" + score +
                 ", dureeEnMinutes=" + dureeEnMinutes +
                 ", disponibilitee=" + disponibilitee +
